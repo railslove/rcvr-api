@@ -23,3 +23,9 @@ blocks:
             - cache store
             - 'bundle exec rake db:setup'
             - bundle exec rspec
+
+promotions:
+  - name: Production Deploy on Heroku
+    pipeline_file: deploy-heroku.yml
+    auto_promote:
+      when: "result = 'passed'"
