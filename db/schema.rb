@@ -16,16 +16,16 @@ ActiveRecord::Schema.define(version: 2020_05_08_145526) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "companies", force: :cascade do |t|
+  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tickets", force: :cascade do |t|
+  create_table "tickets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "entered_at"
     t.datetime "left_at"
-    t.bigint "company_id"
+    t.uuid "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_tickets_on_company_id"
