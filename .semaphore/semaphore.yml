@@ -28,4 +28,4 @@ promotions:
   - name: Production Deploy on Heroku
     pipeline_file: deploy-heroku.yml
     auto_promote:
-      when: "result = 'passed'"
+      when: "result = 'passed' and branch = 'master'"
