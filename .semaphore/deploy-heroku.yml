@@ -11,7 +11,7 @@ blocks:
   - name: heroku deploy
     task:
       secrets:
-        - name: rcvr-secrets
+        - name: rcvr-heroku
       env_vars:
         - name: HEROKU_REMOTE
           value: https://git.heroku.com/rcvr.git
