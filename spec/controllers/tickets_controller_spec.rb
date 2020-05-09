@@ -28,7 +28,6 @@ RSpec.describe TicketsController do
 
   context 'GET risk_feed' do
     let!(:ticket_neutral) { FactoryBot.create(:ticket, status: :neutral) }
-    let!(:ticket_confirmed) { FactoryBot.create(:ticket, status: :confirmed) }
     let!(:ticket_at_risk) { FactoryBot.create(:ticket, status: :at_risk) }
 
     it 'returns only at_risk tickets' do
