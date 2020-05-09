@@ -9,6 +9,13 @@ class TicketsController < ApplicationController
     @ticket.update!(ticket_params)
   end
 
+  def risk_feed
+    # TODO: Not sure if we should include (status: :confirmed) here
+    ticket_ids = Ticket.where(status: :at_risk).pluck(:id)
+
+    render json: ticket_ids
+  end
+
   private
 
   def ticket_params
