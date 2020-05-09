@@ -7,6 +7,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'pg'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3'
+gem 'sentry-raven'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
