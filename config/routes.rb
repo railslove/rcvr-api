@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :tickets
   resources :companies
+  resource :owner, only: :update
 
   get 'risk-feed', to: 'tickets#risk_feed'
 end
