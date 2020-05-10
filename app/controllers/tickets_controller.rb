@@ -14,7 +14,6 @@ class TicketsController < ApplicationController
   end
 
   def risk_feed
-    # TODO: Not sure if we should include (status: :confirmed) here
     ticket_ids = Ticket.where(status: :at_risk).pluck(:id)
 
     render json: ticket_ids
@@ -23,6 +22,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:id, :company_id, :entered_at, :left_at)
+    params.require(:ticket).permit(:id, :company_id, :entered_at, :left_at, :encrypted_data)
   end
 end
