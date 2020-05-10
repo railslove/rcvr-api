@@ -1,6 +1,7 @@
 class AddsEncryptedDataToTicket < ActiveRecord::Migration[6.0]
   def change
     add_column :tickets, :encrypted_data, :string
+    add_column :tickets, :public_key, :string
     add_column :tickets, :encrypted_private_key, :string
     add_column :companies, :encrypted_private_key, :string
 

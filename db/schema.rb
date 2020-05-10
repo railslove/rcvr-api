@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_120240) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
     t.string "encrypted_data"
+    t.string "public_key"
     t.string "encrypted_private_key"
     t.uuid "area_id"
     t.index ["area_id"], name: "index_tickets_on_area_id"
