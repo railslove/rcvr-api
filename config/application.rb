@@ -40,7 +40,7 @@ module RcvrApi
         origins '*'
         resource '*',
           headers: :any,
-          expose: %w[access-token expiry token-type uid client],
+          expose: ['Authorization'],
           methods: %i[options get post patch]
       end
     end
