@@ -5,4 +5,5 @@ class Owner < ApplicationRecord
   validates :email, uniqueness: true, presence: true
 
   has_many :companies, dependent: :destroy
+  has_many :areas, through: :companies
 end

@@ -39,4 +39,30 @@ RSpec.describe AreasController do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  context 'UPDATE area' do
+    let!(:area) { FactoryBot.create(:area, company: company) }
+
+    subject do
+      -> { patch(area_path(area), params: { area: { name: 'New Name' } }) }
+    end
+
+    it { is_expected.to change { area.reload.name }.to('New Name') }
+
+    it 'Has renders the area' do
+      subject.call
+
+      expect(JSON.parse(response.body)['id']).to eq(area.id)
+    end
+  end
+
+  context 'GET area' do
+    let!(:area) { FactoryBot.create(:area, company: company) }
+
+    before { get area_path(area) }
+
+    it 'Has renders the area' do
+      expect(JSON.parse(response.body)['id']).to eq(area.id)
+    end
+  end
 end

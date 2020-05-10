@@ -13,6 +13,20 @@ class CompaniesController < ApplicationController
     render json: company
   end
 
+  def update
+    company = current_owner.companies.find(params[:id])
+
+    company.update!(company_params)
+
+    render json: company
+  end
+
+  def show
+    company = current_owner.companies.find(params[:id])
+
+    render json: company
+  end
+
   private
 
   def company_params

@@ -40,4 +40,34 @@ RSpec.describe CompaniesController do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  context 'PATCH company' do
+    let(:company) { FactoryBot.create(:company, owner: owner) }
+
+    subject do
+      -> { patch company_path(company), params: { company: { name: 'New Name' } } }
+    end
+
+    it { is_expected.to change { company.reload.name }.to('New Name') }
+
+    it 'Has the correct http status' do
+      subject.call
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  context 'GET company' do
+    let(:company) { FactoryBot.create(:company, owner: owner) }
+
+    before { get company_path(company) }
+
+    it 'has the correct status' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'Returns the company' do
+      expect(JSON.parse(response.body)['id']).to eq(company.id)
+    end
+  end
 end
