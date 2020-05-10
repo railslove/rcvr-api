@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_171456) do
+ActiveRecord::Schema.define(version: 2020_05_10_084118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "areas", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.uuid "company_id"
+    t.index ["company_id"], name: "index_areas_on_company_id"
+  end
+
   create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
   create_table "jwt_blacklist", force: :cascade do |t|
@@ -54,5 +64,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_171456) do
     t.index ["company_id"], name: "index_tickets_on_company_id"
   end
 
+  add_foreign_key "areas", "companies"
+  add_foreign_key "companies", "owners"
   add_foreign_key "tickets", "companies"
 end

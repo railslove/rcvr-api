@@ -3,4 +3,6 @@ class Owner < ApplicationRecord
          jwt_revocation_strategy: JwtBlacklist
 
   validates :email, uniqueness: true, presence: true
+
+  has_many :companies, dependent: :destroy
 end

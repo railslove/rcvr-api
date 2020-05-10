@@ -5,7 +5,9 @@ Rails.application.routes.draw do
              controllers: { sessions: 'sessions', registrations: 'registrations' }
 
   resources :tickets
-  resources :companies
+  resources :companies do
+    resources :areas
+  end
   resource :owner, only: :update
 
   get 'risk-feed', to: 'tickets#risk_feed'

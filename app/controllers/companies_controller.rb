@@ -1,6 +1,8 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_owner!
+
   def create
-    Company.create(company_params)
+    current_owner.companies.create!(company_params)
   end
 
   private
