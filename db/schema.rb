@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_05_10_120240) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "owner_id"
+    t.string "encrypted_private_key"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
