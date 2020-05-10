@@ -1,9 +1,6 @@
 class TicketsController < ApplicationController
   def create
-    ticket = Ticket.new(ticket_create_params)
-
-    ticket.encrypted_private_key = ticket&.company&.owner&.encrypted_private_key
-    ticket.save!
+    ticket = Ticket.create!(ticket_create_params)
 
     render json: ticket
   end

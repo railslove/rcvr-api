@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_142747) do
+ActiveRecord::Schema.define(version: 2020_05_10_143538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_142747) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "public_key"
-    t.string "encrypted_private_key"
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
@@ -63,7 +62,6 @@ ActiveRecord::Schema.define(version: 2020_05_10_142747) do
     t.integer "status", default: 0
     t.string "encrypted_data"
     t.string "public_key"
-    t.string "encrypted_private_key"
     t.uuid "area_id"
     t.index ["area_id"], name: "index_tickets_on_area_id"
   end
