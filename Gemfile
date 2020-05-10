@@ -11,6 +11,7 @@ gem 'rails', '~> 6.0.3'
 gem 'sentry-raven'
 gem 'happypdf_renderer', git: 'https://ef44d43b3bd2bcace3681ac53e1553a1a4f98eda:x-oauth-basic@github.com/railslove/happypdf_renderer.git'
 gem 'interactor-rails'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
