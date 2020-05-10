@@ -10,6 +10,6 @@ class OwnersController < ApplicationController
   private
 
   def owner_params
-    params.require(:owner).permit(:name, :public_key)
+    params.require(:owner).permit(:name, :public_key, :encrypted_private_key)
   end
 end
