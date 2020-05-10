@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Ticket do
   describe '#mark_cases!' do
     let(:time_range) { 3.hours.ago..2.hours.ago }
-    let(:company) { FactoryBot.create(:company) }
+    let(:area) { FactoryBot.create(:area) }
 
     def create_ticket(entered_at, left_at)
-      FactoryBot.create(:ticket, company: company, entered_at: entered_at, left_at: left_at)
+      FactoryBot.create(:ticket, area: area, entered_at: entered_at, left_at: left_at)
     end
 
     it 'Marks overlapping tickets' do
@@ -16,7 +16,7 @@ RSpec.describe Ticket do
       ticket3 = create_ticket(2.5.hours.ago, 2.6.hours.ago)
       ticket4 = create_ticket(4.hours.ago, 1.hour.ago)
 
-      Ticket.mark_cases!(time_range, company.id)
+      Ticket.mark_cases!(time_range, area.id)
 
       expect(ticket1.reload.status).to eq('at_risk')
       expect(ticket2.reload.status).to eq('at_risk')
@@ -28,7 +28,7 @@ RSpec.describe Ticket do
       ticket1 = create_ticket(4.hours.ago, 3.5.hours.ago)
       ticket2 = create_ticket(1.5.hours.ago, 1.hour.ago)
 
-      Ticket.mark_cases!(time_range, company.id)
+      Ticket.mark_cases!(time_range, area.id)
 
       expect(ticket1.reload.status).to eq('neutral')
       expect(ticket2.reload.status).to eq('neutral')
@@ -37,7 +37,7 @@ RSpec.describe Ticket do
     it 'Does not touch tickets at other companies' do
       ticket1 = FactoryBot.create(:ticket, entered_at: 4.hours.ago, left_at: 1.hour.ago)
 
-      Ticket.mark_cases!(time_range, company.id)
+      Ticket.mark_cases!(time_range, area.id)
 
       expect(ticket1.reload.status).to eq('neutral')
     end
