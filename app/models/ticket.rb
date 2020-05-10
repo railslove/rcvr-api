@@ -1,5 +1,6 @@
 class Ticket < ApplicationRecord
-  belongs_to :company
+  belongs_to :area
+  has_one :company, through: :area
 
   validates :id, absence: true, on: :update, if: :id_changed? # Can never update id
 
@@ -14,12 +15,22 @@ class Ticket < ApplicationRecord
           .or(Ticket.where('entered_at <= ? AND left_at >= ?', time_range.begin, time_range.end))
   end
 
-  def self.mark_cases!(time_range, company_id)
+  def self.mark_cases!(time_range, area_id)
     Ticket.transaction do
       Ticket
         .overlapping_time(time_range)
-        .where(company_id: company_id)
+        .where(area_id: area_id)
         .find_each { |ticket| ticket.update(status: :at_risk) }
     end
+  end
+
+  private
+
+  def attributes
+    super.merge(company_name: company.name)
+  end
+
+  def company_name
+    company.name
   end
 end

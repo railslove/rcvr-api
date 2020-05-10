@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe TicketsController do
   context 'POST create' do
-    let!(:company) { FactoryBot.create(:company) }
-    let(:ticket_attributes) { FactoryBot.attributes_for(:ticket, :open, company_id: company.id) }
+    let!(:area) { FactoryBot.create(:area) }
+    let(:ticket_attributes) { FactoryBot.attributes_for(:ticket, :open, area_id: area.id) }
 
     subject { -> { post tickets_path, params: { ticket: ticket_attributes } } }
 
