@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
     response = { message: error.message, name: error.class.name }
 
     if Rails.env.production?
-      Raven.user_context(id: current_user&.id)
+      Raven.user_context(owner_id: current_owner&.id)
       Raven.extra_context(params: params.to_unsafe_h, url: request.url)
       Raven.capture_exception(error)
     else
