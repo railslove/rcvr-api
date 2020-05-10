@@ -22,6 +22,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:id, :company_id, :entered_at, :left_at, :encrypted_data)
+    params.require(:ticket).permit(:id, :area_id, :entered_at, :left_at, :encrypted_data)
   end
 end

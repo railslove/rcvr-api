@@ -57,15 +57,16 @@ ActiveRecord::Schema.define(version: 2020_05_10_120240) do
   create_table "tickets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "entered_at"
     t.datetime "left_at"
-    t.uuid "company_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
     t.string "encrypted_data"
-    t.index ["company_id"], name: "index_tickets_on_company_id"
+    t.string "encrypted_private_key"
+    t.uuid "area_id"
+    t.index ["area_id"], name: "index_tickets_on_area_id"
   end
 
   add_foreign_key "areas", "companies"
   add_foreign_key "companies", "owners"
-  add_foreign_key "tickets", "companies"
+  add_foreign_key "tickets", "areas"
 end
