@@ -1,6 +1,6 @@
 class AddsArea < ActiveRecord::Migration[6.0]
   def change
-    create_table :areas do |t|
+    create_table :areas, id: :uuid do |t|
       t.timestamps
 
       t.string :name

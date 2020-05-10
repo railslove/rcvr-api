@@ -1,8 +1,16 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_owner!
 
+  def index
+    companies = current_owner.companies
+
+    render json: companies
+  end
+
   def create
-    current_owner.companies.create!(company_params)
+    company = current_owner.companies.create!(company_params)
+
+    render json: company
   end
 
   private

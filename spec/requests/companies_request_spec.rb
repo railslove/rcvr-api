@@ -9,6 +9,24 @@ RSpec.describe CompaniesController do
     sign_in(owner)
   end
 
+  context 'GET index' do
+    before do
+      FactoryBot.create(:company, owner: owner)
+      FactoryBot.create(:company)
+
+      get(companies_path) 
+    end
+
+    it 'Has the correct http status' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'Return the companies of the current user' do
+      expect(JSON.parse(response.body).map { |c| c['id'] })
+        .to match_array(owner.reload.companies.pluck(:id))
+    end
+  end
+
   context 'POST company' do
     subject do
       -> { post companies_path, params: { company: FactoryBot.attributes_for(:company) } }
@@ -19,7 +37,7 @@ RSpec.describe CompaniesController do
     it 'Has the correct http status' do
       subject.call
 
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
 end

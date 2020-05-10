@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe AreasController do
   include_context 'api request authentication'
@@ -11,6 +11,21 @@ RSpec.describe AreasController do
     sign_in(owner)
   end
 
+  context 'GET index' do
+    before do
+      FactoryBot.create(:area, company: company)
+      FactoryBot.create(:area)
+
+      get(company_areas_path(company_id: company.id))
+    end
+
+    it 'Has the right response' do
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body).map { |a| a['id'] })
+        .to match_array(company.reload.areas.pluck(:id))
+    end
+  end
+
   context 'POST area' do
     subject do
       -> { post(company_areas_path(company_id: company.id), params: { area: area_attributes }) }
@@ -21,7 +36,7 @@ RSpec.describe AreasController do
     it 'has the right http status code' do
       subject.call
 
-      expect(response).to have_http_status(:no_content)
+      expect(response).to have_http_status(:ok)
     end
   end
 end

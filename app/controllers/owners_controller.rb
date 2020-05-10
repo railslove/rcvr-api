@@ -3,6 +3,8 @@ class OwnersController < ApplicationController
 
   def update
     current_owner.update!(owner_params)
+
+    render json: current_owner.reload
   end
 
   private

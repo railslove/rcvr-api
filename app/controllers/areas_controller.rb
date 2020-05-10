@@ -1,8 +1,16 @@
 class AreasController < ApplicationController
   before_action :load_company
 
+  def index
+    areas = @company.areas
+
+    render json: areas
+  end
+
   def create
-    @company.areas.create!(area_params)
+    area = @company.areas.create!(area_params)
+
+    render json: area
   end
 
   private

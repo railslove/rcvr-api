@@ -1,12 +1,16 @@
 class TicketsController < ApplicationController
   def create
-    @ticket = Ticket.create!(ticket_params)
+    ticket = Ticket.create!(ticket_params)
+
+    render json: ticket
   end
 
   def update
-    @ticket = Ticket.find(params[:id])
+    ticket = Ticket.find(params[:id])
 
-    @ticket.update!(ticket_params)
+    ticket.update!(ticket_params)
+
+    render json: ticket
   end
 
   def risk_feed
