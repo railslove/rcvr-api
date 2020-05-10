@@ -14,8 +14,8 @@ RSpec.describe 'POST /signup', type: :request do
   context 'when owner is unauthenticated' do
     before { post url, params: params }
 
-    it 'returns 204' do
-      expect(response.status).to eq 204
+    it 'returns ok' do
+      expect(response).to have_http_status(:ok)
     end
 
     it 'creates a new owner' do
@@ -24,13 +24,12 @@ RSpec.describe 'POST /signup', type: :request do
   end
 
   context 'when owner already exists' do
-    before do
-      FactoryBot.create(:owner, email: params[:owner][:email])
-      post url, params: params
-    end
+    let!(:owner) { FactoryBot.create(:owner, email: params[:owner][:email]) }
 
-    it 'returns bad request status' do
-      expect(response.status).to eq 422
+    before { post url, params: params }
+
+    it 'returns unprocessable_entity status' do
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 end
