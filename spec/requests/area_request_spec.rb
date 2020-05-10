@@ -49,7 +49,7 @@ RSpec.describe AreasController do
 
     it { is_expected.to change { area.reload.name }.to('New Name') }
 
-    it 'Has renders the area' do
+    it 'renders the area' do
       subject.call
 
       expect(JSON.parse(response.body)['id']).to eq(area.id)
@@ -61,8 +61,18 @@ RSpec.describe AreasController do
 
     before { get area_path(area) }
 
-    it 'Has renders the area' do
+    it 'renders the area' do
       expect(JSON.parse(response.body)['id']).to eq(area.id)
+    end
+  end
+
+  context 'GET qr pdf' do
+    let!(:area) { FactoryBot.create(:area, company: company) }
+
+    before { get area_path(area, format: :pdf) }
+
+    it 'renders the area' do
+      byebug
     end
   end
 end
