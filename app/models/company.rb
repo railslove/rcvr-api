@@ -3,8 +3,8 @@ class Company < ApplicationRecord
 
   belongs_to :owner
 
-  has_many :tickets, dependent: :destroy
   has_many :areas, dependent: :destroy
+  has_many :tickets, through: :area
 
   private
 
