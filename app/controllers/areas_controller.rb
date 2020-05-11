@@ -22,7 +22,7 @@ class AreasController < ApplicationController
   def show
     respond_to do |format|
       format.pdf do
-        qr_code_pdf = QrCodePdf.call(area: area)
+        qr_code_pdf = QrCodePdf.call(area: Area.find(params[:id]))
 
         render pdf: qr_code_pdf.file_name, data: qr_code_pdf.data
       end
