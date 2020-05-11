@@ -5,4 +5,14 @@ class Company < ApplicationRecord
 
   has_many :tickets, dependent: :destroy
   has_many :areas, dependent: :destroy
+
+  private
+
+  def attributes
+    super.merge(areas: areas)
+  end
+
+  def company_name
+    areas
+  end
 end
