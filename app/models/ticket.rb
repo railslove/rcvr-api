@@ -1,5 +1,6 @@
 class Ticket < ApplicationRecord
   include ApiSerializable
+  include RailsAdminConfig::ForTicket
   
   AUTO_CHECKOUT_AFTER = 4.hours
   EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name]

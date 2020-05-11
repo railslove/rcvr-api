@@ -14,6 +14,7 @@ gem 'interactor-rails'
 gem 'rack-cors'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

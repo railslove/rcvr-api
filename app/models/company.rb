@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   include ApiSerializable
+  include RailsAdminConfig::ForCompany
 
   EXPOSED_ATTRIBUTES = %i[id name areas]
 
@@ -8,5 +9,5 @@ class Company < ApplicationRecord
   belongs_to :owner
 
   has_many :areas, dependent: :destroy
-  has_many :tickets, through: :area
+  has_many :tickets, through: :areas
 end

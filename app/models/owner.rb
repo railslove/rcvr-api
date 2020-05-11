@@ -1,5 +1,6 @@
 class Owner < ApplicationRecord
   include ApiSerializable
+  include RailsAdminConfig::ForOwner
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
          jwt_revocation_strategy: JwtBlacklist

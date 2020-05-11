@@ -37,6 +37,12 @@ module RcvrApi
 
     config.active_job.queue_adapter = :sidekiq
 
+    # For rails_admin
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use Rack::MethodOverride
+    config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_rcvr_api_session"}
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
