@@ -2,6 +2,8 @@ class TicketsController < ApplicationController
   def create
     ticket = Ticket.create!(ticket_create_params)
 
+    ticket.schedule_auto_checkout_job
+
     render json: ticket
   end
 

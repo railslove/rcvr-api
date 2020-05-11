@@ -1,0 +1,9 @@
+# frozen_string_literal: true
+
+require 'sidekiq'
+require 'sidekiq/web'
+require 'sidekiq-scheduler/web'
+
+sidekiq.configure_server do |config|
+  config.redis = { url: env['redis_url'] }
+end
