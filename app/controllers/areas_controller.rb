@@ -1,5 +1,5 @@
 class AreasController < ApplicationController
-  before_action :authenticate_owner!
+  before_action :authenticate_owner!, except: :show
 
   def index
     areas = company.areas
@@ -21,7 +21,6 @@ class AreasController < ApplicationController
 
   def show
     respond_to do |format|
-      format.json { render json: area }
       format.pdf do
         qr_code_pdf = QrCodePdf.call(area: area)
 

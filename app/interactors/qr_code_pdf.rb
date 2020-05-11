@@ -26,7 +26,7 @@ class QrCodePdf
     URI('https://rcvr.app/checkin/').tap do |uri|
       uri.query = {
         a: area.id,
-        p: company.owner.public_key
+        k: company.owner.public_key
       }.to_param
     end
   end
