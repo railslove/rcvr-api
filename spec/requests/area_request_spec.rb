@@ -69,10 +69,12 @@ RSpec.describe AreasController do
   context 'GET qr pdf' do
     let!(:area) { FactoryBot.create(:area, company: company) }
 
-    before { get area_path(area, format: :pdf) }
+    it 'requests the pdf from happy pdf' do
+      stub_request(:get, %r{http://app.happypdf.com/api/pdf.*})
 
-    it 'renders the area' do
-      byebug
+      get area_path(area, format: :pdf)
+
+      expect(WebMock).to have_requested(:get, %r{http://app.happypdf.com/api/pdf.*})
     end
   end
 end
