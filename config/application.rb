@@ -33,15 +33,11 @@ module RcvrApi
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
+    #
+    # Sadly this does not work with rails_admin now.
+    config.api_only = false
 
     config.active_job.queue_adapter = :sidekiq
-
-    # For rails_admin
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Flash
-    config.middleware.use Rack::MethodOverride
-    config.middleware.use ActionDispatch::Session::CookieStore, {:key=>"_rcvr_api_session"}
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
@@ -52,5 +48,11 @@ module RcvrApi
           methods: %i[options get post patch]
       end
     end
+
+    # For rails_admin
+    config.middleware.use(ActionDispatch::Cookies)
+    config.middleware.use(ActionDispatch::Flash)
+    config.middleware.use(Rack::MethodOverride)
+    config.middleware.use(ActionDispatch::Session::CookieStore, { key: '_rcvr_api_session' })
   end
 end
