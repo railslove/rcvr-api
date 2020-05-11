@@ -23,7 +23,7 @@ class QrCodePdf
   end
 
   def qr_code_link
-    URI('https://rcvr.app/checkin/').tap do |uri|
+    URI('https://rcvr.app/checkin').tap do |uri|
       uri.query = {
         a: area.id,
         k: company.owner.public_key
