@@ -1,10 +1,18 @@
 class Ticket < ApplicationRecord
+  AUTO_CHECKOUT_AFTER = 4.hours
+
   belongs_to :area
   has_one :company, through: :area
 
   validates :id, absence: true, on: :update, if: :id_changed? # Can never update id
 
   enum status: { neutral: 0, at_risk: 2 }
+
+  scope :open, -> { where(left_at: nil) }
+
+  def schedule_auto_checkout_job
+    AutoCheckoutTicketJob.set(wait: AUTO_CHECKOUT_AFTER).perform_later(id)
+  end
 
   def self.overlapping_time(time_range)
     # Three possibilities: They entered while the other person was there
