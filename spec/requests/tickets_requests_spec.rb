@@ -15,6 +15,8 @@ RSpec.describe TicketsController do
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)).not_to be_empty
     end
+
+    it { is_expected.to have_enqueued_job(AutoCheckoutTicketJob) }
   end
 
   context 'PATCH update' do
