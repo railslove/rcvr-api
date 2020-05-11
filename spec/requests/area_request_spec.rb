@@ -56,16 +56,6 @@ RSpec.describe AreasController do
     end
   end
 
-  context 'GET area' do
-    let!(:area) { FactoryBot.create(:area, company: company) }
-
-    before { get area_path(area) }
-
-    it 'renders the area' do
-      expect(JSON.parse(response.body)['id']).to eq(area.id)
-    end
-  end
-
   context 'GET qr pdf' do
     let!(:area) { FactoryBot.create(:area, company: company) }
 
