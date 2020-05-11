@@ -10,5 +10,5 @@ class Owner < ApplicationRecord
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
 
-  EXPOSED_ATTRIBUTES = %i[email name]
+  EXPOSED_ATTRIBUTES = %i[id email name]
 end
