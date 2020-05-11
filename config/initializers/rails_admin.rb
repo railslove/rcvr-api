@@ -17,5 +17,6 @@ RailsAdmin.config do |config|
     show
     edit
     delete
+    bulk_delete
   end
 end
