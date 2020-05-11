@@ -1,10 +1,14 @@
 class Ticket < ApplicationRecord
+  include ApiSerializable
+
   belongs_to :area
   has_one :company, through: :area
 
   validates :id, absence: true, on: :update, if: :id_changed? # Can never update id
 
   enum status: { neutral: 0, at_risk: 2 }
+
+  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id]
 
   def self.overlapping_time(time_range)
     # Three possibilities: They entered while the other person was there
@@ -25,10 +29,6 @@ class Ticket < ApplicationRecord
   end
 
   private
-
-  def attributes
-    super.merge(company_name: company.name)
-  end
 
   def company_name
     company.name
