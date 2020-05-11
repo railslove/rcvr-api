@@ -8,7 +8,7 @@ class Ticket < ApplicationRecord
 
   enum status: { neutral: 0, at_risk: 2 }
 
-  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id]
+  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name]
 
   def self.overlapping_time(time_range)
     # Three possibilities: They entered while the other person was there
@@ -27,8 +27,6 @@ class Ticket < ApplicationRecord
         .find_each { |ticket| ticket.update(status: :at_risk) }
     end
   end
-
-  private
 
   def company_name
     company.name
