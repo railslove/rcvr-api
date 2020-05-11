@@ -1,5 +1,8 @@
 class Ticket < ApplicationRecord
+  include ApiSerializable
+  
   AUTO_CHECKOUT_AFTER = 4.hours
+  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name]
 
   belongs_to :area
   has_one :company, through: :area
@@ -30,12 +33,6 @@ class Ticket < ApplicationRecord
         .where(area_id: area_id)
         .find_each { |ticket| ticket.update(status: :at_risk) }
     end
-  end
-
-  private
-
-  def attributes
-    super.merge(company_name: company.name)
   end
 
   def company_name
