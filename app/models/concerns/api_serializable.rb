@@ -5,7 +5,7 @@ module ApiSerializable
     def attributes
       self.class.const_get(:EXPOSED_ATTRIBUTES).map do |attr|
         [attr, public_send(attr)]
-      end.to_h# .tap { |_| byebug }
+      end.to_h
     end
   end
 end
