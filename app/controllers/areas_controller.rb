@@ -20,7 +20,14 @@ class AreasController < ApplicationController
   end
 
   def show
-    render json: area
+    respond_to do |format|
+      format.json { render json: area }
+      format.pdf do
+        qr_code_pdf = QrCodePdf.call(area: area)
+
+        render pdf: qr_code_pdf.file_name, data: qr_code_pdf.data
+      end
+    end
   end
 
   private

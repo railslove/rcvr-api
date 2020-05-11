@@ -9,6 +9,8 @@ gem 'pg'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3'
 gem 'sentry-raven'
+gem 'happypdf_renderer', git: 'https://ef44d43b3bd2bcace3681ac53e1553a1a4f98eda:x-oauth-basic@github.com/railslove/happypdf_renderer.git'
+gem 'interactor-rails'
 gem 'rack-cors'
 
 group :development, :test do
@@ -29,4 +31,8 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'webmock'
 end

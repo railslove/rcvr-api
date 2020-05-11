@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::MimeResponds
+
   before_action :set_default_request_format
 
   rescue_from StandardError, with: :render_internal_error
@@ -8,7 +10,7 @@ class ApplicationController < ActionController::API
   private
 
   def set_default_request_format
-    request.format = :json
+    request.format = :json if request.format.symbol == :html
   end
 
   def render_unprocessable_entity_response(exception)
