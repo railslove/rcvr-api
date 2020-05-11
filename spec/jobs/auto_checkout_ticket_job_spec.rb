@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe AutoCheckoutTicketJob do
   context 'not checked out ticket is updated' do
     let(:ticket) { FactoryBot.create(:ticket, left_at: nil) }
-    
+
     it 'sets left_at of the ticket' do
       expect { described_class.perform_now(ticket.id) }.to change { ticket.reload.left_at }
     end
