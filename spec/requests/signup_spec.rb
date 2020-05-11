@@ -21,6 +21,11 @@ RSpec.describe 'POST /signup', type: :request do
     it 'creates a new owner' do
       expect(Owner.count).to eq(1)
     end
+
+    it 'Signs the owner in directly' do
+      expect(response.headers['Authorization']).to be_present
+
+    end
   end
 
   context 'when owner already exists' do

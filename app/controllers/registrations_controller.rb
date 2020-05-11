@@ -6,6 +6,14 @@ class RegistrationsController < Devise::RegistrationsController
 
     resource.save!
 
+    sign_in resource
+
     render json: resource
+  end
+
+  private
+
+  def sign_up_params
+    params.require(:owner).permit(:email, :password, :name)
   end
 end

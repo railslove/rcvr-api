@@ -38,7 +38,10 @@ module RcvrApi
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', headers: :any, methods: %i[options get post patch]
+        resource '*',
+          headers: :any,
+          expose: ['Authorization'],
+          methods: %i[options get post patch]
       end
     end
   end
