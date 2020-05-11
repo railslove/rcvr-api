@@ -69,7 +69,7 @@ RSpec.describe AreasController do
   context 'GET qr pdf' do
     let!(:area) { FactoryBot.create(:area, company: company) }
 
-    it 'requests the pdf from happy pdf' do
+    xit 'requests the pdf from happy pdf' do
       stub_request(:get, %r{http://app.happypdf.com/api/pdf.*})
 
       get area_path(area, format: :pdf)
