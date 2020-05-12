@@ -5,8 +5,11 @@ class QrCodePdf
   required_attributes %i[area]
 
   delegate :company, to: :area
+  delegate :owner, to: :company
 
   def call
+    raise StandardError, "Owner #{owner.id} has no public_key" if owner.public_key.blank?
+
     context.file_name = "recover_qr_#{area.name}.pdf"
     context.data = pdf_data
   end
@@ -17,7 +20,7 @@ class QrCodePdf
     {
       pdt_id: 219,
       name: company.name,
-      name: area.name,
+      area: area.name,
       qrcode: qr_code_link
     }
   end
