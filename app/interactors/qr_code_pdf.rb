@@ -15,7 +15,7 @@ class QrCodePdf
 
   def pdf_data
     {
-      pdt_id: 218,
+      pdt_id: 219,
       name: company.name,
       name: area.name,
       qrcode: qr_code_link
