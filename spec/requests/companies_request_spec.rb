@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CompaniesController do
+RSpec.describe Owners::CompaniesController do
   include_context 'api request authentication'
 
   let(:owner) { FactoryBot.create(:owner) }
@@ -14,7 +14,7 @@ RSpec.describe CompaniesController do
       FactoryBot.create(:company, owner: owner)
       FactoryBot.create(:company)
 
-      get(companies_path) 
+      get(owners_companies_path) 
     end
 
     it 'Has the correct http status' do
@@ -29,7 +29,7 @@ RSpec.describe CompaniesController do
 
   context 'POST company' do
     subject do
-      -> { post companies_path, params: { company: FactoryBot.attributes_for(:company) } }
+      -> { post owners_companies_path, params: { company: FactoryBot.attributes_for(:company) } }
     end
 
     it { is_expected.to change { Company.count }.by(1) }
@@ -45,7 +45,7 @@ RSpec.describe CompaniesController do
     let(:company) { FactoryBot.create(:company, owner: owner) }
 
     subject do
-      -> { patch company_path(company), params: { company: { name: 'New Name' } } }
+      -> { patch owners_company_path(company), params: { company: { name: 'New Name' } } }
     end
 
     it { is_expected.to change { company.reload.name }.to('New Name') }
@@ -60,7 +60,7 @@ RSpec.describe CompaniesController do
   context 'GET company' do
     let(:company) { FactoryBot.create(:company, owner: owner) }
 
-    before { get company_path(company) }
+    before { get owners_company_path(company) }
 
     it 'has the correct status' do
       expect(response).to have_http_status(:ok)

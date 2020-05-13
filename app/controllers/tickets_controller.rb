@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   def create
-    ticket = Ticket.create!(ticket_create_params)
+    ticket = Ticket.create!(ticket_params)
 
     ticket.schedule_auto_checkout_job
 
@@ -10,7 +10,7 @@ class TicketsController < ApplicationController
   def update
     ticket = Ticket.find(params[:id])
 
-    ticket.update!(ticket_update_params)
+    ticket.update!(ticket_params)
 
     render json: ticket
   end
@@ -23,11 +23,7 @@ class TicketsController < ApplicationController
 
   private
 
-  def ticket_update_params
-    params.require(:ticket).permit(:id, :entered_at, :left_at)
-  end
-
-  def ticket_create_params
+  def ticket_params
     params.require(:ticket).permit(:id, :area_id, :entered_at, :left_at, :encrypted_data, :public_key)
   end
 end

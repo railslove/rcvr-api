@@ -8,7 +8,12 @@ class Ticket < ApplicationRecord
   belongs_to :area
   has_one :company, through: :area
 
-  validates :id, absence: true, on: :update, if: :id_changed? # Can never update id
+  validates :id, write_once_only: true
+  validates :entered_at, write_once_only: true
+  validates :left_at, write_once_only: true
+  validates :encrypted_data, write_once_only: true
+  validates :public_key, write_once_only: true
+  validates :area_id, write_once_only: true
 
   enum status: { neutral: 0, at_risk: 2, expired: 4 }
 
@@ -20,12 +25,8 @@ class Ticket < ApplicationRecord
   end
 
   def self.overlapping_time(time_range)
-    # Three possibilities: They entered while the other person was there
-    # .or they left while the other person was there
-    # .or they arrived before and left after (they were there the entire time)
-    Ticket.where(entered_at: time_range)
-          .or(Ticket.where(left_at: time_range))
-          .or(Ticket.where('entered_at <= ? AND left_at >= ?', time_range.begin, time_range.end))
+    Ticket.where('entered_at <= ? AND left_at >= ?',
+                 time_range.end, time_range.begin)
   end
 
   def self.mark_cases!(time_range, area_id)

@@ -42,4 +42,30 @@ RSpec.describe Ticket do
       expect(ticket1.reload.status).to eq('neutral')
     end
   end
+
+  context "WriteOnceOnlyValidator" do
+    it "Can write if empty" do
+      ticket = FactoryBot.create(:ticket, entered_at: nil)
+
+      ticket.entered_at = Time.zone.now
+
+      expect(ticket.valid?).to be(true)
+    end
+
+    it "Can't write if already written" do
+      ticket = FactoryBot.create(:ticket, entered_at: 1.hour.ago)
+
+      ticket.entered_at = Time.zone.now
+
+      expect(ticket.valid?).to be(false)
+    end
+
+    it "Can write other attributes" do
+      ticket = FactoryBot.create(:ticket, entered_at: 1.hour.ago, left_at: nil)
+
+      ticket.left_at = Time.zone.now
+
+      expect(ticket.valid?).to be(true)
+    end
+  end
 end
