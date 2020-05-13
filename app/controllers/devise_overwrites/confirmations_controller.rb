@@ -3,7 +3,11 @@ module DeviseOverwrites
     private
 
     def after_confirmation_path_for(resource_name, resource)
-      'https://rcvr.app'
+      if resource.public_key.blank?
+        redirect_to 'https://rcvr.app/business/setup/key-intro'
+      else
+        redirect_to 'https://rcvr.app/business/dashboard'
+      end
     end
   end
 end
