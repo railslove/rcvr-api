@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AreasController do
+RSpec.describe Owners::AreasController do
   include_context 'api request authentication'
 
   let(:owner) { FactoryBot.create(:owner) }
@@ -16,7 +16,7 @@ RSpec.describe AreasController do
       FactoryBot.create(:area, company: company)
       FactoryBot.create(:area)
 
-      get(company_areas_path(company_id: company.id))
+      get(owners_company_areas_path(company_id: company.id))
     end
 
     it 'Has the right response' do
@@ -28,7 +28,7 @@ RSpec.describe AreasController do
 
   context 'POST area' do
     subject do
-      -> { post(company_areas_path(company_id: company.id), params: { area: area_attributes }) }
+      -> { post(owners_company_areas_path(company_id: company.id), params: { area: area_attributes }) }
     end
 
     it { is_expected.to change { company.reload.areas.count }.by(1) }
@@ -44,7 +44,7 @@ RSpec.describe AreasController do
     let!(:area) { FactoryBot.create(:area, company: company) }
 
     subject do
-      -> { patch(area_path(area), params: { area: { name: 'New Name' } }) }
+      -> { patch(owners_area_path(area), params: { area: { name: 'New Name' } }) }
     end
 
     it { is_expected.to change { area.reload.name }.to('New Name') }
@@ -62,7 +62,7 @@ RSpec.describe AreasController do
     xit 'requests the pdf from happy pdf' do
       stub_request(:get, %r{http://app.happypdf.com/api/pdf.*})
 
-      get area_path(area, format: :pdf)
+      get owners_area_path(area, format: :pdf)
 
       expect(WebMock).to have_requested(:get, %r{http://app.happypdf.com/api/pdf.*})
     end
