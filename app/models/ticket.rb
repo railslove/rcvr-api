@@ -1,7 +1,7 @@
 class Ticket < ApplicationRecord
   include ApiSerializable
   include RailsAdminConfig::ForTicket
-  
+
   AUTO_CHECKOUT_AFTER = 4.hours
   EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name]
 
@@ -23,7 +23,9 @@ class Ticket < ApplicationRecord
     # Three possibilities: They entered while the other person was there
     # .or they left while the other person was there
     # .or they arrived before and left after (they were there the entire time)
-    Ticket.where('entered_at <= ? AND left_at >= ?', time_range.begin, time_range.end)
+    Ticket.where(entered_at: time_range)
+          .or(Ticket.where(left_at: time_range))
+          .or(Ticket.where('entered_at <= ? AND left_at >= ?', time_range.begin, time_range.end))
   end
 
   def self.mark_cases!(time_range, area_id)
