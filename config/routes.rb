@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :owners, path: '' do
     resources :companies, only: %i[index create update show] do
       resources :areas, only: %i[index create update show], shallow: true
+      resources :tickets, only: :index
     end
     resource :owner, only: :update
   end
