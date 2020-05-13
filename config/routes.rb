@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   resources :tickets, only: %i[create update]
   get 'risk-feed', to: 'tickets#risk_feed'
 
-  resources :companies, only: %i[index create update show] do
-    resources :areas, only: %i[index create update show], shallow: true
+  namespace :owners, path: '' do
+    resources :companies, only: %i[index create update show] do
+      resources :areas, only: %i[index create update show], shallow: true
+    end
+    resource :owner, only: :update
   end
-  resource :owner, only: :update
 end
