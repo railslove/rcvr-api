@@ -1,8 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe Ticket do
+  context '#overlapping_time' do
+    context 'open tickets' do
+      let(:time_range) { 4.hours.ago..2.hours.ago }
+
+      subject { Ticket.overlapping_time(time_range) }
+
+      let(:ticket_before_end) { FactoryBot.create(:ticket, entered_at: 3.hours.ago, left_at: nil) }
+      let(:ticket_after_end) { FactoryBot.create(:ticket, entered_at: 1.hour.ago, left_at: nil) }
+
+      it { is_expected.to include(ticket_before_end) }
+      it { is_expected.not_to include(ticket_after_end) }
+    end
+  end
+
   describe '#mark_cases!' do
-    let(:time_range) { 3.hours.ago..2.hours.ago }
+    let(:time_range) { 4.hours.ago..2.hours.ago }
     let(:area) { FactoryBot.create(:area) }
 
     def create_ticket(entered_at, left_at)
@@ -11,10 +25,10 @@ RSpec.describe Ticket do
 
     it 'Marks overlapping tickets' do
       # overlapping scenarios:
-      ticket1 = create_ticket(4.hours.ago, 2.5.hours.ago)
-      ticket2 = create_ticket(2.5.hours.ago, 1.hour.ago)
-      ticket3 = create_ticket(2.5.hours.ago, 2.6.hours.ago)
-      ticket4 = create_ticket(4.hours.ago, 1.hour.ago)
+      ticket1 = create_ticket(time_range.begin - 1.hour, time_range.end - 1.hour)
+      ticket2 = create_ticket(time_range.begin + 1.hour, time_range.end + 1.hour)
+      ticket3 = create_ticket(time_range.begin + 1.hour, time_range.end - 1.hour)
+      ticket4 = create_ticket(time_range.begin - 1.hour, time_range.end + 1.hour)
 
       Ticket.mark_cases!(time_range, area.id)
 
@@ -25,8 +39,8 @@ RSpec.describe Ticket do
     end
 
     it 'Does not touch tickets from other times' do
-      ticket1 = create_ticket(4.hours.ago, 3.5.hours.ago)
-      ticket2 = create_ticket(1.5.hours.ago, 1.hour.ago)
+      ticket1 = create_ticket(time_range.begin - 2.hours, time_range.begin - 1.hour)
+      ticket2 = create_ticket(time_range.end + 1.hour, time_range.end + 2.hours)
 
       Ticket.mark_cases!(time_range, area.id)
 

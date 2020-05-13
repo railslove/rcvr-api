@@ -24,7 +24,7 @@ class Ticket < ApplicationRecord
   end
 
   def self.overlapping_time(time_range)
-    Ticket.where('entered_at <= ? AND left_at >= ?',
+    Ticket.where('entered_at <= ? AND (left_at >= ? OR left_at IS NULL)',
                  time_range.end, time_range.begin)
   end
 
