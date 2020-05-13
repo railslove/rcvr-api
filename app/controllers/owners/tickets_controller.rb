@@ -1,9 +1,14 @@
 module Owners
   class TicketsController < Owners::ApplicationController
     def index
-      tickets = company.tickets
+      from = Time.zone.parse(params.require(:from))
+      to = Time.zone.parse(params.require(:to))
+
+      tickets = company.tickets.overlapping_time(from..to)
 
       render json: tickets
+    rescue ActionController::ParameterMissing => e
+      render json: { message: e.message }, status: :unprocessable_entity
     end
 
     private
