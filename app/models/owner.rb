@@ -3,12 +3,12 @@ class Owner < ApplicationRecord
   include RailsAdminConfig::ForOwner
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
-         jwt_revocation_strategy: JwtBlacklist
+         :confirmable, jwt_revocation_strategy: JwtBlacklist
 
   validates :email, uniqueness: true, presence: true
 
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
 
-  EXPOSED_ATTRIBUTES = %i[id email name]
+  EXPOSED_ATTRIBUTES = %i[id email name public_key]
 end
