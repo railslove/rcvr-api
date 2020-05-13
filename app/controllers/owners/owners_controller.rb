@@ -1,5 +1,5 @@
 module Owners
-  class OwnersController < ApplicationController
+  class OwnersController < Owners::ApplicationController
     before_action :authenticate_owner!
 
     def update

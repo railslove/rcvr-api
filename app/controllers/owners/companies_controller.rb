@@ -1,5 +1,5 @@
 module Owners
-  class CompaniesController < ApplicationController
+  class CompaniesController < Owners::ApplicationController
     before_action :authenticate_owner!
 
     def index

@@ -1,5 +1,5 @@
 module Owners
-  class AreasController < ApplicationController
+  class AreasController < Owners::ApplicationController
     before_action :authenticate_owner!, except: :show
 
     def index

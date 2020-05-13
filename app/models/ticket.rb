@@ -3,7 +3,7 @@ class Ticket < ApplicationRecord
   include RailsAdminConfig::ForTicket
   
   AUTO_CHECKOUT_AFTER = 4.hours
-  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name]
+  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name area_name]
 
   belongs_to :area
   has_one :company, through: :area
@@ -39,5 +39,9 @@ class Ticket < ApplicationRecord
 
   def company_name
     company.name
+  end
+
+  def area_name
+    area.name
   end
 end
