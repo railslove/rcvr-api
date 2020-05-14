@@ -18,5 +18,6 @@ RailsAdmin.config do |config|
     edit
     delete
     bulk_delete
+    export
   end
 end
