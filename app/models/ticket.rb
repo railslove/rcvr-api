@@ -15,9 +15,8 @@ class Ticket < ApplicationRecord
   validates :public_key, write_once_only: true
   validates :area_id, write_once_only: true
 
-  enum status: { neutral: 0, at_risk: 2, expired: 4 }
+  enum status: { neutral: 0, at_risk: 2 }
 
-  scope :not_expired, -> { where.not(status: :expired) }
   scope :open, -> { where(left_at: nil) }
 
   def schedule_auto_checkout_job
