@@ -5,3 +5,7 @@ production:
   :concurrency: 10
 :queues:
   - default
+:schedule:
+  cleanup_expired_tickets:
+    every: '12h'
+    class: CleanupExpiredTicketsJob
