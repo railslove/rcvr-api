@@ -2,7 +2,7 @@ class Company < ApplicationRecord
   include ApiSerializable
   include RailsAdminConfig::ForCompany
 
-  EXPOSED_ATTRIBUTES = %i[id name areas]
+  EXPOSED_ATTRIBUTES = %i[id name menu_link areas]
 
   validates :name, presence: true
 

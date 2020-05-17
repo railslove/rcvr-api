@@ -31,7 +31,7 @@ module Owners
     private
 
     def company_params
-      params.require(:company).permit(:name)
+      params.require(:company).permit(:name, :menu_link)
     end
   end
 end
