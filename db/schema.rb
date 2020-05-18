@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_082146) do
+ActiveRecord::Schema.define(version: 2020_05_17_083114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2020_05_17_082146) do
     t.string "encrypted_data"
     t.string "public_key"
     t.uuid "area_id"
+    t.boolean "accepted_privacy_policy"
     t.index ["area_id"], name: "index_tickets_on_area_id"
   end
 
