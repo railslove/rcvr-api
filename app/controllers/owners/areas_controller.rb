@@ -21,11 +21,17 @@ module Owners
     end
 
     def show
+      area = Area.find(params[:id])
+
       respond_to do |format|
         format.pdf do
-          qr_code_pdf = QrCodePdf.call(area: Area.find(params[:id]))
+          qr_code_pdf = QrCodePdf.call(area: area)
 
           render pdf: qr_code_pdf.file_name, data: qr_code_pdf.data
+        end
+
+        format.json do
+          render json: area
         end
       end
     end

@@ -5,6 +5,8 @@ class Ticket < ApplicationRecord
   AUTO_CHECKOUT_AFTER = 4.hours
   EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name area_name]
 
+  enum status: { neutral: 0, at_risk: 2 }
+
   belongs_to :area
   has_one :company, through: :area
 
@@ -15,9 +17,10 @@ class Ticket < ApplicationRecord
   validates :public_key, write_once_only: true
   validates :area_id, write_once_only: true
 
-  enum status: { neutral: 0, at_risk: 2 }
-
   scope :open, -> { where(left_at: nil) }
+
+  delegate :name, to: :company, prefix: :company
+  delegate :name, to: :area, prefix: :area
 
   def schedule_auto_checkout_job
     AutoCheckoutTicketJob.set(wait: AUTO_CHECKOUT_AFTER).perform_later(id)
@@ -35,13 +38,5 @@ class Ticket < ApplicationRecord
         .where(area_id: area_id)
         .find_each { |ticket| ticket.update(status: :at_risk) }
     end
-  end
-
-  def company_name
-    company.name
-  end
-
-  def area_name
-    area.name
   end
 end
