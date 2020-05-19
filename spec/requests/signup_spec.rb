@@ -6,7 +6,8 @@ RSpec.describe 'POST /signup', type: :request do
     {
       owner: {
         email: 'owner@example.com',
-        password: 'password'
+        password: 'password',
+        affiliate: 'AFFNAME'
       }
     }
   end
@@ -16,6 +17,7 @@ RSpec.describe 'POST /signup', type: :request do
 
     it 'returns ok' do
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include('AFFNAME')
     end
 
     it 'creates a new owner' do
