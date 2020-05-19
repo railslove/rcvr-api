@@ -4,7 +4,7 @@ module RailsAdminConfig
 
     included do
       rails_admin do
-        fields :email, :created_at, :name, :companies
+        fields :email, :created_at, :name, :companies, :affiliate
       end
     end
   end
