@@ -18,6 +18,7 @@ class Ticket < ApplicationRecord
   validates :area_id, write_once_only: true
 
   scope :open, -> { where(left_at: nil) }
+  scope :by_company, -> (company_id) { joins(area: :company).where(areas: { company_id: company_id }) }
 
   delegate :name, to: :company, prefix: :company
   delegate :name, to: :area, prefix: :area

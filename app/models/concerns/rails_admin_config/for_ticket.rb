@@ -25,6 +25,10 @@ module RailsAdminConfig
             hide
           end
         end
+
+        list do
+          search_by :by_company
+        end
       end
     end
   end
