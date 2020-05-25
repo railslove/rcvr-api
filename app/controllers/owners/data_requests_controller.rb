@@ -4,7 +4,7 @@ module Owners
       data_request = current_owner.data_requests.find(params[:id])
 
       if data_request.accepted?
-        render json: data_request.to_json(include: :tickets)
+        render json: data_request, include: { tickets: { methods: :encrypted_data } }
       else
         render json: data_request
       end
