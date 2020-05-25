@@ -1,5 +1,10 @@
-<p>Welcome <%= @email %>!</p>
-
-<p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns>
+      <h3>Willkommen <%= @owner.name %>,</h3>
+      <p class="lead">bitte bestätigen Sie Ihre E-Mail-Adresse.</p>
+        <p><%= link_to 'JETZT BESTÄTIGEN', confirmation_url(@resource, confirmation_token: @token), class: "email-button" %></p>
+    </columns>
+  </row>
+</container>

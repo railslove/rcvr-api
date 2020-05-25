@@ -1,1 +1,30 @@
+// change foundation-email variables before importing them!
+$body-background: #eff3f6;
+
 @import "foundation-emails";
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    font-family: Nunito, sans-serif;
+}
+
+p {
+    font-weight: 400;
+    font-family: Nunito, sans-serif;
+}
+
+.email-button {
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 900;
+    color: #000000; 
+    text-decoration: none; 
+    border-radius: 3px; 
+    background-color: #ffffff; 
+    border: 2px solid #000000;
+    border-radius: 16px;
+    padding: 10px;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+}
