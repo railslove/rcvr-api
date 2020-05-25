@@ -10,4 +10,5 @@ class Company < ApplicationRecord
 
   has_many :areas, dependent: :destroy
   has_many :tickets, through: :areas
+  has_many :data_requests, dependent: :destroy
 end

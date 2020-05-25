@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :companies, only: %i[index create update show] do
       resources :areas, only: %i[index create update show], shallow: true
       resources :tickets, only: :index
+      resources :data_requests, only: %i[show index], shallow: true
     end
     resource :owner, only: %i[show update]
   end

@@ -19,25 +19,12 @@ class Ticket < ApplicationRecord
 
   scope :open, -> { where(left_at: nil) }
   scope :by_company, -> (company_id) { joins(area: :company).where(areas: { company_id: company_id }) }
+  scope :during, -> (range) { where('entered_at <= ? AND (left_at >= ? OR left_at IS NULL)', range.end, range.begin) }
 
   delegate :name, to: :company, prefix: :company
   delegate :name, to: :area, prefix: :area
 
   def schedule_auto_checkout_job
     AutoCheckoutTicketJob.set(wait: AUTO_CHECKOUT_AFTER).perform_later(id)
-  end
-
-  def self.overlapping_time(time_range)
-    Ticket.where('entered_at <= ? AND (left_at >= ? OR left_at IS NULL)',
-                 time_range.end, time_range.begin)
-  end
-
-  def self.mark_cases!(time_range, area_id)
-    Ticket.transaction do
-      Ticket
-        .overlapping_time(time_range)
-        .where(area_id: area_id)
-        .find_each { |ticket| ticket.update(status: :at_risk) }
-    end
   end
 end

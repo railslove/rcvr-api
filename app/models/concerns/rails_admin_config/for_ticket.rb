@@ -20,8 +20,16 @@ module RailsAdminConfig
         field :left_at
         field :encrypted_data
 
+        field :status do
+          read_only true
+        end
+
         export do
           configure :id do
+            hide
+          end
+
+          configure :status do
             hide
           end
         end

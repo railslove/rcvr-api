@@ -9,6 +9,7 @@ class Owner < ApplicationRecord
 
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
+  has_many :data_requests, through: :companies
 
   EXPOSED_ATTRIBUTES = %i[id email name public_key affiliate]
 end

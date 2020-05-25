@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_085943) do
+ActiveRecord::Schema.define(version: 2020_05_20_140450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 2020_05_19_085943) do
     t.bigint "owner_id"
     t.string "menu_link"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
+  end
+
+  create_table "data_requests", force: :cascade do |t|
+    t.uuid "company_id"
+    t.datetime "from"
+    t.datetime "to"
+    t.datetime "accepted_at"
+    t.index ["company_id"], name: "index_data_requests_on_company_id"
   end
 
   create_table "jwt_blacklist", force: :cascade do |t|
@@ -75,5 +83,6 @@ ActiveRecord::Schema.define(version: 2020_05_19_085943) do
 
   add_foreign_key "areas", "companies"
   add_foreign_key "companies", "owners"
+  add_foreign_key "data_requests", "companies"
   add_foreign_key "tickets", "areas"
 end

@@ -1,3 +1,7 @@
+require Rails.root.join('lib/rails_admin/accept_data_request.rb')
+
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::AcceptDataRequest)
+
 RailsAdmin.config do |config|
   config.authenticate_with do
     authenticate_or_request_with_http_basic do |username, password|
@@ -8,7 +12,7 @@ RailsAdmin.config do |config|
 
   config.parent_controller = "::RailsAdminController"
 
-  config.included_models = %w[Area Company Owner Ticket]
+  config.included_models = %w[Area Company Owner Ticket DataRequest]
 
   config.actions do
     dashboard
@@ -19,5 +23,6 @@ RailsAdmin.config do |config|
     delete
     bulk_delete
     export
+    accept_data_request
   end
 end
