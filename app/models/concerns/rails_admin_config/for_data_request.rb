@@ -4,7 +4,7 @@ module RailsAdminConfig
 
     included do
       rails_admin do
-        fields :from, :to
+        fields :company, :from, :to
 
         fields :accepted_at, :tickets do
           read_only true

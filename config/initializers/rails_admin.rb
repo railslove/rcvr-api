@@ -1,3 +1,7 @@
+require Rails.root.join('lib/rails_admin/accept_data_request.rb')
+
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::AcceptDataRequest)
+
 RailsAdmin.config do |config|
   config.authenticate_with do
     authenticate_or_request_with_http_basic do |username, password|
@@ -19,5 +23,6 @@ RailsAdmin.config do |config|
     delete
     bulk_delete
     export
+    accept_data_request
   end
 end
