@@ -122,6 +122,8 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.6)
+    css_parser (1.7.1)
+      addressable
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -162,6 +164,7 @@ GEM
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.12.2)
+    foundation_emails (2.2.1.0)
     fugit (1.3.5)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.1)
@@ -171,6 +174,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashdiff (1.0.1)
+    htmlentities (4.3.4)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     httparty (0.18.0)
@@ -178,6 +182,9 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
+    inky-rb (1.3.8.0)
+      foundation_emails (~> 2)
+      nokogiri
     interactor (3.1.2)
     interactor-rails (2.2.1)
       interactor (~> 3.0)
@@ -231,6 +238,13 @@ GEM
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     pg (1.2.3)
+    premailer (1.11.1)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
+    premailer-rails (1.11.1)
+      actionmailer (>= 3)
+      premailer (~> 1.7, >= 1.7.9)
     public_suffix (4.0.5)
     puma (4.3.3)
       nio4r (~> 2.0)
@@ -369,10 +383,12 @@ DEPENDENCIES
   factory_bot_rails
   faker
   happypdf_renderer!
+  inky-rb
   interactor-rails
   listen (~> 3.2)
   mailgun-ruby (~> 1.2)
   pg
+  premailer-rails
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3)
