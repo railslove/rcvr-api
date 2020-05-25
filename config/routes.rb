@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :data_requests
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for(
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
     resources :companies, only: %i[index create update show] do
       resources :areas, only: %i[index create update show], shallow: true
       resources :tickets, only: :index
+      resources :data_requests, only: %i[show index], shallow: true
     end
     resource :owner, only: :update
   end

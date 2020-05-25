@@ -1,5 +1,8 @@
 class DataRequest < ApplicationRecord
+  include ApiSerializable
   include RailsAdminConfig::ForDataRequest
+
+  EXPOSED_ATTRIBUTES = %i[id from to accepted_at]
 
   belongs_to :company
   has_many :tickets, -> (request) { during(request.time_range) }, through: :company
