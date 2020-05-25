@@ -2,6 +2,10 @@ module Owners
   class OwnersController < Owners::ApplicationController
     before_action :authenticate_owner!
 
+    def show
+      render json: current_owner
+    end
+
     def update
       current_owner.update!(owner_params)
 
