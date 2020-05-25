@@ -47,6 +47,10 @@ de:
       unauthenticated: Du musst Dich anmelden oder registrieren, bevor Du fortfahren können.
       unconfirmed: Du musst Dein Konto bestätigen, bevor Du fortfahren kannst.
     mailer:
+      footer:
+        headline: Habt ihr Fragen? Sprecht uns an!
+        message: Wir sind am Start, um allen Gastronom*Innen das Leben leichter zu machen und freuen uns darauf auch Euch kennenzulernen.
+        contact: 'So erreicht ihr uns:'
       confirmation_instructions:
         greeting: Willkommen %{recipient}!
         instruction: 'Bitte folge dem untenstehenden Link, um Dein Konto zu bestätigen:'
