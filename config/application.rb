@@ -54,5 +54,10 @@ module RcvrApi
     config.middleware.use(ActionDispatch::Flash)
     config.middleware.use(Rack::MethodOverride)
     config.middleware.use(ActionDispatch::Session::CookieStore, { key: '_rcvr_api_session' })
+
+    # Devise Mailer
+    config.to_prepare do
+      Devise::Mailer.layout "mailer"
+    end
   end
 end
