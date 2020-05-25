@@ -1,17 +1,19 @@
 // change foundation-email variables before importing them!
 $body-background: #eff3f6;
 $button-font-color: #000000;
+$global-padding: 24px !default;
+$global-font-size: 14px !default;
+$global-line-height: 1.4 !default;
+$global-font-family: Nunito, sans-serif;
 
 @import "foundation-emails";
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
-    font-family: Nunito, sans-serif;
 }
 
 p {
     font-weight: 400;
-    font-family: Nunito, sans-serif;
 }
 
 .email-logo {
@@ -19,10 +21,7 @@ p {
 }
 
 .email-button {
-    font-size: 14px;
-    line-height: 1.4;
     font-weight: 900;
-    font-family: Nunito, sans-serif;
     text-decoration: none;
     color: $button-font-color;
     border-radius: 3px; 

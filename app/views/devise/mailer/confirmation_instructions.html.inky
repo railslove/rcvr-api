@@ -4,7 +4,7 @@
     <columns>
       <h3><%= t('devise.mailer.confirmation_instructions.greeting', recipient: @owner.name) %></h3>
       <p class="lead"><%= t('devise.mailer.confirmation_instructions.instruction') %></p>
-      <p><%= link_to t('devise.mailer.confirmation_instructions.button'), confirmation_url(@resource, confirmation_token: @token), class: "email-button" %></p>
+      <p><%= link_to t('devise.mailer.confirmation_instructions.action'), confirmation_url(@resource, confirmation_token: @token), class: "email-button" %></p>
     </columns>
   </row>
 </container>

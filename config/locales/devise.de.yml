@@ -48,10 +48,9 @@ de:
       unconfirmed: Du musst Dein Konto bestätigen, bevor Du fortfahren kannst.
     mailer:
       confirmation_instructions:
-        action: Mein Konto bestätigen
         greeting: Willkommen %{recipient}!
         instruction: 'Bitte folge dem untenstehenden Link, um Dein Konto zu bestätigen:'
-        button: 'JETZT BESTÄTIGEN'
+        action: 'JETZT BESTÄTIGEN'
         subject: Anleitung zur Bestätigung Deines Kontos
       email_changed:
         greeting: Hallo %{recipient}!
@@ -62,14 +61,14 @@ de:
         message: Wir schreiben Dir, um Dich darüber zu informieren, dass Dein Passwort geändert wurde.
         subject: Passwort geändert
       reset_password_instructions:
-        action: Passwort ändern
+        action: PASSWORD ÄNDERN
         greeting: Hallo %{recipient}!
         instruction: Jemand hat einen Link angefordert, um Dein Passwort zu ändern. Klicke auf den unten aufgeführten Link um das Passwort zu ändern.
         instruction_2: Bitte ignoriere diese E-Mail, wenn du kein neues Passwort angefordert hast.
         instruction_3: Das Passwort wird nicht geändert bis Du den obenstehenden Link abrufst und ein neues Passwort bestimmst.
         subject: Anleitung für das Zurücksetzen Deines Passworts
       unlock_instructions:
-        action: Mein Konto entsperren
+        action: KONTO SPERREN
         greeting: Hallo %{recipient}!
         instruction: 'Folge dem untenstehenden Link, um Dein Konto zu entsperren:'
         message: Dein Konto wurde aufgrund einer großen Anzahl von fehlgeschlagenen Anmeldeversuchen gesperrt.
