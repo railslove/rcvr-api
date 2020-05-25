@@ -16,7 +16,9 @@
               <row>
                 <columns small="12" valign="middle">
                   <spacer size="16"/>
-                  <img src="https://static1.squarespace.com/static/5eb707bcc46deb69f548bb49/t/5eb888c540f56e45feec8960/1590168018876/?format=1500w" width=200 class="email-logo"> 
+                  <center>
+                    <img src="https://static1.squarespace.com/static/5eb707bcc46deb69f548bb49/t/5eb888c540f56e45feec8960/1590168018876/?format=1500w" width=200 class="email-logo">
+                  </center> 
                 </columns>
               </row>
             </container>
