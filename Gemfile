@@ -6,7 +6,7 @@ ruby '2.6.6'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise-jwt'
 gem 'pg'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'rails', '~> 6.0.3'
 gem 'sentry-raven'
 gem 'happypdf_renderer', git: 'https://ef44d43b3bd2bcace3681ac53e1553a1a4f98eda:x-oauth-basic@github.com/railslove/happypdf_renderer.git'
