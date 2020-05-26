@@ -56,6 +56,7 @@ module RcvrApi
     config.middleware.use(ActionDispatch::Session::CookieStore, { key: '_rcvr_api_session' })
 
     config.i18n.default_locale = :de
+    config.i18n.fallbacks = [:en]
 
     # Devise Mailer
     config.to_prepare do
