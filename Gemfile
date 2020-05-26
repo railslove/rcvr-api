@@ -16,6 +16,7 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'rails_admin'
 gem "mailgun-ruby", "~> 1.2"
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

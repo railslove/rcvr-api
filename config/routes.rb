@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :tickets, only: %i[create update]
   get 'risk-feed', to: 'tickets#risk_feed'
 
+  post 'stripe-webhooks', controller: :stripe_webhooks, action: :create
+
   namespace :owners, path: '' do
     resources :companies, only: %i[index create update show] do
       resources :areas, only: %i[index create update show], shallow: true
@@ -19,5 +21,6 @@ Rails.application.routes.draw do
       resources :data_requests, only: %i[show index], shallow: true
     end
     resource :owner, only: %i[show update]
+    resource :checkout
   end
 end
