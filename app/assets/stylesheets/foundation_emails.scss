@@ -2,10 +2,10 @@
 $body-background: #eff3f6;
 $primary-color: #ea26ed;
 $button-font-color: #000000;
-$global-padding: 34px !default;
+$global-padding: 24px !default;
 $global-font-size: 14px !default;
 $global-line-height: 1.4 !default;
-$global-font-family: Nunito, sans-serif;
+$body-font-family: Nunito, sans-serif !default;
 
 @import "foundation-emails";
 
@@ -15,7 +15,15 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     font-weight: 400;
+    padding: 0 $global-padding;
 }
+
+.email-link {
+    font-size: 16px;
+    margin: 0 0 4px;
+    padding: 0 24px;
+}
+
 
 .email-logo {
     width: 200px;
