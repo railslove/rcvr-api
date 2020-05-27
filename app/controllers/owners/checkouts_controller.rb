@@ -4,10 +4,6 @@ module Owners
       render json: checkout_session
     end
 
-    def show
-      render json: Stipe::Checkout::Session.retrieve(params[:session_id])
-    end
-
     private
 
     def checkout_session
@@ -18,7 +14,12 @@ module Owners
         payment_method_types: ['card'],
         line_items: [{ price: ENV['STRIPE_SUBSCRIPTION_PRICE_ID'], quantity: 1 }],
         customer_email: current_owner.email,
-        client_reference_id: current_owner.id
+        client_reference_id: current_owner.id,
+        setup_intent_data: {
+          metadata: {
+            subscription_id: current_owner.stripe_subscription_id
+          }
+        }
       )
     end
   end

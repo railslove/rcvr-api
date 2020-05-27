@@ -21,6 +21,6 @@ Rails.application.routes.draw do
       resources :data_requests, only: %i[show index], shallow: true
     end
     resource :owner, only: %i[show update]
-    resource :checkout
+    resource :checkout, only: :create
   end
 end
