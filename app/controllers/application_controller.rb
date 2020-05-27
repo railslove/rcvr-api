@@ -29,10 +29,9 @@ class ApplicationController < ActionController::API
       Raven.extra_context(params: params.to_unsafe_h, url: request.url)
       Raven.capture_exception(error)
     else
-      Rails.logger.error(error)
-      Rails.logger.error(error.backtrace)
-
       response[:backtrace] = error.backtrace
+
+      raise error
     end
 
     render json: response, status: :internal_server_error

@@ -13,7 +13,11 @@ class Owner < ApplicationRecord
 
   EXPOSED_ATTRIBUTES = %i[id email name public_key affiliate stripe_subscription_status]
 
-  def update_stripe_subscription_status!
-    update!(stripe_subscription_status: Stripe::Subscription.retrieve(stripe_subscription_id).status)
+  delegate :status, to: :stripe_subscription, prefix: :stripe_subscription
+
+  def stripe_subscription
+    return OpenStruct.new unless stripe_subscription_id?
+
+    @stripe_subscription ||= Stripe::Subscription.retrieve(stripe_subscription_id)
   end
 end

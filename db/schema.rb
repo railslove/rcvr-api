@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 2020_05_27_120503) do
     t.string "affiliate"
     t.string "stripe_customer_id"
     t.string "stripe_subscription_id"
-    t.string "stripe_subscription_status"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
