@@ -59,6 +59,8 @@ module RcvrApi
     config.i18n.default_locale = :de
     config.i18n.fallbacks = [:en]
 
+    config.time_zone = 'Berlin'
+
     # Devise Mailer
     config.to_prepare do
       Devise::Mailer.layout "mailer"
