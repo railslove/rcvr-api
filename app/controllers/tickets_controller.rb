@@ -5,13 +5,19 @@ class TicketsController < ApplicationController
     ticket.schedule_auto_checkout_job
 
     render json: ticket
+  rescue ActiveRecord::RecordNotUnique
+    # idempotency, but we dont update the ticket since the checkout time would be pushed back unecessarily
+    render json: Ticket.find(ticket_params[:id])
   end
 
   def update
     ticket = Ticket.find(params[:id])
 
     ticket.update!(ticket_params)
-
+  rescue ActiveRecord::RecordInvalid
+    # idempotency
+    # TODO: Make sure this is only idempotent for the write only once validator
+  ensure
     render json: ticket
   end
 
