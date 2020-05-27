@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby '2.7.1'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise-jwt'
@@ -15,8 +15,12 @@ gem 'rack-cors'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'rails_admin'
-gem "mailgun-ruby", "~> 1.2"
 gem 'stripe'
+
+# Emails
+gem 'mailgun-ruby', '~> 1.2'
+gem 'inky-rb', require: 'inky'
+gem 'premailer-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <%= stylesheet_link_tag "foundation_emails" %>
+  </head>
+
+  <body>
+    <table class="body" data-made-with-foundation>
+      <tr>
+        <td class="center" align="center" valign="top">
+          <center>
+            <spacer size="24"/>
+            <container>
+              <row>
+                <columns small="24" valign="middle">
+                  <spacer size="48"/>
+                  <center>
+                    <img src="https://static1.squarespace.com/static/5eb707bcc46deb69f548bb49/t/5eb888c540f56e45feec8960/1590168018876/?format=200w" width=200 class="email-logo">
+                  </center> 
+                </columns>
+              </row>
+            </container>
+            <%= yield %>
+            <spacer size="24"/>
+            <container>
+              <row>
+                <columns small="24" valign="middle">
+                  <spacer size="48"/>
+                  <center>
+                    <img src="https://images.squarespace-cdn.com/content/v1/5eb707bcc46deb69f548bb49/1589152304625-BXUXIPNWW7QB65603SAI/ke17ZwdGBToddI8pDm48kP36yNYTkbjsc8042rkOJVVZw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7bceXY-R5S3UfGyvt5PpxWDDY9w1fdbe6kux3pPBHxQ2e-c5pQW77MadkxmRCAxDjA/Group+24.png?format=70w" width=70 class="email-footer-img">
+                  </center> 
+                </columns>
+              </row>
+              <row>
+                <columns small="24" valign="middle">
+                  <center>
+                    <h3><%= t('devise.mailer.footer.headline') %></h3>
+                    <p class="lead"><%= t('devise.mailer.footer.message') %></p>
+                    <spacer size="32"/>
+                    <p class="lead"><%= t('devise.mailer.footer.contact') %></p>
+                    <p class="email-link"><a href="tel:+49 221 99 999 700">+49 221 99 999 700</a></p>
+                    <p class="email-link"><a href="mailto:team@recoverapp.de">team@recoverapp.de</a></p>
+                  </center> 
+                </columns>
+              </row>
+            </container>
+          </center>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<container>
+  <spacer size="16"></spacer>
+  <row>
+    <columns>
+      <center>
+        <h3><%= t('devise.mailer.unlock_instructions.greeting', recipient: @owner.name) %></h3>
+        <p class="lead"><%= t('devise.mailer.unlock_instructions.message') %></p> 
+        <p class="lead"><%= t('devise.mailer.unlock_instructions.instruction') %></p>
+        <p><%= link_to t('devise.mailer.confirmation_instructions.action'), unlock_url(@resource, unlock_token: @token), class: "email-button" %></p>
+      </center>
+    </columns>
+  </row>
+</container>

@@ -17,7 +17,7 @@ blocks:
           commands:
             - checkout
             - sem-service start postgres 12
-            - sem-version ruby 2.6.5
+            - sem-version ruby 2.7.1
             - cache restore
             - bundle install --deployment --path vendor/bundle
             - cache store

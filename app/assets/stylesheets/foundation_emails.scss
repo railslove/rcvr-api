@@ -1,0 +1,46 @@
+// change foundation-email variables before importing them!
+$body-background: #eff3f6;
+$primary-color: #ea26ed;
+$button-font-color: #000000;
+$global-padding: 24px !default;
+$global-font-size: 14px !default;
+$global-line-height: 1.4 !default;
+$body-font-family: Nunito, sans-serif !default;
+
+@import "foundation-emails";
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+p {
+    font-weight: 400;
+    padding: 0 $global-padding;
+}
+
+.email-link {
+    font-size: 16px;
+    margin: 0 0 4px;
+    padding: 0 24px;
+}
+
+.email-logo {
+    width: 200px;
+}
+
+.email-footer-img {
+    width: 70px;
+}
+
+.email-button {
+    font-weight: 900;
+    text-decoration: none;
+    color: $button-font-color;
+    border-radius: 3px; 
+    border: 2px solid #000000;
+    border-radius: 16px;
+    padding: 10px;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+}
