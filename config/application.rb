@@ -55,6 +55,7 @@ module RcvrApi
     config.middleware.use(Rack::MethodOverride)
     config.middleware.use(ActionDispatch::Session::CookieStore, { key: '_rcvr_api_session' })
 
+    config.i18n.available_locales = [:de, :en]
     config.i18n.default_locale = :de
     config.i18n.fallbacks = [:en]
 
