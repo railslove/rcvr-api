@@ -6,9 +6,9 @@ class RailsAdminController < ActionController::Base
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionView::Layouts
 
-  before_action :set_locale
+  around_action :set_locale
 
-  def set_locale
-    I18n.locale = :en
+  def set_locale(&action)
+    I18n.with_locale(:en, &action)
   end
 end
