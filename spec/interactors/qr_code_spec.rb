@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe QrCodePdf do
+RSpec.describe QrCode do
   let(:area) { FactoryBot.create(:area) }
 
   subject { -> { described_class.call(area: area) } }

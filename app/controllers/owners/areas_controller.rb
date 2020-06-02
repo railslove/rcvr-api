@@ -25,9 +25,15 @@ module Owners
 
       respond_to do |format|
         format.pdf do
-          qr_code_pdf = QrCodePdf.call(area: area)
+          qr_code = QrCode.call(area: area)
 
-          render pdf: qr_code_pdf.file_name, data: qr_code_pdf.data
+          render pdf: qr_code.file_name, data: qr_code.data
+        end
+
+        format.svg do
+          qr_code = QrCode.call(area: area)
+
+          render body: qr_code.svg
         end
 
         format.json do

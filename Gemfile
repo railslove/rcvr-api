@@ -15,6 +15,7 @@ gem 'rack-cors'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'rails_admin'
+gem 'rqrcode'
 
 # Emails
 gem 'mailgun-ruby', '~> 1.2'
