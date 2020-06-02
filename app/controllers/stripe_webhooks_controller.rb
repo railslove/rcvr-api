@@ -11,9 +11,20 @@ class StripeWebhooksController < ApplicationController
         # A new subscription was created
         owner.stripe_customer_id = event_data.customer
         owner.stripe_subscription_id = event_data.subscription
+
+        subscription = Stripe::Subscription.retrieve(event_data.subscription)
+        payment_method = Stripe::PaymentMethod.retrieve(subscription.default_payment_method)
+
+        Stripe::Customer.update(owner.stripe_customer_id, address: payment_method.billing_details.address.to_h)
       else
         # We just collected a new billing method and need to update the customer with that
-        Stripe::Customer.update(owner.stripe_customer_id, invoice_settings: { default_payment_method: setup_intent.payment_method })
+        setup_intent = Stripe::SetupIntent.retrieve(event_data.setup_intent)
+
+        Stripe::Customer.update(
+          owner.stripe_customer_id,
+          invoice_settings: { default_payment_method: setup_intent.payment_method },
+          address: setup_intent.payment_method.billing_details.address.to_h
+        )
       end
 
       owner.save!
@@ -29,10 +40,6 @@ class StripeWebhooksController < ApplicationController
   end
 
   private
-
-  def setup_intent
-    Stripe::SetupIntent.retrieve(event_data.setup_intent)
-  end
 
   def event_data
     event.data.object

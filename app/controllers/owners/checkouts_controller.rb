@@ -36,7 +36,8 @@ module Owners
         customer_email: current_owner.email,
         line_items: [{ price: ENV['STRIPE_SUBSCRIPTION_PRICE_ID'], quantity: current_owner.companies.count }],
         subscription_data: {
-          trial_end: trial_end
+          trial_end: trial_end,
+          default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']]
         }
       }
     end
