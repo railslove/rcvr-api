@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_05_27_170152) do
     t.string "stripe_subscription_id"
     t.datetime "trial_ends_at"
     t.boolean "can_use_for_free", default: false
+    t.datetime "block_at"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true

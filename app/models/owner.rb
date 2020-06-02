@@ -20,10 +20,20 @@ class Owner < ApplicationRecord
   def stripe_subscription
     return OpenStruct.new unless stripe_subscription_id?
 
-    @stripe_subscription ||= Stripe::Subscription.retrieve(stripe_subscription_id)
+    Stripe::Subscription.retrieve(stripe_subscription_id)
   end
 
   def update_stripe_subscription
+    return unless stripe_subscription_id?
+
     Stripe::Subscription.update(stripe_subscription_id, quantity: companies.count)
+  end
+
+  def cancel_stripe_subscription!
+    return unless stripe_subscription_id?
+
+    Stripe::Subscription.delete(stripe_subscription_id)
+
+    update(stripe_subscription_id: nil)
   end
 end

@@ -17,6 +17,7 @@ module Owners
         success_url: "#{ENV['FRONTEND_URL']}/business/profile?success=true",
         cancel_url: "#{ENV['FRONTEND_URL']}/business/profile?success=false",
         payment_method_types: ['card'],
+        billing_address_collection: 'required',
         client_reference_id: current_owner.id,
       }
 
@@ -28,10 +29,15 @@ module Owners
     end
 
     def params_for_new_subscription
+      trial_end = [current_owner.trial_ends_at, 2.days.from_now].max.to_i # Has to be min two days in the future
+
       {
         mode: 'subscription',
         customer_email: current_owner.email,
         line_items: [{ price: ENV['STRIPE_SUBSCRIPTION_PRICE_ID'], quantity: current_owner.companies.count }],
+        subscription_data: {
+          trial_end: trial_end
+        }
       }
     end
 

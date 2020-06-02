@@ -22,5 +22,6 @@ Rails.application.routes.draw do
     end
     resource :owner, only: %i[show update]
     resource :checkout, only: :create
+    resource :stripe_billing_portal_session, only: :create
   end
 end
