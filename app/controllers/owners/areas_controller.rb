@@ -36,6 +36,12 @@ module Owners
           render body: qr_code.svg
         end
 
+        format.png do
+          qr_code = QrCode.call(area: area)
+
+          render body: qr_code.png.to_s
+        end
+
         format.json do
           render json: area
         end
