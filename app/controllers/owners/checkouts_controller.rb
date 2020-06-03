@@ -29,7 +29,7 @@ module Owners
     end
 
     def params_for_new_subscription
-      trial_end = [current_owner.trial_ends_at, 2.days.from_now].max.to_i # Has to be min two days in the future
+      trial_end = [current_owner.trial_ends_at, 2.days.from_now].compact.max.to_i # Has to be min two days in the future
 
       {
         mode: 'subscription',
