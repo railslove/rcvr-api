@@ -67,4 +67,14 @@ RSpec.describe Owners::AreasController do
       expect(WebMock).to have_requested(:get, %r{http://app.happypdf.com/api/pdf.*})
     end
   end
+
+  context 'GET qr svg' do
+    let!(:area) { FactoryBot.create(:area, company: company) }
+
+    it 'returns svg data' do
+      get owners_area_path(area, format: :svg)
+
+      expect(response.body).to start_with("<?xml version=\"1.0\" standalone=\"yes\"?>\n<svg version=\"1.1\"")
+    end
+  end
 end

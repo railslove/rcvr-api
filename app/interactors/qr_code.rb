@@ -1,4 +1,4 @@
-class QrCodePdf
+class QrCode
   include Interactor
   include RequiredAttributes
 
@@ -12,9 +12,21 @@ class QrCodePdf
 
     context.file_name = "recover_qr_#{area.name}.pdf"
     context.data = pdf_data
+    context.svg = svg_data
   end
 
   private
+
+  def svg_data
+    qrcode = ::RQRCode::QRCode.new(qr_code_link.to_s)
+    qrcode.as_svg(
+      offset: 0,
+      color: '000',
+      shape_rendering: 'crispEdges',
+      module_size: 6,
+      standalone: true
+    )
+  end
 
   def pdf_data
     {
