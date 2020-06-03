@@ -1,15 +1,7 @@
 class HandleStripeWebhookJob < ApplicationJob
-  def perform(params)
-    StripeWebhookHandler.call(event_from(params))
-  end
+  def perform(params, body, stripe_signature)
+    event = Stripe::Webhook.construct_event(body, stripe_signature, ENV['STRIPE_WEBHOOK_SIGNING_SECRET'])
 
-  private
-
-  def event_from(params)
-    @event ||= Stripe::Webhook.construct_event(
-      request.body.read,
-      request.headers['HTTP_STRIPE_SIGNATURE'],
-      ENV['STRIPE_WEBHOOK_SIGNING_SECRET']
-    )
+    StripeWebhookHandler.call(event: event)
   end
 end

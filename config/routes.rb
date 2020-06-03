@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :data_requests, only: %i[show index], shallow: true
     end
     resource :owner, only: %i[show update]
-    resource :checkout, only: :create
-    resource :stripe_billing_portal_session, only: :create
+    post :checkout, only: :create, controller: :checkouts, action: :create
+    post 'subscription-settings', only: :create, controller: :subscription_settings, action: :create
   end
 end

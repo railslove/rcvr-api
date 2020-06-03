@@ -1,5 +1,5 @@
 module Owners
-  class StripeBillingPortalSessionsController < Owners::ApplicationController
+  class SubscriptionSettingsController < Owners::ApplicationController
     before_action :authenticate_owner!
 
     def create

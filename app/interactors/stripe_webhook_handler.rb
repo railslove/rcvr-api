@@ -10,7 +10,11 @@ class StripeWebhookHandler
   after :save_owner
 
   def call
-    public_send("handle_#{event.type.gsub('.', '_')}")
+    handler_method = "handle_#{event.type.gsub('.', '_')}"
+
+    return unless respond_to?(handler_method)
+
+    public_send(handler_method)
   end
 
   def handle_checkout_session_completed
@@ -52,7 +56,7 @@ class StripeWebhookHandler
   end
 
   def save_owner
-    owner.save!
+    owner&.save!
   end
 
   def event_data
