@@ -10,7 +10,7 @@ class QrCode
   def call
     raise StandardError, "Owner #{owner.id} has no public_key" if owner.public_key.blank?
 
-    context.file_name = "recover_qr_#{area.name}.pdf"
+    context.file_name = "Recover QR - #{company.name} - #{area.name}"
     context.data = pdf_data
     context.svg = svg_data
     context.png = png_data
