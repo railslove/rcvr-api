@@ -10,10 +10,10 @@ class QrCode
   def call
     raise StandardError, "Owner #{owner.id} has no public_key" if owner.public_key.blank?
 
-    context.file_name = "Recover QR - #{company.name} - #{area.name}"
+    context.file_name = "Recover QR - #{company.name} - #{area.name}.#{context.format}"
 
     handler_method = "#{context.format}_data"
-    return unless respond_to?(handler_method, :include_private)
+    raise StandardError, "Unsopported Fromat: #{context.format}" unless respond_to?(handler_method, :include_private)
 
     context.data = send(handler_method)
   end
