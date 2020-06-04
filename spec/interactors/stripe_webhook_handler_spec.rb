@@ -95,7 +95,7 @@ RSpec.describe StripeWebhookHandler do
     before { StripeWebhookHandler.call(event: event) }
     subject { owner.reload.block_at }
 
-    context 'canecled' do
+    context 'canceled' do
       let(:cancel_at) { 1.day.from_now }
 
       it { is_expected.to be_within(1.second).of(cancel_at) }
