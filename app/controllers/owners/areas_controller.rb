@@ -27,7 +27,6 @@ module Owners
 
       respond_to do |format|
         format.pdf do
-          qr_code = QrCode.call(area: area, format: 'pdf')
 
           render pdf: "#{qr_code.file_name}.pdf", data: qr_code.data
         end
