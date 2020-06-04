@@ -32,7 +32,6 @@ module Owners
         end
 
         format.svg do
-          qr_code = QrCode.call(area: area, format: 'svg')
 
           send_data qr_code.data, type: 'image/svg', disposition: 'attachment', filename: "#{qr_code.file_name}.svg"
         end
