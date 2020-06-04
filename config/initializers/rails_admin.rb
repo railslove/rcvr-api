@@ -10,6 +10,9 @@ RailsAdmin.config do |config|
     end
   end
 
+  # Lets show empty fields
+  config.compact_show_view = false
+
   config.parent_controller = "::RailsAdminController"
 
   config.included_models = %w[Area Company Owner Ticket DataRequest]
