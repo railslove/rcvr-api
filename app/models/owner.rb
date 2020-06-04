@@ -9,6 +9,8 @@ class Owner < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
 
+  scope :affiliate, -> { where.not(affiliate: nil) }
+
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
   has_many :data_requests, through: :companies
