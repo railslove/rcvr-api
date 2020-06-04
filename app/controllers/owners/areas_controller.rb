@@ -25,21 +25,21 @@ module Owners
 
       respond_to do |format|
         format.pdf do
-          qr_code = QrCode.call(area: area)
+          qr_code = QrCode.call(area: area, format: 'pdf')
 
           render pdf: "#{qr_code.file_name}.pdf", data: qr_code.data
         end
 
         format.svg do
-          qr_code = QrCode.call(area: area)
+          qr_code = QrCode.call(area: area, format: 'svg')
 
-          send_data qr_code.svg, type: 'image/svg', disposition: 'attachment', filename: "#{qr_code.file_name}.svg"
+          send_data qr_code.data, type: 'image/svg', disposition: 'attachment', filename: "#{qr_code.file_name}.svg"
         end
 
         format.png do
-          qr_code = QrCode.call(area: area)
+          qr_code = QrCode.call(area: area, format: 'png')
 
-          send_data qr_code.png.to_s, type: 'image/png', disposition: 'attachment', filename: "#{qr_code.file_name}.png"
+          send_data qr_code.data, type: 'image/png', disposition: 'attachment', filename: "#{qr_code.file_name}.png"
         end
 
         format.json do

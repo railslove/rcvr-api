@@ -2,7 +2,7 @@ class QrCode
   include Interactor
   include RequiredAttributes
 
-  required_attributes %i[area]
+  required_attributes %i[area format]
 
   delegate :company, to: :area
   delegate :owner, to: :company
@@ -11,9 +11,11 @@ class QrCode
     raise StandardError, "Owner #{owner.id} has no public_key" if owner.public_key.blank?
 
     context.file_name = "Recover QR - #{company.name} - #{area.name}"
-    context.data = pdf_data
-    context.svg = svg_data
-    context.png = png_data
+
+    handler_method = "#{context.format}_data"
+    return unless respond_to?(handler_method, :include_private)
+
+    context.data = send(handler_method)
   end
 
   private
@@ -42,7 +44,7 @@ class QrCode
       resize_exactly_to: false,
       resize_gte_to: false,
       size: 480
-    )
+    ).to_s
   end
 
   def pdf_data
