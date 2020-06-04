@@ -22,18 +22,19 @@ module Owners
 
     def show
       area = Area.find(params[:id])
+      qr_code = QrCode.call(area: area, format: request.format.symbol) unless request.format.symbol == :json
 
       respond_to do |format|
         format.pdf do
-          qr_code = QrCode.call(area: area)
-
           render pdf: qr_code.file_name, data: qr_code.data
         end
 
         format.svg do
-          qr_code = QrCode.call(area: area)
+          send_data qr_code.data, type: 'image/svg', disposition: 'attachment', filename: qr_code.file_name
+        end
 
-          render body: qr_code.svg
+        format.png do
+          send_data qr_code.data, type: 'image/png', disposition: 'attachment', filename: qr_code.file_name
         end
 
         format.json do
