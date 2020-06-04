@@ -37,7 +37,6 @@ module Owners
         end
 
         format.png do
-          qr_code = QrCode.call(area: area, format: 'png')
 
           send_data qr_code.data, type: 'image/png', disposition: 'attachment', filename: "#{qr_code.file_name}.png"
         end
