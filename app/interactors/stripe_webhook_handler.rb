@@ -20,8 +20,8 @@ class StripeWebhookHandler
   def handle_checkout_session_completed
     owner.block_at = nil
 
-    owner.stripe_customer_id = event_data.customer
-    owner.stripe_subscription_id = event_data.subscription
+    owner.stripe_customer_id = event_data.customer if event_data.customer
+    owner.stripe_subscription_id = event_data.subscription if event_data.subscription
 
     Stripe::Customer.update(
       owner.stripe_customer_id,
@@ -37,13 +37,11 @@ class StripeWebhookHandler
   private
 
   def payment_method
-    if event_data.mode == 'subscription'
-      subscription = Stripe::Subscription.retrieve(event_data.subscription)
-
-      Stripe::PaymentMethod.retrieve(subscription.default_payment_method)
-    else
+    payment_method_id = event_data.mode == 'subscription' ?
+      Stripe::Subscription.retrieve(event_data.subscription).default_payment_method :
       Stripe::SetupIntent.retrieve(event_data.setup_intent).payment_method
-    end
+
+    Stripe::PaymentMethod.retrieve(payment_method_id)
   end
 
   def set_owner

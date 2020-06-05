@@ -44,7 +44,7 @@ RSpec.describe StripeWebhookHandler do
     end
 
     context 'Customer Billing Update' do
-      let(:setup_intent) { OpenStruct.new(payment_method: payment_method) }
+      let(:setup_intent) { OpenStruct.new(payment_method: 'pm_1') }
       let(:event) do
         OpenStruct.new(
           type: 'checkout.session.completed',
@@ -62,6 +62,7 @@ RSpec.describe StripeWebhookHandler do
 
       before do
         allow(Stripe::SetupIntent).to receive(:retrieve).with('si_1').and_return(setup_intent)
+        allow(Stripe::PaymentMethod).to receive(:retrieve).and_return(payment_method)
       end
 
       it 'happy path' do
