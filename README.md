@@ -21,7 +21,7 @@ You can use the provided docker-compose file to locally run redis and postgres, 
 Dont forget to set all four stripe related environment variables (see .env).
 For trying out payment related things you might want to setup webhooks to work locally with stripe (similar to ngrok), if your server runs on `localhost:3000`:
 
-`stripe listen --forward-to localhost:3000`
+`stripe listen --forward-to localhost:3000/stripe-webhooks`
 
 And to trigger test events:
 
