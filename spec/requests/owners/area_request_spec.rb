@@ -74,7 +74,18 @@ RSpec.describe Owners::AreasController do
     it 'returns svg data' do
       get owners_area_path(area, format: :svg)
 
+      expect(response.content_type).to eq('image/svg')
       expect(response.body).to start_with("<?xml version=\"1.0\" standalone=\"yes\"?>\n<svg version=\"1.1\"")
+    end
+  end
+
+  context 'GET qr png' do
+    let!(:area) { FactoryBot.create(:area, company: company) }
+
+    it 'returns svg data' do
+      get owners_area_path(area, format: :png)
+
+      expect(response.content_type).to eq('image/png')
     end
   end
 end

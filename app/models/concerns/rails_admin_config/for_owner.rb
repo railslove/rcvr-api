@@ -10,8 +10,8 @@ module RailsAdminConfig
           read_only true
         end
 
-        field :stripe_subscription_status do
-          read_only true
+        list do
+          scopes [:all, :affiliate]
         end
       end
     end
