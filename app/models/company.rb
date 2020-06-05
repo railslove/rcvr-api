@@ -6,7 +6,7 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
-  belongs_to :owner
+  belongs_to :owner, touch: true
 
   has_many :areas, dependent: :destroy
   has_many :tickets, through: :areas

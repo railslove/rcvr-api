@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Backend for the recover app.
 
-Things you may want to cover:
+Landingpage: recoverapp.de
+frontend-repository: github.com/railslove/rcvr-app
+app: rcvr.app
 
-* Ruby version
+## Development
 
-* System dependencies
+### Secrets
 
-* Configuration
+We do not use rails credentials in favor of dotenv. You can find the variables that you might want to set in the `.env` file.
 
-* Database creation
+### Setup
 
-* Database initialization
+You can use the provided docker-compose file to locally run redis and postgres, but it is not required.
 
-* How to run the test suite
+### Stripe
 
-* Services (job queues, cache servers, search engines, etc.)
+Dont forget to set all four stripe related environment variables (see .env).
+For trying out payment related things you might want to setup webhooks to work locally with stripe (similar to ngrok), if your server runs on `localhost:3000`:
 
-* Deployment instructions
+`stripe listen --forward-to localhost:3000/stripe-webhooks`
 
-* ...
+And to trigger test events:
+
+`stripe trigger customer.subscription.updated`

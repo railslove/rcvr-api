@@ -30,6 +30,8 @@ class ApplicationController < ActionController::API
       Raven.capture_exception(error)
     else
       response[:backtrace] = error.backtrace
+
+      raise error
     end
 
     render json: response, status: :internal_server_error

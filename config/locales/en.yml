@@ -5,3 +5,7 @@ en:
         menu: 'Accept'
         title: 'Accept'
         breadcrumb: 'Accept'
+      block_owner:
+        menu: 'Block'
+        title: 'Block'
+        breadcrumb: 'Block'

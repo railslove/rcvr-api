@@ -1,6 +1,7 @@
-require Rails.root.join('lib/rails_admin/accept_data_request.rb')
+require Rails.root.join('lib/rails_admin/actions.rb')
 
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::AcceptDataRequest)
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::BlockOwner)
 
 RailsAdmin.config do |config|
   config.authenticate_with do
@@ -26,6 +27,7 @@ RailsAdmin.config do |config|
     delete
     bulk_delete
     export
+    block_owner
     accept_data_request
   end
 end
