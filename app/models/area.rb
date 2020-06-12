@@ -7,7 +7,10 @@ class Area < ApplicationRecord
   belongs_to :company
   has_many :tickets
 
-  delegate :menu_link, to: :company
   delegate :id, to: :company, prefix: :company
   delegate :name, to: :company, prefix: :company
+
+  def menu_link
+    company.menu_pdf_link || company.menu_link
+  end
 end
