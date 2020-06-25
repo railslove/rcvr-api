@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   include ApiSerializable
+  include RailsAdminConfig::ForCompany
   include Rails.application.routes.url_helpers
 
   EXPOSED_ATTRIBUTES = %i[id name menu_link areas menu_pdf_link]

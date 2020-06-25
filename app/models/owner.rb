@@ -19,6 +19,11 @@ class Owner < ApplicationRecord
 
   after_commit :update_stripe_subscription
 
+  def stripe_price_id
+    Affiliate.find_by(code: affiliate)&.stripe_price_id_monthly ||
+      ENV['STRIPE_SUBSCRIPTION_PRICE_ID']
+  end
+
   def stripe_subscription
     return OpenStruct.new unless stripe_subscription_id?
 

@@ -16,7 +16,7 @@ RailsAdmin.config do |config|
 
   config.parent_controller = "::RailsAdminController"
 
-  config.included_models = %w[Area Company Owner Ticket DataRequest]
+  config.included_models = %w[Area Company Owner Ticket DataRequest Affiliate]
 
   config.actions do
     dashboard
