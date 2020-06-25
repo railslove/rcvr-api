@@ -10,7 +10,7 @@ class Owner < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
 
-  scope :affiliate, -> { where.not(affiliate: nil) }
+  scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
 
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
