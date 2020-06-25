@@ -11,7 +11,7 @@ module Owners
     def session
       Stripe::BillingPortal::Session.create({
         customer: current_owner.stripe_customer_id,
-        return_url: "#{ENV['FRONTEND_URL']}/business/profile",
+        return_url: "#{current_owner.frontend_url}/business/profile",
       })
     end
   end

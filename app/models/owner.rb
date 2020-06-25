@@ -2,7 +2,8 @@ class Owner < ApplicationRecord
   include ApiSerializable
   include RailsAdminConfig::ForOwner
 
-  EXPOSED_ATTRIBUTES = %i[id email name public_key affiliate stripe_subscription_status can_use_for_free trial_ends_at block_at]
+  EXPOSED_ATTRIBUTES = %i[id email name public_key affiliate stripe_subscription_status
+                          can_use_for_free trial_ends_at block_at frontend_url]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
          :confirmable, jwt_revocation_strategy: JwtBlacklist
@@ -18,6 +19,10 @@ class Owner < ApplicationRecord
   delegate :status, to: :stripe_subscription, prefix: :stripe_subscription
 
   after_commit :update_stripe_subscription
+
+  def frontend_url
+    super || ENV['FRONTEND_URL']
+  end
 
   def active_stripe_subscription?
     stripe_subscription_id? && stripe_subscription_status != 'canceled'

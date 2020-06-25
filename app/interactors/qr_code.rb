@@ -57,7 +57,7 @@ class QrCode
   end
 
   def qr_code_link
-    URI("#{ENV['FRONTEND_URL']}/checkin").tap do |uri|
+    URI("#{company.owner.frontend_url}/checkin").tap do |uri|
       uri.query = {
         a: area.id,
         k: company.owner.public_key

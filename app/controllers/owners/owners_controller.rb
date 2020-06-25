@@ -15,7 +15,7 @@ module Owners
     private
 
     def owner_params
-      params.require(:owner).permit(:name, :public_key)
+      params.require(:owner).permit(:name, :public_key, :frontend_url)
     end
   end
 end
