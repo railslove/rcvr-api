@@ -21,7 +21,7 @@ module Owners
         client_reference_id: current_owner.id,
       }
 
-      if current_owner.stripe_subscription_id?
+      if current_owner.active_stripe_subscription?
         params.merge(params_for_existing_subscription)
       else
         params.merge(params_for_new_subscription)

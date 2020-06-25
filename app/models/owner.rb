@@ -19,6 +19,10 @@ class Owner < ApplicationRecord
 
   after_commit :update_stripe_subscription
 
+  def active_stripe_subscription?
+    stripe_subscription_id? && stripe_subscription_status != 'canceled'
+  end
+
   def stripe_price_id
     main_price_id = ENV['STRIPE_SUBSCRIPTION_PRICE_ID']
 
@@ -34,13 +38,13 @@ class Owner < ApplicationRecord
   end
 
   def update_stripe_subscription
-    return unless stripe_subscription_id?
+    return unless active_stripe_subscription?
 
     Stripe::Subscription.update(stripe_subscription_id, quantity: companies.count)
   end
 
   def cancel_stripe_subscription!
-    return unless stripe_subscription_id?
+    return unless active_stripe_subscription?
 
     Stripe::Subscription.delete(stripe_subscription_id)
 
