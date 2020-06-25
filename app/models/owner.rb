@@ -20,8 +20,11 @@ class Owner < ApplicationRecord
   after_commit :update_stripe_subscription
 
   def stripe_price_id
-    Affiliate.find_by(code: affiliate)&.stripe_price_id_monthly ||
-      ENV['STRIPE_SUBSCRIPTION_PRICE_ID']
+    main_price_id = ENV['STRIPE_SUBSCRIPTION_PRICE_ID']
+
+    raise "ENV['STRIPE_SUBSCRIPTION_PRICE_ID'] is empty" unless main_price_id.present?
+
+    Affiliate.find_by(code: affiliate)&.stripe_price_id_monthly || main_price_id
   end
 
   def stripe_subscription
