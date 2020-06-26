@@ -15,9 +15,13 @@ class Owner < ApplicationRecord
   has_many :areas, through: :companies
   has_many :data_requests, through: :companies
 
-  delegate :status, to: :stripe_subscription, prefix: :stripe_subscription
-
   after_commit :update_stripe_subscription
+
+  def stripe_subscription_status
+    stripe_subscription&.status
+  rescue Stripe::InvalidRequestError
+    nil
+  end
 
   def active_stripe_subscription?
     stripe_subscription_id? && stripe_subscription_status != 'canceled'
