@@ -1,0 +1,16 @@
+<spacer size="24"/>
+<container>
+  <row>
+    <columns small="24" valign="middle">
+      <center>
+        <spacer size="24"/>
+
+        <p class="lead"><%= t('notification_mailer.headline') %></p>
+        <p class="lead">
+          <%= @body.gsub("\n", "<br />").html_safe %>
+        </p>
+        <p class="lead"><%= t('notification_mailer.greeting').html_safe %></h3>
+      </center>
+    </columns>
+  </row>
+</container>
