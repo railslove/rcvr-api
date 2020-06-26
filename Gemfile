@@ -29,6 +29,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'letter_opener'
 
   # Bleeding edge testing / required for rails 6 with rspec
   gem 'rspec-core', github: 'rspec/rspec-core'
