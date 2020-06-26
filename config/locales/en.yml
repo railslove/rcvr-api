@@ -11,5 +11,5 @@ en:
         breadcrumb: 'Block'
 
   notification_mailer:
-    headline: Liebe Recover Kunden,
-    greeting: Liebe Grüße<br />Euer Recover Team
+    headline: Liebe recover-Kunden,
+    greeting: Liebe Grüße aus Köln<br />Max von recover
