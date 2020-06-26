@@ -12,6 +12,8 @@ class Owner < ApplicationRecord
 
   scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
 
+  belongs_to :frontend
+
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
   has_many :data_requests, through: :companies
@@ -21,7 +23,9 @@ class Owner < ApplicationRecord
   after_commit :update_stripe_subscription
 
   def frontend_url
-    super || ENV['FRONTEND_URL']
+    # This could be replaced by a delegate once the migration has been done on production
+
+    frontend&.url || ENV['FRONTEND_URL']
   end
 
   def active_stripe_subscription?
