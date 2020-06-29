@@ -9,8 +9,8 @@ class NotificationMailer < ApplicationMailer
   end
 
   def self.notify_all_owners(params)
-    Owner.all.each do |owner|
-      NotificationMailer.with(params.merge(owner: owner)).notification_email.deliver_later
+    Owner.find_each do |owner|
+      NotificationMailer.with(params.merge(owner: owner)).notification_email.deliver_now
     end
   end
 end
