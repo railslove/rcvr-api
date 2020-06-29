@@ -1,5 +1,12 @@
+require 'sidekiq/web'
+
+Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
+  [user, password] == ["admin", ENV['RAILS_ADMIN_PASSWORD']]
+end
+
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Sidekiq::Web => '/sidekiq'
 
   devise_for(
     :owners, path: '',
