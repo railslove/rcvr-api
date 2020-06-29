@@ -5,6 +5,9 @@ production:
   :concurrency: 10
 :queues:
   - default
+  - mailers
+  - active_storage_analysis
+  - active_storage_purge
 :schedule:
   cleanup_expired_tickets:
     every: '12h'
