@@ -18,14 +18,18 @@ class Owner < ApplicationRecord
   has_many :areas, through: :companies
   has_many :data_requests, through: :companies
 
-  delegate :status, to: :stripe_subscription, prefix: :stripe_subscription
-
   after_commit :update_stripe_subscription
 
   def frontend_url
     # This could be replaced by a delegate once the migration has been done on production
 
     frontend&.url || ENV['FRONTEND_URL']
+  end
+
+  def stripe_subscription_status
+    stripe_subscription&.status
+  rescue Stripe::InvalidRequestError
+    nil
   end
 
   def active_stripe_subscription?

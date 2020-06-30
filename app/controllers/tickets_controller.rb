@@ -14,11 +14,12 @@ class TicketsController < ApplicationController
     ticket = Ticket.find(params[:id])
 
     ticket.update!(ticket_params)
+
+    render json: ticket
   rescue ActiveRecord::RecordInvalid
     # idempotency
     # TODO: Make sure this is only idempotent for the write only once validator
-  ensure
-    render json: ticket
+    render json: Ticket.find(params[:id])
   end
 
   def risk_feed

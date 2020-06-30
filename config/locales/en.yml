@@ -9,3 +9,7 @@ en:
         menu: 'Block'
         title: 'Block'
         breadcrumb: 'Block'
+
+  notification_mailer:
+    headline: Liebe recover-Kunden,
+    greeting: Liebe Grüße aus Köln<br />Max von recover
