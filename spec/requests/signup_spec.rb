@@ -2,12 +2,16 @@ require 'rails_helper'
 
 RSpec.describe 'POST /signup', type: :request do
   let(:url) { '/signup' }
+  let(:frontend) { FactoryBot.create(:frontend) }
   let(:params) do
     {
       owner: {
         email: 'owner@example.com',
         password: 'password',
         affiliate: 'AFFNAME'
+      },
+      frontend: {
+        url: frontend.url
       }
     }
   end

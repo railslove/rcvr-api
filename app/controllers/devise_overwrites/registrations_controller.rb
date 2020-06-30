@@ -7,6 +7,7 @@ module DeviseOverwrites
 
       resource.trial_ends_at = 14.days.from_now
       resource.block_at = 16.days.from_now
+      resource.frontend = Frontend.find_by(frontend_params)
 
       resource.save!
 
@@ -19,6 +20,10 @@ module DeviseOverwrites
 
     def sign_up_params
       params.require(:owner).permit(:email, :password, :name, :affiliate)
+    end
+
+    def frontend_params
+      params.require(:frontend).permit(:url)
     end
   end
 end

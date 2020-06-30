@@ -14,8 +14,8 @@ module Owners
 
     def checkout_session_params
       params = {
-        success_url: "#{ENV['FRONTEND_URL']}/business/profile?success=true",
-        cancel_url: "#{ENV['FRONTEND_URL']}/business/profile?success=false",
+        success_url: "#{current_owner.frontend_url}/business/profile?success=true",
+        cancel_url: "#{current_owner.frontend_url}/business/profile?success=false",
         payment_method_types: ['card'],
         billing_address_collection: 'required',
         client_reference_id: current_owner.id,

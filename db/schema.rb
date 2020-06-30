@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_134022) do
+ActiveRecord::Schema.define(version: 2020_06_26_070204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -67,6 +67,11 @@ ActiveRecord::Schema.define(version: 2020_06_16_134022) do
     t.index ["company_id"], name: "index_data_requests_on_company_id"
   end
 
+  create_table "frontends", force: :cascade do |t|
+    t.string "name"
+    t.string "url"
+  end
+
   create_table "jwt_blacklist", force: :cascade do |t|
     t.string "jti", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
@@ -94,8 +99,10 @@ ActiveRecord::Schema.define(version: 2020_06_16_134022) do
     t.datetime "trial_ends_at"
     t.boolean "can_use_for_free", default: false
     t.datetime "block_at"
+    t.bigint "frontend_id"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
+    t.index ["frontend_id"], name: "index_owners_on_frontend_id"
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
 
@@ -116,5 +123,6 @@ ActiveRecord::Schema.define(version: 2020_06_16_134022) do
   add_foreign_key "areas", "companies"
   add_foreign_key "companies", "owners"
   add_foreign_key "data_requests", "companies"
+  add_foreign_key "owners", "frontends"
   add_foreign_key "tickets", "areas"
 end
