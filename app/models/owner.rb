@@ -11,6 +11,7 @@ class Owner < ApplicationRecord
   validates :email, uniqueness: true, presence: true
 
   scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
+  scope :with_stripe_data, -> { where.not(stripe_subscription_id: nil) }
 
   belongs_to :frontend
 
