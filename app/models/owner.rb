@@ -3,7 +3,7 @@ class Owner < ApplicationRecord
   include RailsAdminConfig::ForOwner
 
   EXPOSED_ATTRIBUTES = %i[id email name public_key affiliate stripe_subscription_status
-                          can_use_for_free trial_ends_at block_at frontend_url]
+                          can_use_for_free trial_ends_at frontend_url block_at]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
          :confirmable, jwt_revocation_strategy: JwtBlacklist
@@ -20,6 +20,16 @@ class Owner < ApplicationRecord
   has_many :data_requests, through: :companies
 
   after_commit :update_stripe_subscription
+
+  def block_at
+    return nil if can_use_for_free
+
+    super
+  end
+
+  def blocked?
+    block_at&.past?
+  end
 
   def frontend_url
     # This could be replaced by a delegate once the migration has been done on production
