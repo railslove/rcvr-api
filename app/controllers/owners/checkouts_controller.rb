@@ -31,7 +31,7 @@ module Owners
     def params_for_new_subscription
       # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
       trial_end = current_owner.trial_ends_at? && current_owner.trial_ends_at.future? ?
-        [current_owner.trial_ends_at, 2.days.from_now].max.to_i :
+        [current_owner.trial_ends_at, 50.hours.from_now].max.to_i :
         nil
 
       {
