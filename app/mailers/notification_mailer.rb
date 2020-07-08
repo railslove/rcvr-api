@@ -4,6 +4,7 @@ class NotificationMailer < ApplicationMailer
   def notification_email
     owner = params[:owner]
     @body = params[:body]
+    @headline = params[:headline]
 
     mail(to: owner.email, subject: params[:subject])
   end

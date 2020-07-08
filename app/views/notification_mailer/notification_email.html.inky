@@ -5,7 +5,7 @@
       <center>
         <spacer size="24"/>
 
-        <p class="lead"><%= t('notification_mailer.headline') %></p>
+        <p class="lead"><%= @headline || t('notification_mailer.headline') %></p>
         <p class="lead">
           <%= @body.gsub("\n", "<br />").html_safe %>
         </p>
