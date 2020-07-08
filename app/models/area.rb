@@ -5,7 +5,7 @@ class Area < ApplicationRecord
   EXPOSED_ATTRIBUTES = %i[id name menu_link company_id company_name owner_is_blocked]
 
   belongs_to :company
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
 
   delegate :id, to: :company, prefix: :company
   delegate :name, to: :company, prefix: :company
