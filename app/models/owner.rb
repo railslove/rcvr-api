@@ -64,7 +64,7 @@ class Owner < ApplicationRecord
   def update_stripe_subscription
     return unless active_stripe_subscription?
 
-    Stripe::Subscription.update(stripe_subscription_id, quantity: companies.count)
+    Stripe::Subscription.update(stripe_subscription_id, quantity: companies.not_free.count)
   end
 
   def cancel_stripe_subscription!

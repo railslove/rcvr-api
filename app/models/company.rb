@@ -15,6 +15,8 @@ class Company < ApplicationRecord
 
   has_one_attached :menu_pdf
 
+  scope :not_free, -> { where.not(is_free: true) }
+
   def menu_pdf_link
     return unless menu_pdf.attached?
 
