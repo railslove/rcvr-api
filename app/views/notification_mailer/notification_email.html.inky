@@ -1,11 +1,10 @@
-<spacer size="24"/>
 <container>
   <row>
     <columns small="24" valign="middle">
       <center>
         <spacer size="24"/>
 
-        <p class="lead"><%= @headline || t('notification_mailer.headline') %></p>
+        <h3 class="lead"><%= @headline || t('notification_mailer.headline') %></h3>
         <p class="lead">
           <%= @body.gsub("\n", "<br />").html_safe %>
         </p>

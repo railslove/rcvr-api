@@ -30,5 +30,7 @@ Rails.application.routes.draw do
     resource :owner, only: %i[show update]
     post :checkout, only: :create, controller: :checkouts, action: :create
     post 'subscription-settings', only: :create, controller: :subscription_settings, action: :create
+    post 'request-password-reset', controller: :password_resets, action: :request_reset
+    post 'reset-password', controller: :password_resets, action: :reset
   end
 end
