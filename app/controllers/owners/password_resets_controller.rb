@@ -7,19 +7,13 @@ module Owners
     end
 
     def reset
-      return if reset_params[:token].blank?
+      return if params[:token].blank? || params[:password].blank?
 
-      owner = Owner.with_reset_password_token(reset_params[:token])
+      owner = Owner.with_reset_password_token(params[:token])
 
       raise ActiveRecord::RecordNotFound if owner.blank?
 
-      owner.update(password: reset_params[:password])
-    end
-
-    private
-
-    def reset_params
-      params.require(:password).permit(:token, :password)
+      owner.update(password: params[:password])
     end
   end
 end
