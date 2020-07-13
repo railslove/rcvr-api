@@ -4,6 +4,7 @@ staging:
 production:
   :concurrency: 10
 :queues:
+  - high_priority
   - default
   - mailers
   - active_storage_analysis

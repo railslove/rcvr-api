@@ -1,4 +1,6 @@
 class HandleStripeWebhookJob < ApplicationJob
+  queue_as :high_priority
+
   def perform(body, stripe_signature)
     # We already check the request in the controller, to make sure that jobs that previously
     # failed or are in the queue for long are still handled correctly we set the tolerance this high

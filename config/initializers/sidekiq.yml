@@ -5,5 +5,5 @@ require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 
 sidekiq.configure_server do |config|
-  config.redis = { url: env['redis_url'] }
+  config.redis = { url: ENV['REDIS_URL'] }
 end
