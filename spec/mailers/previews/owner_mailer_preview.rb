@@ -1,7 +1,13 @@
 # http://localhost:3000/rails/mailers/owner_mailer
 class OwnerMailerPreview < ActionMailer::Preview
   def confirmation_instructions
-    Devise::Mailer.confirmation_instructions(Owner.first, "faketoken")
+    Devise::Mailer.confirmation_instructions(FactoryBot.build(:owner), "faketoken")
+  end
+
+  def care_confirmation_instructions
+    frontend = FactoryBot.build(:frontend, :care)
+
+    Devise::Mailer.confirmation_instructions(FactoryBot.build(:owner, frontend: frontend), 'faketoken')
   end
 
   def reset_password_instructions

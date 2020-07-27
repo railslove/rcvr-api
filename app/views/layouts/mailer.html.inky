@@ -17,7 +17,11 @@
                 <columns small="24" valign="middle">
                   <spacer size="48"/>
                   <center>
-                    <img src="https://static1.squarespace.com/static/5eb707bcc46deb69f548bb49/t/5eb888c540f56e45feec8960/1590168018876/?format=200w" width=200 class="email-logo">
+                    <% if @owner&.care_user? %>
+                      <img src="" width=200 class="email-logo">
+                    <% else %>
+                      <img src="https://static1.squarespace.com/static/5eb707bcc46deb69f548bb49/t/5eb888c540f56e45feec8960/1590168018876/?format=200w" width=200 class="email-logo">
+                    <% end %>
                   </center> 
                   <spacer size="24"/>
                 </columns>
@@ -38,10 +42,17 @@
               <row>
                 <columns small="24" valign="middle">
                   <center>
-                    <h3><%= t('devise.mailer.footer.headline') %></h3>
-                    <p class="lead"><%= t('devise.mailer.footer.message') %></p>
-                    <spacer size="32"/>
-                    <p class="lead"><%= t('devise.mailer.footer.contact') %></p>
+                    <% if @owner&.care_user? %>
+                      <h3><%= t('devise.mailer.care_footer.headline') %></h3>
+                      <p class="lead"><%= t('devise.mailer.care_footer.message') %></p>
+                      <spacer size="32"/>
+                      <p class="lead"><%= t('devise.mailer.care_footer.contact') %></p>
+                    <% else %>
+                      <h3><%= t('devise.mailer.footer.headline') %></h3>
+                      <p class="lead"><%= t('devise.mailer.footer.message') %></p>
+                      <spacer size="32"/>
+                      <p class="lead"><%= t('devise.mailer.footer.contact') %></p>
+                    <% end %>
                     <p class="email-link"><a href="tel:+49 221 99 999 700">+49 221 99 999 700</a></p>
                     <p class="email-link"><a href="mailto:team@recoverapp.de">team@recoverapp.de</a></p>
                   </center> 

@@ -3,10 +3,21 @@
     <columns small="24" valign="middle">
       <spacer size="24"/>
       <center>
-        <h3><%= t('devise.mailer.confirmation_instructions.greeting', recipient: @owner.name) %></h3>
-        <p class="lead"><%= t('devise.mailer.confirmation_instructions.instruction') %></p>
-        <spacer size="32"/>
-        <p><%= link_to t('devise.mailer.confirmation_instructions.action'), confirmation_url(@resource, confirmation_token: @token), class: "email-button" %></p>
+        <% if @owner.care_user? %>
+          <h3><%= t('devise.mailer.care_confirmation_instructions.greeting', recipient: @owner.name) %></h3>
+          <p class="lead"><%= t('devise.mailer.care_confirmation_instructions.instruction') %></p>
+          <spacer size="32"/>
+          <p>
+            <%= link_to t('devise.mailer.care_confirmation_instructions.action'), confirmation_url(@resource, confirmation_token: @token), class: "email-button" %>
+          </p>
+        <% else %>
+          <h3><%= t('devise.mailer.confirmation_instructions.greeting', recipient: @owner.name) %></h3>
+          <p class="lead"><%= t('devise.mailer.confirmation_instructions.instruction') %></p>
+          <spacer size="32"/>
+          <p>
+            <%= link_to t('devise.mailer.confirmation_instructions.action'), confirmation_url(@resource, confirmation_token: @token), class: "email-button" %>
+          </p>
+        <% end %>
       </center>
     </columns>
   </row>

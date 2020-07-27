@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :owner do
+    name { Faker::Name.name }
     email { Faker::Internet.email }
     password { SecureRandom.hex(20) }
 

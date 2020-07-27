@@ -27,6 +27,10 @@ class Owner < ApplicationRecord
     super
   end
 
+  def care_user?
+    frontend&.url == 'https://care.rcvr.app'
+  end
+
   def blocked?
     block_at&.past?
   end
