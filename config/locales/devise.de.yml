@@ -64,7 +64,7 @@ de:
         greeting: Willkommen %{recipient}!
         instruction: 'Bitte folgen Sie dem untenstehenden Link, um Ihr Konto zu bestätigen:'
         action: 'JETZT BESTÄTIGEN'
-        subject: Anleitung zur Bestätigung Ihres Kontos
+        subject: Anleitung zur Kontobestätigung
       email_changed:
         greeting: Hallo %{recipient}!
         message: Wir schreiben Dir, um Dich darüber zu informieren, dass Deine E-Mail-Adresse zu %{email} geändert wurde.
