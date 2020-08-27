@@ -70,4 +70,26 @@ RSpec.describe Owners::CompaniesController do
       expect(JSON.parse(response.body)['id']).to eq(company.id)
     end
   end
+
+  context 'GET stats' do
+    let!(:company) { FactoryBot.create(:company, owner: owner) }
+    let!(:area_1) { FactoryBot.create(:area, company: company) }
+    let!(:area_2) { FactoryBot.create(:area, company: company) }
+    let!(:closed_ticket) { FactoryBot.create(:ticket, area: area_1) }
+    let!(:open_ticket_1) { FactoryBot.create(:ticket, area: area_1, left_at: nil) }
+    let!(:open_ticket_2) { FactoryBot.create(:ticket, area: area_1, left_at: nil) }
+    let!(:open_ticket_3) { FactoryBot.create(:ticket, area: area_2, left_at: nil) }
+    let(:response_json) { JSON.parse(response.body) }
+
+    before { get owners_company_stats_path(company) }
+
+    it 'return stats for open tickets by area' do
+      expect(response_json.size).to eq(2)
+      expect(response_json.first['area_name']).to eq(area_1.name)
+      expect(response_json.first['checkin_count']).to eq(2)
+      expect(response_json.second['area_name']).to eq(area_2.name)
+      expect(response_json.second['checkin_count']).to eq(1)
+    end
+  end
+
 end

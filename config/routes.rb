@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       resources :areas, only: %i[index create update show], shallow: true
       resources :tickets, only: :index
       resources :data_requests, only: %i[show index], shallow: true
+      get :stats
     end
     resource :owner, only: %i[show update]
     post :checkout, only: :create, controller: :checkouts, action: :create

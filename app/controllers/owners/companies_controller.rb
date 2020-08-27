@@ -1,6 +1,6 @@
 module Owners
   class CompaniesController < Owners::ApplicationController
-    before_action :authenticate_owner!
+    before_action :authenticate_owner!, except: %i[stats]
 
     def index
       companies = current_owner.companies
@@ -26,6 +26,16 @@ module Owners
       company = current_owner.companies.find(params[:id])
 
       render json: company
+    end
+
+    def stats
+      company = Company.find(params[:company_id])
+
+      stats = company.areas.map do |a|
+        { area_name: a.name, checkin_count: a.tickets.open.count }
+      end
+
+      render json: stats
     end
 
     private
