@@ -1,6 +1,9 @@
 module Owners
   class CompaniesController < Owners::ApplicationController
+    include ActionController::HttpAuthentication::Token::ControllerMethods
+
     before_action :authenticate_owner!, except: %i[stats]
+    before_action :authenticate_owner_with_api_token, only: %i[stats]
 
     def index
       companies = current_owner.companies
@@ -29,7 +32,7 @@ module Owners
     end
 
     def stats
-      company = Company.find(params[:company_id])
+      company = @owner.companies.find(params[:company_id])
 
       stats = company.areas.map do |a|
         { area_name: a.name, checkin_count: a.tickets.open.count }
@@ -42,6 +45,12 @@ module Owners
 
     def company_params
       params.require(:company).permit(:name, :menu_link, :menu_pdf)
+    end
+
+    def authenticate_owner_with_api_token
+      authenticate_or_request_with_http_token do |token, _options|
+        @owner = Owner.find_by(api_token: token)
+      end
     end
   end
 end

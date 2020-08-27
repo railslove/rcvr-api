@@ -9,6 +9,10 @@ module RailsAdminConfig
         field :stripe_subscription_status do
           read_only true
         end
+
+        field :api_token do
+          read_only true
+        end
         
         list do
           scopes [:all, :affiliate, :with_stripe_data]

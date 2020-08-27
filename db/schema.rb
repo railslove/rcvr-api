@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_152827) do
+ActiveRecord::Schema.define(version: 2020_08_27_142840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_152827) do
     t.boolean "can_use_for_free", default: false
     t.datetime "block_at"
     t.bigint "frontend_id"
+    t.string "api_token"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"

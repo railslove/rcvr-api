@@ -9,6 +9,10 @@ en:
         menu: 'Block'
         title: 'Block'
         breadcrumb: 'Block'
+      generate_owner_api_token:
+        menu: 'Generate Api Token'
+        title: 'Generate Api Token'
+        breadcrumb: 'Generate Api Token'
 
   notification_mailer:
     headline: Liebe recover-Kunden,

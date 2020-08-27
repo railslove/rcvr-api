@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Owners::CompaniesController do
+RSpec.describe Owners::CompaniesController, type: :request do
   include_context 'api request authentication'
 
   let(:owner) { FactoryBot.create(:owner) }
@@ -81,7 +81,11 @@ RSpec.describe Owners::CompaniesController do
     let!(:open_ticket_3) { FactoryBot.create(:ticket, area: area_2, left_at: nil) }
     let(:response_json) { JSON.parse(response.body) }
 
-    before { get owners_company_stats_path(company) }
+    before do
+      owner.update_attribute(:api_token, 'test123')
+      headers = { "Authorization": 'Bearer test123' }
+      get owners_company_stats_path(company), headers: headers
+    end
 
     it 'return stats for open tickets by area' do
       expect(response_json.size).to eq(2)
@@ -91,5 +95,4 @@ RSpec.describe Owners::CompaniesController do
       expect(response_json.second['checkin_count']).to eq(1)
     end
   end
-
 end
