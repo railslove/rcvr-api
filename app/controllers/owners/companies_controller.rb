@@ -31,8 +31,8 @@ module Owners
     def stats
       company = Company.find(params[:company_id])
 
-      stats = company.areas.map do |a|
-        { area_name: a.name, checkin_count: a.tickets.open.count }
+      stats = company.areas.map do |area|
+        { area_name: area.name, checkin_count: area.tickets.open.count }
       end
 
       render json: stats
