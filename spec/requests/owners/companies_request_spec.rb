@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Owners::CompaniesController, type: :request do
+RSpec.describe Owners::CompaniesController do
   include_context 'api request authentication'
 
   let(:owner) { FactoryBot.create(:owner) }
