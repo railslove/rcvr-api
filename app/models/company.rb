@@ -22,4 +22,8 @@ class Company < ApplicationRecord
 
     url_for(menu_pdf)
   end
+
+  def stats_url
+    owners_company_stats_url(self)
+  end
 end

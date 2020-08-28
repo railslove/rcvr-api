@@ -2,6 +2,7 @@ require Rails.root.join('lib/rails_admin/actions.rb')
 
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::AcceptDataRequest)
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::BlockOwner)
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::GenerateOwnerApiToken)
 
 RailsAdmin.config do |config|
   config.authenticate_with do
@@ -28,6 +29,7 @@ RailsAdmin.config do |config|
     bulk_delete
     export
     block_owner
+    generate_owner_api_token
     accept_data_request
   end
 end
