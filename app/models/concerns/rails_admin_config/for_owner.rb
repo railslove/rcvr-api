@@ -4,10 +4,14 @@ module RailsAdminConfig
 
     included do
       rails_admin do
-        fields :id, :email, :created_at, :name, :companies, :affiliate, :can_use_for_free, :trial_ends_at, :block_at, :frontend, :stripe_subscription_id, :stripe_customer_id, :auto_checkout_minutes
+        fields :id, :email, :created_at, :name, :companies, :affiliate, :can_use_for_free, :trial_ends_at, :block_at, :frontend, :stripe_subscription_id, :stripe_customer_id
 
         field :stripe_subscription_status do
           read_only true
+        end
+
+        field :auto_checkout_minutes do
+          help "Default is #{::Ticket::AUTO_CHECKOUT_AFTER.to_i / 60} minutes if not specified"
         end
 
         field :api_token do
