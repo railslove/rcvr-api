@@ -10,10 +10,14 @@ module RailsAdminConfig
           read_only true
         end
 
+        field :auto_checkout_minutes do
+          help "Default is #{::Ticket::AUTO_CHECKOUT_AFTER.to_i / 60} minutes if not specified"
+        end
+
         field :api_token do
           read_only true
         end
-        
+
         list do
           scopes [:all, :affiliate, :with_stripe_data]
         end

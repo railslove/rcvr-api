@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_142840) do
+ActiveRecord::Schema.define(version: 2020_08_28_192134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_142840) do
     t.datetime "block_at"
     t.bigint "frontend_id"
     t.string "api_token"
+    t.integer "auto_checkout_minutes"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"
