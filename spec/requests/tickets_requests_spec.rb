@@ -16,7 +16,14 @@ RSpec.describe TicketsController do
       expect(JSON.parse(response.body)).not_to be_empty
     end
 
-    it { is_expected.to have_enqueued_job(AutoCheckoutTicketJob) }
+    # Using 1 second tolerence as noted in https://github.com/rspec/rspec-rails/issues/2333#issuecomment-628790743
+    # Alternative: user Timecop
+    it { is_expected.to have_enqueued_job(AutoCheckoutTicketJob).at(a_value_within(1.seconds).of(4.hours.from_now)) }
+
+    it 'uses auto_checkout_minutes from owner' do
+      area.company.owner.update_attribute(:auto_checkout_minutes, 720)
+      is_expected.to have_enqueued_job(AutoCheckoutTicketJob).at(a_value_within(1.seconds).of(12.hours.from_now))
+    end
   end
 
   context 'PATCH update' do

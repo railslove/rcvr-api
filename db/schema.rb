@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_074522) do
     t.bigint "frontend_id"
     t.string "api_token"
     t.string "menu_alias"
+    t.integer "auto_checkout_minutes"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"
