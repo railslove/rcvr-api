@@ -17,8 +17,7 @@ class Company < ApplicationRecord
 
   scope :not_free, -> { where.not(is_free: true) }
 
-  delegate :menu_alias, to: :owner
-  delegate :frontend_url, to: :owner
+  delegate :menu_alias, :frontend_url, :public_key, to: :owner
 
   def menu_pdf_link
     return unless menu_pdf.attached?
