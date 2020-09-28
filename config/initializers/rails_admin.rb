@@ -17,7 +17,7 @@ RailsAdmin.config do |config|
 
   config.parent_controller = "::RailsAdminController"
 
-  config.included_models = %w[Area Company Owner Ticket DataRequest Affiliate Frontend]
+  config.included_models = %w[Area Company Owner Ticket DataRequest Affiliate Frontend Whitelabel]
 
   config.actions do
     dashboard
@@ -32,4 +32,5 @@ RailsAdmin.config do |config|
     generate_owner_api_token
     accept_data_request
   end
+
 end
