@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_074522) do
+ActiveRecord::Schema.define(version: 2020_09_25_111527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2020_09_01_074522) do
   create_table "frontends", force: :cascade do |t|
     t.string "name"
     t.string "url"
+    t.bigint "whitelabel_id"
+    t.index ["whitelabel_id"], name: "index_frontends_on_whitelabel_id"
   end
 
   create_table "jwt_blacklist", force: :cascade do |t|
@@ -102,12 +104,14 @@ ActiveRecord::Schema.define(version: 2020_09_01_074522) do
     t.datetime "block_at"
     t.bigint "frontend_id"
     t.string "api_token"
-    t.string "menu_alias"
     t.integer "auto_checkout_minutes"
+    t.string "menu_alias"
+    t.bigint "whitelabel_id"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
+    t.index ["whitelabel_id"], name: "index_owners_on_whitelabel_id"
   end
 
   create_table "tickets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -123,10 +127,28 @@ ActiveRecord::Schema.define(version: 2020_09_01_074522) do
     t.index ["area_id"], name: "index_tickets_on_area_id"
   end
 
+  create_table "whitelabels", force: :cascade do |t|
+    t.string "name"
+    t.text "intro_text"
+    t.string "privacy_url"
+    t.boolean "formal_address"
+    t.string "background_color"
+    t.string "primary_highlight_color"
+    t.string "secondary_highlight_color"
+    t.integer "logo_small_width"
+    t.integer "logo_small_height"
+    t.integer "logo_big_width"
+    t.integer "logo_big_height"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "areas", "companies"
   add_foreign_key "companies", "owners"
   add_foreign_key "data_requests", "companies"
+  add_foreign_key "frontends", "whitelabels"
   add_foreign_key "owners", "frontends"
+  add_foreign_key "owners", "whitelabels"
   add_foreign_key "tickets", "areas"
 end
