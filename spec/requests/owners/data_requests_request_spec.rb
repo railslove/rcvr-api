@@ -38,16 +38,16 @@ RSpec.describe Owners::DataRequestsController do
   end
 
   context 'POST further data_request on the same day' do
-    subject do
-      -> { post owners_company_data_requests_path(company_id: company.id), params: { data_request: { reason: 'for abuse' } } }
+    let!(:previous_request) do
+      FactoryBot.create(:data_request,
+                        company: company,
+                        from: Time.zone.now - 4.hours,
+                        to: Time.zone.now,
+                        accepted_at: Time.zone.now)
     end
 
-    before do
-      company.data_requests.create!(
-        from: Time.zone.now - 4.hours,
-        to: Time.zone.now,
-        accepted_at: Time.zone.now
-      )
+    subject do
+      -> { post owners_company_data_requests_path(company_id: company.id), params: { data_request: { reason: 'for abuse' } } }
     end
 
     it { is_expected.to change { DataRequest.count }.by(0) }
@@ -60,16 +60,16 @@ RSpec.describe Owners::DataRequestsController do
   end
 
   context 'POST further data_request on another day' do
-    subject do
-      -> { post owners_company_data_requests_path(company_id: company.id), params: { data_request: { reason: 'new day' } } }
+    let!(:previous_request) do
+      FactoryBot.create(:data_request,
+                        company: company,
+                        from: Time.zone.now.yesterday - 4.hours,
+                        to: Time.zone.now.yesterday,
+                        accepted_at: Time.zone.now.yesterday)
     end
 
-    before do
-      company.data_requests.create!(
-        from: Time.zone.now.yesterday - 4.hours,
-        to: Time.zone.now.yesterday,
-        accepted_at: Time.zone.now.yesterday
-      )
+    subject do
+      -> { post owners_company_data_requests_path(company_id: company.id), params: { data_request: { reason: 'new day' } } }
     end
 
     it { is_expected.to change { DataRequest.count }.by(1) }
