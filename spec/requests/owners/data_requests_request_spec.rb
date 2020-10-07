@@ -26,14 +26,16 @@ RSpec.describe Owners::DataRequestsController do
     end
 
     it 'creates a new DataRequest for the last 2 hours' do
-      subject.call
+      freeze_time do
+        subject.call
 
-      new_data_request = DataRequest.last
+        new_data_request = DataRequest.last
 
-      expect(new_data_request.from).to be_within(1.seconds).of(Time.zone.now - 4.hours)
-      expect(new_data_request.to).to be_within(1.seconds).of(Time.zone.now)
-      expect(new_data_request.accepted_at).to be_within(1.seconds).of(Time.zone.now)
-      expect(new_data_request.reason).to eq('for fun')
+        expect(new_data_request.from).to eq(Time.zone.now - 4.hours)
+        expect(new_data_request.to).to eq(Time.zone.now)
+        expect(new_data_request.accepted_at).to eq(Time.zone.now)
+        expect(new_data_request.reason).to eq('for fun')
+      end
     end
   end
 
