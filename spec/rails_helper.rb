@@ -63,4 +63,6 @@ RSpec.configure do |config|
   config.after(:each, type: :system) do
     WebMock.disable_net_connect!(allow_localhost: true)
   end
+
+  config.include ActiveSupport::Testing::TimeHelpers
 end

@@ -28,4 +28,18 @@ RSpec.describe Owner, type: :model do
       end
     end
   end
+
+  describe '.auto_checkout_time' do
+    let(:owner) { FactoryBot.create(:owner) }
+
+    subject { owner.auto_checkout_time }
+
+    it 'returns the default time' do
+      expect(subject).to eq(4.hours)
+    end
+    it 'returns the custom time' do
+      owner.update(auto_checkout_minutes: 120)
+      expect(subject).to eq(2.hours)
+    end
+  end
 end

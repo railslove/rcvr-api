@@ -4,5 +4,6 @@ FactoryBot.define do
 
     from { Faker::Time.between(from: 3.hours.ago, to: 2.hour.ago) }
     to { Faker::Time.between(from: 1.hour.ago, to: Time.zone.now) }
+    reason { Faker::FunnyName.name }
   end
 end
