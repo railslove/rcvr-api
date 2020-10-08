@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_111527) do
   create_table "frontends", force: :cascade do |t|
     t.string "name"
     t.string "url"
-    t.bigint "whitelabel_id"
+    t.uuid "whitelabel_id"
     t.index ["whitelabel_id"], name: "index_frontends_on_whitelabel_id"
   end
 
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_111527) do
     t.string "api_token"
     t.integer "auto_checkout_minutes"
     t.string "menu_alias"
-    t.bigint "whitelabel_id"
+    t.uuid "whitelabel_id"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_111527) do
     t.index ["area_id"], name: "index_tickets_on_area_id"
   end
 
-  create_table "whitelabels", force: :cascade do |t|
+  create_table "whitelabels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "intro_text"
     t.string "privacy_url"

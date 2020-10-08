@@ -1,6 +1,6 @@
 class CreateWhitelabels < ActiveRecord::Migration[6.0]
   def change
-    create_table :whitelabels do |t|
+    create_table :whitelabels, id: :uuid do |t|
       t.string :name
       t.text :intro_text
       t.string :privacy_url
@@ -16,8 +16,8 @@ class CreateWhitelabels < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_reference :owners, :whitelabel, foreign_key: true
-    add_reference :frontends, :whitelabel, foreign_key: true
+    add_reference :owners, :whitelabel, foreign_key: true, type: :uuid
+    add_reference :frontends, :whitelabel, foreign_key: true, type: :uuid
 
   end
 end
