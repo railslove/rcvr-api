@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_111527) do
+ActiveRecord::Schema.define(version: 2020_10_07_091650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_09_25_111527) do
     t.datetime "from"
     t.datetime "to"
     t.datetime "accepted_at"
+    t.string "reason"
     t.index ["company_id"], name: "index_data_requests_on_company_id"
   end
 

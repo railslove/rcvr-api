@@ -79,4 +79,8 @@ class Owner < ApplicationRecord
 
     update(stripe_subscription_id: nil)
   end
+
+  def auto_checkout_time
+    auto_checkout_minutes&.minutes || ::Ticket::AUTO_CHECKOUT_AFTER
+  end
 end

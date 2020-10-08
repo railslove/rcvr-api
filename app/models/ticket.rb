@@ -25,6 +25,6 @@ class Ticket < ApplicationRecord
   delegate :name, to: :area, prefix: :area
 
   def schedule_auto_checkout_job
-    AutoCheckoutTicketJob.set(wait: company.owner.auto_checkout_minutes&.minutes || AUTO_CHECKOUT_AFTER).perform_later(id)
+    AutoCheckoutTicketJob.set(wait: company.owner.auto_checkout_time).perform_later(id)
   end
 end
