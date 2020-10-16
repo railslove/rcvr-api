@@ -7,6 +7,8 @@ RSpec.describe 'POST /signup', type: :request do
     {
       owner: {
         email: 'owner@example.com',
+        company_name: 'Railslove',
+        phone: '0221666666666',
         password: 'password',
         affiliate: 'AFFNAME'
       },
