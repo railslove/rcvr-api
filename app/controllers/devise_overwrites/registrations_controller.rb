@@ -19,7 +19,7 @@ module DeviseOverwrites
     private
 
     def sign_up_params
-      params.require(:owner).permit(:email, :password, :name, :affiliate)
+      params.require(:owner).permit(:email, :password, :phone, :company_name, :name, :affiliate)
     end
 
     def frontend_params
