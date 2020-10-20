@@ -28,4 +28,12 @@ class Company < ApplicationRecord
   def stats_url
     owners_company_stats_url(self)
   end
+
+  def open_ticket_count
+    tickets.open.count
+  end
+
+  def ticket_count
+    tickets.count
+  end
 end

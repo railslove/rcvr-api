@@ -9,6 +9,9 @@ module RailsAdminConfig
       rails_admin do
         fields :id, :name, :created_at, :areas, :owner, :tickets, :menu_link, :menu_pdf, :is_free
 
+        field :ticket_count
+        field :open_ticket_count
+
         field :stats_url do
           read_only true
         end
