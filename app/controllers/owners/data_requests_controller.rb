@@ -15,12 +15,8 @@ module Owners
     end
 
     def create
-      if company.data_requests.where(accepted_at: Time.zone.now.beginning_of_day..Time.zone.now).any?
-        raise RateLimitError
-      end
-
       create_params = data_request_params.merge(
-        from: Time.zone.now - current_owner.auto_checkout_time,
+        from: Time.zone.now - 48.hours,
         to: Time.zone.now,
         accepted_at: Time.zone.now
       )
