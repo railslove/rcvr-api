@@ -24,7 +24,7 @@ The German government suggested a very old-school way on how to achieve this. Ow
 
 With **recover**, guests scan a QR Code with their phone and enter their contact details, which will be encrypted on their device and stored on our server. Only the business owner can decrypt this data, and only when the public health department requests it.
 
-## How does rcvr.app work?
+## How does recoverapp.de work?
 
 When an owner signs up, a key pair will be generated on their device. The owner needs to safely store the private key by saving it inside a password manager or writing it on a piece of paper and putting it in a physical safe. This private key is required to decrypt the data of the guests.
 
