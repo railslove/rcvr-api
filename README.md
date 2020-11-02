@@ -1,5 +1,5 @@
 <p align="center">
-  <img src=".github/checkmark.png" width="95" height="87" alt="">
+  <img src="https://raw.githubusercontent.com/railslove/rcvr-app/master/.github/checkmark.png" width="95" height="87" alt="">
 </p>
 
 <h1 align="center">rcvr.app</h1>
