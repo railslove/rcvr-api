@@ -58,10 +58,8 @@ You can use the provided docker-compose file to locally run redis and postgres, 
 
 ### Deployment
 
-- `origin/master` deploys to [rcvr.app](https://rcvr.app) on push
-- `origin/env/care` deploys to [care.rcvr.app](https://care.rcvr.app) on push
+- `origin/master` deploys to ___________________ on push
 - All pushed branches will create a preview deployment
-  - Prefixing a branch with `care/` will use a preview deployment of recover care
 
 ### Secrets
 
