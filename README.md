@@ -42,23 +42,33 @@ When a guest checks in, a random ID will be saved on the guest's device. **recov
 
 **recover** was initially developed during one weekend. We noticed the urgency and needs of business owners and wanted to provide a solution. A special thanks goes to everyone who helped and consulted us to achieve our goal in this short amount of time.
 
-## Contribute
+## Development Setup
 
-**Stack:**
+To get a development environment up and running ensure your development system has the following components:
 
-- ...
-- ...
-- ...
+- docker
+- docker-compose
+- ruby 2.7
+- ruby bundler
+- basic C build tools (base-devel, build-essential or whatever your system calls these)
+- postgres development headers
 
-**Before you can start, you need:**
+It is also advisable to install the gems locally and not system wide:
 
-- ...
-- ...
-- ...
+```
+export GEM_HOME=$HOME/.gem
+export PATH=$PATH:$HOME.gem/bin
+```
 
-**Setup:**
+Then execute:
 
-You can use the provided docker-compose file to locally run redis and postgres, but it is not required.
+```
+bundler install
+echo "DATABASE_URL=postgres://postgres:mysecretpassword@127.0.0.1:5432/" >> .env.local
+docker-compose up -d # will start database in the background
+rails db:migrate RAILS_ENV=development
+rails server
+```
 
 ### Deployment
 
