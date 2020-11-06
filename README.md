@@ -42,27 +42,43 @@ When a guest checks in, a random ID will be saved on the guest's device. **recov
 
 **recover** was initially developed during one weekend. We noticed the urgency and needs of business owners and wanted to provide a solution. A special thanks goes to everyone who helped and consulted us to achieve our goal in this short amount of time.
 
-## Contribute
+## Development Setup
 
-**Stack:**
+To get a development environment up and running ensure your development system has the following components:
 
-- ...
-- ...
-- ...
+- (docker)[https://docs.docker.com/engine/install/]
+- docker-compose
+- ruby 2.7
+- bundler (for ruby)
+- basic C build tools (base-devel, build-essential or whatever your system calls these)
+- eventually: postgres development headers
 
-**Before you can start, you need:**
+Then execute:
 
-- ...
-- ...
-- ...
+```
+bundler
+echo "DATABASE_URL=postgres://postgres:mysecretpassword@127.0.0.1:5432/" >> .env.local
+docker-compose up -d # will start database in the background
+rails db:setup RAILS_ENV=development
+rails server
+```
 
-**Setup:**
+The example above uses a docker-compose file to locally run redis and postgres, but it is not required. Alternatively use your own setup.
 
-You can use the provided docker-compose file to locally run redis and postgres, but it is not required.
+Install rcvr-app frontend: https://github.com/railslove/rcvr-app
+
+Create a frontend entry in your postgres database:
+
+```
+docker-compose exec postgres psql -U postgres`
+postgres=# insert into frontends (name, url) values('App-Local', 'http://localhost:3333');
+```
+
+Your port might vary depending on your set up (see rcvr-app README).
 
 ### Deployment
 
-- `origin/master` deploys to ___________________ on push
+- `origin/master` deploys to **\*\*\*\***\_\_\_**\*\*\*\*** on push
 - All pushed branches will create a preview deployment
 
 ### Secrets
@@ -89,3 +105,4 @@ And to trigger test events:
 <p align="center">
   Made with 💚 in Cologne
 </p>
+```
