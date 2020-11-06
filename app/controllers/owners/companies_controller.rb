@@ -19,7 +19,6 @@ module Owners
 
     def update
       company = current_owner.companies.find(params[:id])
-
       company.update!(company_params)
 
       render json: company
@@ -44,7 +43,7 @@ module Owners
     private
 
     def company_params
-      params.require(:company).permit(:name, :menu_link, :menu_pdf)
+      params.require(:company).permit(:name, :menu_link, :menu_pdf, :remove_menu_pdf)
     end
 
     def authenticate_owner_with_api_token
