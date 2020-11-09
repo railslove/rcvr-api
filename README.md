@@ -78,7 +78,7 @@ Your port might vary depending on your set up (see rcvr-app README).
 
 ### Deployment
 
-- `origin/master` deploys to **\*\*\*\***\_\_\_**\*\*\*\*** on push
+- `origin/master` deploys to production on push
 - All pushed branches will create a preview deployment
 
 ### Secrets
@@ -105,4 +105,3 @@ And to trigger test events:
 <p align="center">
   Made with 💚 in Cologne
 </p>
-```
