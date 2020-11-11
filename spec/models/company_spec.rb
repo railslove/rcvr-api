@@ -17,10 +17,8 @@ RSpec.describe Company do
 
     it 'should delete the menu when requested' do
       company.menu_pdf.attach(io: File.open(__FILE__), filename: 'menu.pdf', content_type: 'application/pdf')
-      expect(company.menu_pdf.blank?).to be false
-      company.update!({:remove_menu_pdf => '1'})
-      expect(company.menu_pdf.blank?).to be true
-      expect(company.menu_pdf_link).to be_nil
+      expect { company.update!({:remove_menu_pdf => '1'}) }.to change { company.menu_pdf.blank? }.from(false).to(true)
+      expect { company.update!({:remove_menu_pdf => '1'}) }.to change { company.menu_pdf_link }.to(nil)
     end
   end
 end
