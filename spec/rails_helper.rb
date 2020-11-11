@@ -24,6 +24,9 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+# so url_for works for tests
+Rails.application.routes.default_url_options[:host] = 'localhost'
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
