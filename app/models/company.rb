@@ -19,6 +19,12 @@ class Company < ApplicationRecord
 
   delegate :menu_alias, :frontend_url, :public_key, to: :owner
 
+  attr_accessor :remove_menu_pdf
+
+  before_update {
+    menu_pdf.purge if remove_menu_pdf == '1' and menu_pdf.attached?
+  }
+
   def menu_pdf_link
     return unless menu_pdf.attached?
 
