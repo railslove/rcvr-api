@@ -6,10 +6,19 @@ module Owners
       render json: checkout_session
     end
 
+    def setup_intent
+      render json: client_secret
+    end
+
     private
 
     def checkout_session
       Stripe::Checkout::Session.create(checkout_session_params)
+    end
+
+    def client_secret
+      intent = Stripe::SetupIntent.create({ payment_method_types: ['sepa_debit'], customer: current_owner.email })
+      intent['client_secret']
     end
 
     def checkout_session_params
