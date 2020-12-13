@@ -7,17 +7,26 @@ module Owners
     end
 
     def setup_intent
-      render json: client_secret
+      render json: { id: client_secret }
     end
 
     private
+
+    def create_or_retrieve_customer
+      return current_owner.stripe_customer_id if current_owner.stripe_customer_id.present?
+
+      customer = Stripe::Customer.create({ email: current_owner.email })
+      current_owner.update(stripe_customer_id: customer.id)
+      customer.id
+    end
 
     def checkout_session
       Stripe::Checkout::Session.create(checkout_session_params)
     end
 
     def client_secret
-      intent = Stripe::SetupIntent.create({ payment_method_types: ['sepa_debit'], customer: current_owner.email })
+      intent = Stripe::SetupIntent.create({ payment_method_types: ['sepa_debit'],
+                                            customer: create_or_retrieve_customer })
       intent['client_secret']
     end
 
