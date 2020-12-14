@@ -10,6 +10,18 @@ module Owners
       render json: { id: client_secret }
     end
 
+    def owner_payment_method
+      Stripe::Customer.update(
+        create_or_retrieve_customer,
+        {
+          invoice_settings: {
+            default_payment_method: params[:token]
+          }
+        }
+      )
+      render json: create_sepa_subscription
+    end
+
     private
 
     def create_or_retrieve_customer
@@ -30,6 +42,17 @@ module Owners
       intent['client_secret']
     end
 
+    def create_sepa_subscription
+      subscription = Stripe::Subscription.create({
+        customer: create_or_retrieve_customer,
+        items: [{ price: current_owner.stripe_price_id, quantity: current_owner.companies.count }],
+        trial_end: current_owner.trial_end,
+        default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']],
+        expand: ['latest_invoice.payment_intent']
+      })
+      subscription
+    end
+
     def checkout_session_params
       params = {
         success_url: "#{current_owner.frontend_url}/business/profile?success=true",
@@ -47,17 +70,12 @@ module Owners
     end
 
     def params_for_new_subscription
-      # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
-      trial_end = current_owner.trial_ends_at? && current_owner.trial_ends_at.future? ?
-        [current_owner.trial_ends_at, 50.hours.from_now].max.to_i :
-        nil
-
       {
         mode: 'subscription',
         customer_email: current_owner.email,
         line_items: [{ price: current_owner.stripe_price_id, quantity: current_owner.companies.count }],
         subscription_data: {
-          trial_end: trial_end,
+          trial_end: current_owner.trial_end,
           default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']]
         }
       }
