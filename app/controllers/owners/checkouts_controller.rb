@@ -50,7 +50,10 @@ module Owners
         default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']],
         expand: ['latest_invoice.payment_intent']
       })
-      subscription
+      current_owner.update(stripe_subscription_id: subscription.id)
+      # not sure if we are leaking something we shouldn't be leaking when returning subscription
+      # better return nil
+      nil
     end
 
     def checkout_session_params
