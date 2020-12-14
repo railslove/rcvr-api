@@ -82,4 +82,9 @@ class Owner < ApplicationRecord
   def auto_checkout_time
     auto_checkout_minutes&.minutes || ::Ticket::AUTO_CHECKOUT_AFTER
   end
+
+  def trial_end
+    # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
+    trial_ends_at? && trial_ends_at.future? ? [trial_ends_at, 50.hours.from_now].max.to_i : nil
+  end
 end
