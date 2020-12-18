@@ -17,4 +17,13 @@ class Area < ApplicationRecord
   def menu_link
     company.menu_pdf_link || company.menu_link
   end
+
+  def checkin_link
+    URI("#{company.owner.frontend_url}/checkin").tap do |uri|
+      uri.query = {
+        a: id,
+        k: company.owner.public_key
+      }.to_param
+    end
+  end
 end

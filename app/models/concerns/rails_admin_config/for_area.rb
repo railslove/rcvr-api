@@ -4,7 +4,9 @@ module RailsAdminConfig
 
     included do
       rails_admin do
-        fields :name, :id, :company, :tickets
+        configure :checkin_link do
+        end
+        fields :name, :id, :company, :tickets, :checkin_link
       end
     end
   end
