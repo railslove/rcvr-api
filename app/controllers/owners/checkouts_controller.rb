@@ -10,7 +10,7 @@ module Owners
       render json: { id: client_secret }
     end
 
-    def owner_payment_method
+    def sepa_subscription
       Stripe::Customer.update(
         create_or_retrieve_customer,
         {
@@ -19,7 +19,14 @@ module Owners
           }
         }
       )
-      render json: create_sepa_subscription
+      subscription = Stripe::Subscription.create({
+        customer: create_or_retrieve_customer,
+        items: [{ price: current_owner.stripe_price_id, quantity: current_owner.companies.count }],
+        trial_end: current_owner.trial_end,
+        default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']],
+        expand: ['latest_invoice.payment_intent']
+      })
+      render json: nil
     end
 
     private
@@ -40,20 +47,6 @@ module Owners
       intent = Stripe::SetupIntent.create({ payment_method_types: ['sepa_debit'],
                                             customer: create_or_retrieve_customer })
       intent['client_secret']
-    end
-
-    def create_sepa_subscription
-      subscription = Stripe::Subscription.create({
-        customer: create_or_retrieve_customer,
-        items: [{ price: current_owner.stripe_price_id, quantity: current_owner.companies.count }],
-        trial_end: current_owner.trial_end,
-        default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']],
-        expand: ['latest_invoice.payment_intent']
-      })
-      current_owner.update(stripe_subscription_id: subscription.id)
-      # not sure if we are leaking something we shouldn't be leaking when returning subscription
-      # better return nil
-      nil
     end
 
     def checkout_session_params
