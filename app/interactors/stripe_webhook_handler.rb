@@ -30,6 +30,13 @@ class StripeWebhookHandler
     )
   end
 
+  def handle_customer_subscription_created
+    owner.block_at = nil
+
+    owner.stripe_customer_id = event_data.customer
+    owner.stripe_subscription_id = event_data.id
+  end
+
   def handle_customer_subscription_updated
     owner.block_at = event_data.cancel_at&.yield_self(&Time.method(:at))
   end
@@ -50,6 +57,8 @@ class StripeWebhookHandler
       context.owner = Owner.find(event_data.client_reference_id)
     when 'customer.subscription.updated'
       context.owner = Owner.find_by!(stripe_subscription_id: event_data.id)
+    when 'customer.subscription.created'
+      context.owner = Owner.find_by!(stripe_customer_id: event_data.customer)
     end
   end
 
