@@ -6,10 +6,47 @@ module Owners
       render json: checkout_session
     end
 
+    def setup_intent
+      render json: { id: client_secret }
+    end
+
+    def sepa_subscription
+      Stripe::Customer.update(
+        create_or_retrieve_customer,
+        {
+          invoice_settings: {
+            default_payment_method: params[:token]
+          }
+        }
+      )
+      subscription = Stripe::Subscription.create({
+        customer: create_or_retrieve_customer,
+        items: [{ price: current_owner.stripe_price_id, quantity: current_owner.companies.count }],
+        trial_end: current_owner.trial_end,
+        default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']],
+        expand: ['latest_invoice.payment_intent']
+      })
+      render json: nil
+    end
+
     private
+
+    def create_or_retrieve_customer
+      return current_owner.stripe_customer_id if current_owner.stripe_customer_id.present?
+
+      customer = Stripe::Customer.create({ email: current_owner.email })
+      current_owner.update(stripe_customer_id: customer.id)
+      customer.id
+    end
 
     def checkout_session
       Stripe::Checkout::Session.create(checkout_session_params)
+    end
+
+    def client_secret
+      intent = Stripe::SetupIntent.create({ payment_method_types: ['sepa_debit'],
+                                            customer: create_or_retrieve_customer })
+      intent['client_secret']
     end
 
     def checkout_session_params
@@ -29,17 +66,12 @@ module Owners
     end
 
     def params_for_new_subscription
-      # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
-      trial_end = current_owner.trial_ends_at? && current_owner.trial_ends_at.future? ?
-        [current_owner.trial_ends_at, 50.hours.from_now].max.to_i :
-        nil
-
       {
         mode: 'subscription',
         customer_email: current_owner.email,
         line_items: [{ price: current_owner.stripe_price_id, quantity: current_owner.companies.count }],
         subscription_data: {
-          trial_end: trial_end,
+          trial_end: current_owner.trial_end,
           default_tax_rates: [ENV['STRIPE_TAX_RATE_ID']]
         }
       }
