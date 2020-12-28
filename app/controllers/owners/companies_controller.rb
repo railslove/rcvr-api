@@ -43,7 +43,7 @@ module Owners
     private
 
     def company_params
-      params.require(:company).permit(:name, :menu_link, :menu_pdf, :remove_menu_pdf)
+      params.require(:company).permit(:name, :menu_link, :menu_pdf, :remove_menu_pdf, :privacy_policy_link)
     end
 
     def authenticate_owner_with_api_token

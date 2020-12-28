@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_121444) do
+ActiveRecord::Schema.define(version: 2020_12_28_183749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_10_16_121444) do
     t.bigint "owner_id"
     t.string "menu_link"
     t.boolean "is_free", default: false
+    t.string "privacy_policy_link"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
