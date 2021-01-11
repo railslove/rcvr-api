@@ -21,7 +21,7 @@ class QrCode
   private
 
   def svg_data
-    qrcode = ::RQRCode::QRCode.new(qr_code_link.to_s)
+    qrcode = ::RQRCode::QRCode.new(area.checkin_link.to_s)
     qrcode.as_svg(
       offset: 0,
       color: '000',
@@ -32,7 +32,7 @@ class QrCode
   end
 
   def png_data
-    qrcode = ::RQRCode::QRCode.new(qr_code_link.to_s)
+    qrcode = ::RQRCode::QRCode.new(area.checkin_link.to_s)
     qrcode.as_png(
       bit_depth: 1,
       border_modules: 4,
@@ -52,16 +52,8 @@ class QrCode
       pdt_id: 221,
       name: company.name,
       area: area.name,
-      qrcode: qr_code_link
+      qrcode: area.checkin_link
     }
   end
 
-  def qr_code_link
-    URI("#{company.owner.frontend_url}/checkin").tap do |uri|
-      uri.query = {
-        a: area.id,
-        k: company.owner.public_key
-      }.to_param
-    end
-  end
 end
