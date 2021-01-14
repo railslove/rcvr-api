@@ -3,7 +3,7 @@ class Company < ApplicationRecord
   include RailsAdminConfig::ForCompany
   include Rails.application.routes.url_helpers
 
-  EXPOSED_ATTRIBUTES = %i[id name menu_link areas menu_pdf_link]
+  EXPOSED_ATTRIBUTES = %i[id name menu_link areas menu_pdf_link privacy_policy_link]
 
   validates :name, presence: true
 
