@@ -7,7 +7,7 @@ module RailsAdminConfig
       after_save { menu_pdf.purge if remove_menu_pdf.present? }
 
       rails_admin do
-        fields :id, :name, :created_at, :areas, :owner, :tickets, :menu_link, :menu_pdf, :is_free
+        fields :id, :name, :created_at, :areas, :owner, :tickets, :menu_link, :menu_pdf, :is_free, :privacy_policy_link
 
         field :ticket_count
         field :open_ticket_count
