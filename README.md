@@ -46,7 +46,7 @@ When a guest checks in, a random ID will be saved on the guest's device. **recov
 
 To get a development environment up and running ensure your development system has the following components:
 
-- (docker)[https://docs.docker.com/engine/install/]
+- [docker](https://docs.docker.com/engine/install/)
 - docker-compose
 - ruby 2.7
 - bundler (for ruby)
