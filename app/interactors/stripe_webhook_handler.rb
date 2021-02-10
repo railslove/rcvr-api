@@ -30,6 +30,10 @@ class StripeWebhookHandler
     )
   end
 
+  def handle_customer_subscription_deleted
+    owner.stripe_subscription_id = nil
+  end
+
   def handle_customer_subscription_created
     owner.block_at = nil
 
@@ -55,7 +59,7 @@ class StripeWebhookHandler
     case event.type
     when 'checkout.session.completed'
       context.owner = Owner.find(event_data.client_reference_id)
-    when 'customer.subscription.updated'
+    when 'customer.subscription.updated', 'customer.subscription.deleted'
       context.owner = Owner.find_by!(stripe_subscription_id: event_data.id)
     when 'customer.subscription.created'
       context.owner = Owner.find_by!(stripe_customer_id: event_data.customer)
