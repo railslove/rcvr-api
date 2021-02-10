@@ -102,5 +102,5 @@ Rails.application.configure do
 end
 
 Raven.configure do |config|
-  config.dsn = 'https://be29bc3a37cb4e7593e83bf33ba926de:e14c853c38a645c78db14f333d55677f@o243772.ingest.sentry.io/5231277'
+  config.dsn = ENV['SENTRY_DNS']
 end
