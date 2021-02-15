@@ -11,4 +11,4 @@ amazon:
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
   region: eu-central-1
-  bucket: recover-app
+  bucket: <%= ENV['AWS_S3_BUCKET'] %>

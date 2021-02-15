@@ -3,7 +3,7 @@ class Owner < ApplicationRecord
   include RailsAdminConfig::ForOwner
 
   EXPOSED_ATTRIBUTES = %i[id email name phone company_name public_key affiliate stripe_subscription_status
-                          can_use_for_free trial_ends_at frontend_url block_at menu_alias]
+                          can_use_for_free trial_ends_at frontend_url block_at menu_alias sepa_trial]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
          :confirmable, :recoverable, jwt_revocation_strategy: JwtBlacklist
@@ -81,5 +81,10 @@ class Owner < ApplicationRecord
 
   def auto_checkout_time
     auto_checkout_minutes&.minutes || ::Ticket::AUTO_CHECKOUT_AFTER
+  end
+
+  def trial_end
+    # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
+    trial_ends_at? && trial_ends_at.future? ? [trial_ends_at, 50.hours.from_now].max.to_i : nil
   end
 end
