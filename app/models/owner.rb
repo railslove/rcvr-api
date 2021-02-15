@@ -3,7 +3,7 @@ class Owner < ApplicationRecord
   include RailsAdminConfig::ForOwner
 
   EXPOSED_ATTRIBUTES = %i[id email name phone company_name public_key affiliate stripe_subscription_status
-                          can_use_for_free trial_ends_at frontend_url block_at menu_alias]
+                          can_use_for_free trial_ends_at frontend_url block_at menu_alias sepa_trial]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
          :confirmable, :recoverable, jwt_revocation_strategy: JwtBlacklist
