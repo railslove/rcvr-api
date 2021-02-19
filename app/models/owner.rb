@@ -21,6 +21,8 @@ class Owner < ApplicationRecord
 
   after_commit :update_stripe_subscription
 
+  attr_accessor :dont_call_stripe
+
   def block_at
     return nil if can_use_for_free
 
@@ -67,7 +69,7 @@ class Owner < ApplicationRecord
 
   def update_stripe_subscription
     return unless active_stripe_subscription?
-
+    return if @dont_call_stripe
     Stripe::Subscription.update(stripe_subscription_id, quantity: companies.not_free.count)
   end
 

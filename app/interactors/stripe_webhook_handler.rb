@@ -43,6 +43,7 @@ class StripeWebhookHandler
 
   def handle_customer_subscription_updated
     owner.block_at = event_data.cancel_at&.yield_self(&Time.method(:at))
+    owner.dont_call_stripe = true
   end
 
   private
