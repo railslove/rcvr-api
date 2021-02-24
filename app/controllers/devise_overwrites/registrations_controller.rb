@@ -5,6 +5,9 @@ module DeviseOverwrites
     def create
       build_resource(sign_up_params)
 
+      affiliate = Affiliate.find_by(code: resource.affiliate)
+
+      resource.can_use_for_free = affiliate ? affiliate.free_usage : false
       resource.trial_ends_at = 14.days.from_now
       resource.block_at = 16.days.from_now
       resource.frontend = Frontend.find_by(frontend_params)
