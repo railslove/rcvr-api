@@ -39,6 +39,14 @@ RSpec.describe TicketsController do
       expect(open_ticket.reload.left_at.iso8601).to eql(left_at.iso8601)
     end
 
+    it 'updates encrypted data of an existing ticket' do
+      patch ticket_path(open_ticket), params: { id: open_ticket.id, ticket: { encrypted_data: 'abc' } }
+
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)).not_to be_empty
+      expect(open_ticket.reload.encrypted_data).to eql('abc')
+    end
+
     it 'does not update closed tickets' do
       patch ticket_path(closed_ticket), params: { id: closed_ticket.id, ticket: { left_at: left_at } }
       orig_left_at = closed_ticket.left_at
