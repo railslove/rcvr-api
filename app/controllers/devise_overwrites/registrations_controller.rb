@@ -5,8 +5,15 @@ module DeviseOverwrites
     def create
       build_resource(sign_up_params)
 
-      resource.trial_ends_at = 14.days.from_now
-      resource.block_at = 16.days.from_now
+      affiliate = Affiliate.find_by(code: resource.affiliate)
+
+      if affiliate and affiliate.custom_trial_phase
+        resource.trial_ends_at = Time.now.advance(ActiveSupport::Duration.parse(affiliate.custom_trial_phase).parts)
+      else
+        resource.trial_ends_at = 14.days.from_now
+      end
+
+      resource.block_at = resource.trial_ends_at + 2.days
       resource.frontend = Frontend.find_by(frontend_params)
 
       resource.save!
