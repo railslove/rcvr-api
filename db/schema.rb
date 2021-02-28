@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 2021_02_15_173215) do
     t.datetime "block_at"
     t.bigint "frontend_id"
     t.string "api_token"
-    t.string "menu_alias"
     t.integer "auto_checkout_minutes"
+    t.string "menu_alias"
     t.string "phone"
     t.string "company_name"
     t.boolean "sepa_trial", default: false
