@@ -5,8 +5,16 @@ module DeviseOverwrites
     def create
       build_resource(sign_up_params)
 
-      resource.trial_ends_at = 14.days.from_now
-      resource.block_at = 16.days.from_now
+      affiliate = Affiliate.find_by(code: resource.affiliate)
+      # https://www.digi.com/resources/documentation/digidocs/90001437-13/reference/r_iso_8601_duration_format.htm
+      if affiliate and affiliate.custom_trial_phase
+        trial_phase = ActiveSupport::Duration.parse(affiliate.custom_trial_phase)
+      else
+        trial_phase = ActiveSupport::Duration.parse("P2W")
+      end
+
+      resource.trial_ends_at = trial_phase.since
+      resource.block_at = resource.trial_ends_at + 2.days
       resource.frontend = Frontend.find_by(frontend_params)
 
       resource.save!
