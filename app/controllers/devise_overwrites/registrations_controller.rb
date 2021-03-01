@@ -6,14 +6,14 @@ module DeviseOverwrites
       build_resource(sign_up_params)
 
       affiliate = Affiliate.find_by(code: resource.affiliate)
-
+      # https://www.digi.com/resources/documentation/digidocs/90001437-13/reference/r_iso_8601_duration_format.htm
       if affiliate and affiliate.custom_trial_phase
-        # https://www.digi.com/resources/documentation/digidocs/90001437-13/reference/r_iso_8601_duration_format.htm
-        resource.trial_ends_at = Time.now.advance(ActiveSupport::Duration.parse(affiliate.custom_trial_phase).parts)
+        trial_phase = ActiveSupport::Duration.parse(affiliate.custom_trial_phase)
       else
-        resource.trial_ends_at = 14.days.from_now
+        trial_phase = ActiveSupport::Duration.parse("P2W")
       end
 
+      resource.trial_ends_at = trial_phase.since
       resource.block_at = resource.trial_ends_at + 2.days
       resource.frontend = Frontend.find_by(frontend_params)
 
