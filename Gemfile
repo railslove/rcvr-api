@@ -18,6 +18,7 @@ gem 'rails_admin'
 gem 'stripe'
 gem 'rqrcode'
 gem "aws-sdk-s3", require: false
+gem 'activestorage-validator'
 
 # Emails
 gem 'mailgun-ruby', '~> 1.2'

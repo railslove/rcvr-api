@@ -6,9 +6,12 @@ module RailsAdminConfig
       rails_admin do
         fields :name, :code, :stripe_price_id_monthly
 
+        field :logo, :active_storage
+
         field :link do
           read_only true
         end
+
       end
     end
   end
