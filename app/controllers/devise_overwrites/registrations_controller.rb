@@ -8,6 +8,7 @@ module DeviseOverwrites
       affiliate = Affiliate.find_by(code: resource.affiliate)
 
       if affiliate and affiliate.custom_trial_phase
+        # https://www.digi.com/resources/documentation/digidocs/90001437-13/reference/r_iso_8601_duration_format.htm
         resource.trial_ends_at = Time.now.advance(ActiveSupport::Duration.parse(affiliate.custom_trial_phase).parts)
       else
         resource.trial_ends_at = 14.days.from_now
