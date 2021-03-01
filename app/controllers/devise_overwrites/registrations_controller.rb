@@ -13,7 +13,7 @@ module DeviseOverwrites
         trial_phase = ActiveSupport::Duration.parse("P2W")
       end
 
-      resource.trial_ends_at = Time.now.advance(trial_phase.parts)
+      resource.trial_ends_at = trial_phase.since
       resource.block_at = resource.trial_ends_at + 2.days
       resource.frontend = Frontend.find_by(frontend_params)
 
