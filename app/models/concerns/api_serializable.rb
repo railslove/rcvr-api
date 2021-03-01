@@ -2,10 +2,10 @@ module ApiSerializable
   extend ActiveSupport::Concern
 
   included do
-    def as_json(options)
+    def as_json(options = nil)
       attributes = self.class.const_get(:EXPOSED_ATTRIBUTES)
 
-      super options.merge(methods: attributes, only: attributes)
+      super ({ methods: attributes, only: attributes }).merge(options || {})
     end
   end
 end
