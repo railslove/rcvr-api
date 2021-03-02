@@ -65,9 +65,7 @@ RSpec.describe 'POST /signup', type: :request do
 
   context 'when affiliate does not specify a custom trial phase' do
     let (:affiliate_without_custom_trial_params) {
-      affiliate_without_custom_trial_params = params
-      affiliate_without_custom_trial_params[:owner][:affiliate] = affiliate_without_custom_trial.code
-      affiliate_without_custom_trial_params
+      params.deep_merge({ owner: { affiliate: affiliate_without_custom_trial.code } })
     }
     before { post url, params: affiliate_without_custom_trial_params }
 
