@@ -9,9 +9,12 @@ module RailsAdminConfig
       rails_admin do
         fields :id, :name, :created_at, :areas, :owner, :tickets, :menu_link, :menu_pdf, :is_free, :privacy_policy_link
 
-        field :ticket_count
-        field :open_ticket_count
-
+        field :ticket_count do
+          read_only true
+        end
+        field :open_ticket_count do
+          read_only true
+        end
         field :stats_url do
           read_only true
         end
