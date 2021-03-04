@@ -15,7 +15,6 @@ module RailsAdminConfig
         field :open_ticket_count do
           read_only true
         end
-
         field :stats_url do
           read_only true
         end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_173215) do
+ActiveRecord::Schema.define(version: 2021_02_28_202855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_02_15_173215) do
     t.string "name"
     t.string "code"
     t.string "stripe_price_id_monthly"
+    t.string "custom_trial_phase"
   end
 
   create_table "areas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -104,8 +105,8 @@ ActiveRecord::Schema.define(version: 2021_02_15_173215) do
     t.datetime "block_at"
     t.bigint "frontend_id"
     t.string "api_token"
-    t.string "menu_alias"
     t.integer "auto_checkout_minutes"
+    t.string "menu_alias"
     t.string "phone"
     t.string "company_name"
     t.boolean "sepa_trial", default: false
