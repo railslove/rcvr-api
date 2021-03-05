@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_222213) do
+ActiveRecord::Schema.define(version: 2021_03_05_161548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_03_04_222213) do
     t.string "code"
     t.string "stripe_price_id_monthly"
     t.string "custom_trial_phase"
+    t.string "logo_link"
     t.index ["code"], name: "index_affiliates_on_code"
   end
 

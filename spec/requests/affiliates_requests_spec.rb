@@ -6,13 +6,15 @@ RSpec.describe AffiliatesController do
 
     it 'is possible to fetch affiliate information by code' do
       code = affiliate.code
+      logo = affiliate.logo
 
       get '/affiliates/' + code
 
       expect(response).to have_http_status(:ok)
       res = JSON.parse(response.body)
       expect(res['name']).to eq(affiliate.name)
-      expect(res['logo_download_link']).to be_nil
+      expect(res['logo_link']).to eq(affiliate.logo_link)
+      expect(res['logo_url']).to_not be_nil
 
     end
 

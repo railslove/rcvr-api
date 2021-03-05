@@ -3,7 +3,7 @@ class Affiliate < ApplicationRecord
   include RailsAdminConfig::ForAffiliate
   include Rails.application.routes.url_helpers
 
-  EXPOSED_ATTRIBUTES = %i[name logo_download_link]
+  EXPOSED_ATTRIBUTES = %i[name logo_link logo_url]
 
   has_one_attached :logo
 
@@ -12,7 +12,7 @@ class Affiliate < ApplicationRecord
   validates :code, presence: true
   validates :custom_trial_phase, duration: true
 
-  def logo_download_link
+  def logo_url
     return unless logo.attached?
 
     url_for(logo)
