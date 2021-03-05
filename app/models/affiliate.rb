@@ -1,6 +1,10 @@
 class Affiliate < ApplicationRecord
   include RailsAdminConfig::ForAffiliate
 
+  has_one_attached :logo
+
+  validates :logo, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
+
   validates :code, presence: true
   validates :custom_trial_phase, duration: true
 
