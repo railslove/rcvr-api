@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   post 'stripe-webhooks', controller: :stripe_webhooks, action: :create
 
+  get '/affiliates/:code', to: 'affiliates#show'
+
   namespace :owners, path: '' do
     resources :companies, only: %i[index create update show] do
       resources :areas, only: %i[index create update show], shallow: true
