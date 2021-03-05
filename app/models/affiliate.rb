@@ -3,9 +3,6 @@ class Affiliate < ApplicationRecord
 
   has_one_attached :logo
 
-  attr_accessor :remove_logo
-  after_save { logo.purge if remove_logo == '1' }
-
   validates :logo, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
 
   validates :code, presence: true

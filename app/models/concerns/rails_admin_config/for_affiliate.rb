@@ -3,6 +3,10 @@ module RailsAdminConfig
     extend ActiveSupport::Concern
 
     included do
+
+      attr_accessor :remove_logo
+      after_save { logo.purge if remove_logo == '1' }
+
       rails_admin do
         fields :name, :code, :stripe_price_id_monthly, :custom_trial_phase
 
