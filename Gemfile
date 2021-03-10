@@ -19,6 +19,7 @@ gem 'stripe'
 gem 'rqrcode'
 gem "aws-sdk-s3", require: false
 gem 'activestorage-validator'
+gem 'image_processing'
 
 # Emails
 gem 'mailgun-ruby', '~> 1.2'
