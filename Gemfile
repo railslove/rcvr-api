@@ -39,6 +39,7 @@ group :development, :test do
   gem 'rspec-mocks', github: 'rspec/rspec-mocks'
   gem 'rspec-rails', github: 'rspec/rspec-rails'
   gem 'rspec-support', github: 'rspec/rspec-support'
+  gem 'bullet'
 end
 
 group :development do

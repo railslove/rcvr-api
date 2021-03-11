@@ -134,6 +134,9 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
+    bullet (6.1.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.3)
     chunky_png (1.3.11)
     concurrent-ruby (1.1.7)
@@ -393,6 +396,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    uniform_notifier (1.14.1)
     warden (1.2.8)
       rack (>= 2.0.6)
     warden-jwt_auth (0.4.2)
@@ -416,6 +420,7 @@ DEPENDENCIES
   activestorage-validator
   aws-sdk-s3
   bootsnap (>= 1.4.2)
+  bullet
   byebug
   devise-jwt
   dotenv-rails
