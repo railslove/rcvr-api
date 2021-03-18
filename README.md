@@ -96,6 +96,12 @@ And to trigger test events:
 
 `stripe trigger customer.subscription.updated`
 
+### IRIS +
+
+In order to enable integration with IRIS+ you need to set the WFD API KEY
+
+`X_WFD_API_KEY`
+
 ## Known challenges
 
 ### Change of active storage record_id to :uuid type
