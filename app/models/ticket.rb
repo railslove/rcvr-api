@@ -2,6 +2,8 @@ class Ticket < ApplicationRecord
   include ApiSerializable
   include RailsAdminConfig::ForTicket
 
+  has_paper_trail on: [:update], only: [:encrypted_data]
+
   AUTO_CHECKOUT_AFTER = 4.hours
   EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name area_name]
 
@@ -13,7 +15,6 @@ class Ticket < ApplicationRecord
   validates :id, write_once_only: true
   validates :entered_at, write_once_only: true
   validates :left_at, write_once_only: true
-  validates :encrypted_data, write_once_only: true
   validates :public_key, write_once_only: true
   validates :area_id, write_once_only: true
 
@@ -27,4 +28,12 @@ class Ticket < ApplicationRecord
   def schedule_auto_checkout_job
     AutoCheckoutTicketJob.set(wait: company.owner.auto_checkout_time).perform_later(id)
   end
+
+  def encrypted_data_change_history
+    self.versions.map { |version|
+      ticket = version.reify
+      ticket.encrypted_data
+    }
+  end
+
 end
