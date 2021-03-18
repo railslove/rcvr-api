@@ -96,6 +96,16 @@ And to trigger test events:
 
 `stripe trigger customer.subscription.updated`
 
+## Known challenges
+
+### Change of active storage record_id to :uuid type
+
+In the process some models primary keys were changed to type :uuid. As a result the foreign key relation for active storage (record_id) was changed accordingly. 
+
+When we added another active storage relation to a non uuid model (Affiliate), we ran into a runtime exception in Rails Admin because we were trying to link a bigint to a uuid. 
+
+This means models with active storage relations must use :uuid as id (Example: Affiliate). 
+
 ## License
 
 **rcvr.api** is open-source and free software released under the [GNU AGPL](https://github.com/railslove/rcvr-api/blob/master/LICENSE) (GNU Affero General Public License v3.0). We, [Railslove GmbH](https://railslove.com/), are committed to ensuring that it will remain a free and open-source project.

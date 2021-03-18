@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_173215) do
+ActiveRecord::Schema.define(version: 2021_03_15_153445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,10 +36,13 @@ ActiveRecord::Schema.define(version: 2021_02_15_173215) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "affiliates", force: :cascade do |t|
+  create_table "affiliates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.string "stripe_price_id_monthly"
+    t.string "custom_trial_phase"
+    t.string "logo_link"
+    t.index ["code"], name: "index_affiliates_on_code"
   end
 
   create_table "areas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -104,11 +107,10 @@ ActiveRecord::Schema.define(version: 2021_02_15_173215) do
     t.datetime "block_at"
     t.bigint "frontend_id"
     t.string "api_token"
-    t.string "menu_alias"
     t.integer "auto_checkout_minutes"
+    t.string "menu_alias"
     t.string "phone"
     t.string "company_name"
-    t.boolean "sepa_trial", default: false
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"

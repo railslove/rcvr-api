@@ -4,7 +4,7 @@ module Owners
       from = Time.zone.parse(params.require(:from))
       to = Time.zone.parse(params.require(:to))
 
-      tickets = company.tickets.during(from..to).order(entered_at: :desc)
+      tickets = company.tickets.includes(:area, :company).during(from..to).order(entered_at: :desc)
 
       render json: tickets
     rescue ActionController::ParameterMissing => e

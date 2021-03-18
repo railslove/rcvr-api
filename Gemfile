@@ -18,6 +18,8 @@ gem 'rails_admin'
 gem 'stripe'
 gem 'rqrcode'
 gem "aws-sdk-s3", require: false
+gem 'activestorage-validator'
+gem 'image_processing'
 
 # Emails
 gem 'mailgun-ruby', '~> 1.2'
@@ -37,6 +39,7 @@ group :development, :test do
   gem 'rspec-mocks', github: 'rspec/rspec-mocks'
   gem 'rspec-rails', github: 'rspec/rspec-rails'
   gem 'rspec-support', github: 'rspec/rspec-support'
+  gem 'bullet'
 end
 
 group :development do
