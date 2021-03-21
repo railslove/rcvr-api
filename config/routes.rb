@@ -38,4 +38,9 @@ Rails.application.routes.draw do
     post 'request-password-reset', controller: :password_resets, action: :request_reset
     post 'reset-password', controller: :password_resets, action: :reset
   end
+
+  namespace :iris do
+    get '/search/:full_text_search', to: 'search#search'
+  end
+
 end
