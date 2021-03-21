@@ -2,7 +2,7 @@ class Iris::IrisController < ApplicationController
 
   include ActiveSupport::SecurityUtils
 
-  @@WFD_API_KEY_HEADER = 'x-wfd-api-key'
+  WFD_API_KEY_HEADER = 'x-wfd-api-key'.freeze
   @@WFD_API_KEY = ENV['X_WFD_API_KEY']
 
   before_action :authenticate
