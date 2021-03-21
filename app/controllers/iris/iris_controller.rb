@@ -11,7 +11,8 @@ class Iris::IrisController < ApplicationController
 
   def authenticate
 
-    if ! secure_compare(@@WFD_API_KEY, request.headers[@@WFD_API_KEY_HEADER] || '') then
+    auth = request.headers[WFD_API_KEY_HEADER]
+    unless auth.blank? || ActiveSupport::SecurityUtils.secure_compare(@@WFD_API_KEY, auth)
       render status: 401
     end
 
