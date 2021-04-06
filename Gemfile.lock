@@ -383,7 +383,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stripe (5.22.0)
+    stripe (5.32.1)
     temple (0.8.2)
     thor (1.1.0)
     thread_safe (0.3.6)
