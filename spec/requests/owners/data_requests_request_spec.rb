@@ -7,6 +7,7 @@ RSpec.describe Owners::DataRequestsController do
 
   let(:owner) { FactoryBot.create(:owner) }
   let(:company) { FactoryBot.create(:company, owner: owner) }
+  let(:area) { FactoryBot.create(:area, company: company) }
 
   before do
     sign_in(owner)
@@ -58,6 +59,33 @@ RSpec.describe Owners::DataRequestsController do
       subject.call
 
       expect(response).to have_http_status(:ok)
+    end
+  end
+
+
+  context "GET result of data_request" do
+    let(:data_request) do
+      FactoryBot.create(:ticket, area: area, encrypted_data: "data", entered_at: Time.zone.now.yesterday - 2.hours, left_at: Time.zone.now.yesterday - 1.hour)
+      FactoryBot.create(:data_request,
+                        company: company,
+                        from: Time.zone.now.yesterday - 4.hours,
+                        to: Time.zone.now.yesterday,
+                        accepted_at: Time.zone.now.yesterday)
+    end
+
+    before do
+      get owners_data_request_path(data_request.id)
+    end
+
+    subject { JSON.parse(response.body) }
+
+    it "has the correct data" do
+      expect(subject["id"]).to eq(data_request.id)
+      expect(subject["tickets"].size).to eq(1)
+      ticket = subject["tickets"].first
+      expect(ticket["encrypted_data"]).to eq("data")
+      expect(ticket["area_id"]).to eq(area.id)
+      expect(ticket["area_name"]).to eq(area.name)
     end
   end
 end
