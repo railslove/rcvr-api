@@ -54,4 +54,26 @@ RSpec.describe Ticket do
       expect(ticket.valid?).to be(true)
     end
   end
+
+  context "Update encrypted data" do
+
+    it "can update encrypted data and keeps versions" do
+      ticket = FactoryBot.create(:ticket, entered_at: 1.hour.ago, left_at: nil)
+
+      original = ticket.encrypted_data
+
+      expect(ticket.encrypted_data.nil?).to be(false)
+      expect(ticket.encrypted_data_change_history.length).to be(0)
+
+      ticket.encrypted_data = 'abc'
+      ticket.save
+
+      expect(ticket.encrypted_data).to eql('abc')
+      expect(ticket.encrypted_data_change_history).to_not be(nil)
+      expect(ticket.encrypted_data_change_history.length).to be(1)
+      expect(ticket.encrypted_data_change_history.first).to eq(original)
+    end
+
+  end
+
 end
