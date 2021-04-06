@@ -57,7 +57,7 @@ Then execute:
 
 ```
 bundler
-echo "DATABASE_URL=postgres://postgres:mysecretpassword@127.0.0.1:5432/" >> .env.local
+echo "DATABASE_URL=postgres://postgres:mysecretpassword@127.0.0.1:5432/rcvr_api_development" >> .env.local
 docker-compose up -d # will start database in the background
 rails db:setup RAILS_ENV=development
 rails server
