@@ -107,8 +107,8 @@ ActiveRecord::Schema.define(version: 2021_03_18_214915) do
     t.datetime "block_at"
     t.bigint "frontend_id"
     t.string "api_token"
-    t.string "menu_alias"
     t.integer "auto_checkout_minutes"
+    t.string "menu_alias"
     t.string "phone"
     t.string "company_name"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true

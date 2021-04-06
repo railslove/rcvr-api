@@ -71,9 +71,7 @@ RSpec.describe Ticket do
       expect(ticket.encrypted_data).to eql('abc')
       expect(ticket.encrypted_data_change_history).to_not be(nil)
       expect(ticket.encrypted_data_change_history.length).to be(1)
-      puts ticket.encrypted_data_change_history
       expect(ticket.encrypted_data_change_history.first).to eq(original)
-
     end
 
   end
