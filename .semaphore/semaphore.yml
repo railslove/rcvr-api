@@ -31,3 +31,5 @@ promotions:
     pipeline_file: deploy-heroku.yml
     auto_promote:
       when: "result = 'passed' and branch = 'master'"
+  - name: Staging deploy
+    pipeline_file: deploy-staging.yml
