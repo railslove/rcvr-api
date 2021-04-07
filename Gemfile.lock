@@ -267,6 +267,9 @@ GEM
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    paper_trail (11.1.0)
+      activerecord (>= 5.2)
+      request_store (~> 1.1)
     pg (1.2.3)
     premailer (1.11.1)
       addressable
@@ -334,6 +337,8 @@ GEM
       ffi (~> 1.0)
     redis (4.1.4)
     remotipart (1.4.4)
+    request_store (1.5.0)
+      rack (>= 1.4)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -431,6 +436,7 @@ DEPENDENCIES
   letter_opener
   listen (~> 3.2)
   mailgun-ruby (~> 1.2)
+  paper_trail
   pg
   premailer-rails
   puma (~> 4.1)
