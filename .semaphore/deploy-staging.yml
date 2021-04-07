@@ -1,0 +1,20 @@
+version: v1.0
+name: Promotions and Auto-promotions
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Deploy
+    task:
+      secrets:
+        - name: rcvr-api-ci-secrets
+      jobs:
+        - name: staging
+          commands:
+            - checkout --use-cache
+            - ssh-keyscan -H dokku.railslabs.com >> ~/.ssh/known_hosts
+            - chmod 600 ~/.ssh/id_rsa_rcvr
+            - ssh-add ~/.ssh/id_rsa_rcvr
+            - git remote add dokku dokku@dokku.railslabs.com:rcvr-api-staging
+            - git push dokku HEAD:master -f
