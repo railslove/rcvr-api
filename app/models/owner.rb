@@ -2,7 +2,7 @@ class Owner < ApplicationRecord
   include ApiSerializable
   include RailsAdminConfig::ForOwner
 
-  EXPOSED_ATTRIBUTES = %i[id email name phone company_name public_key affiliate stripe_subscription_status
+  EXPOSED_ATTRIBUTES = %i[id email name phone company_name street zip city public_key affiliate stripe_subscription_status
                           can_use_for_free trial_ends_at frontend_url block_at menu_alias]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
