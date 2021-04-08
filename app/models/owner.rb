@@ -6,7 +6,7 @@ class Owner < ApplicationRecord
                           can_use_for_free trial_ends_at frontend_url block_at menu_alias]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
-         :confirmable, :recoverable, jwt_revocation_strategy: JwtBlacklist
+         :confirmable, :recoverable, jwt_revocation_strategy: JwtDenylist
 
   validates :email, uniqueness: true, presence: true
 
