@@ -11,6 +11,9 @@ RSpec.describe 'POST /signup', type: :request do
         email: 'owner@example.com',
         company_name: 'Railslove',
         phone: '0221666666666',
+        street: 'Strasse 1',
+        zip: '12345',
+        city: 'Exampletown',
         password: 'password',
         affiliate: 'AFFNAME'
       },
@@ -34,6 +37,15 @@ RSpec.describe 'POST /signup', type: :request do
 
     it 'creates a new owner' do
       expect(Owner.count).to eq(1)
+      owner = Owner.first
+      expect(owner.email).to eq("owner@example.com")
+      expect(owner.company_name).to eq("Railslove")
+      expect(owner.phone).to eq("0221666666666")
+      expect(owner.street).to eq("Strasse 1")
+      expect(owner.zip).to eq("12345")
+      expect(owner.city).to eq("Exampletown")
+      expect(owner.affiliate).to eq("AFFNAME")
+      expect(owner.frontend_id).to eq(frontend.id)
     end
 
     it 'Signs the owner in directly' do
