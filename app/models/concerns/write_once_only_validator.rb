@@ -3,6 +3,6 @@ class WriteOnceOnlyValidator < ActiveModel::EachValidator
     return if record.attribute_was(attribute).blank?
     return unless record.attribute_changed?(attribute)
 
-    record.errors[attribute] << "#{attribute} can be written only once."
+    record.errors.add(attribute, "#{attribute} can be written only once.")
   end
 end
