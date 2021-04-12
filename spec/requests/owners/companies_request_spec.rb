@@ -29,10 +29,20 @@ RSpec.describe Owners::CompaniesController do
 
   context 'POST company' do
     subject do
-      -> { post owners_companies_path, params: { company: FactoryBot.attributes_for(:company) } }
+      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown"}} }
     end
 
-    it { is_expected.to change { Company.count }.by(1) }
+    it "creates a new company" do
+      subject.call
+
+      expect(Company.count).to eq(1)
+      company = Company.last
+      expect(company.owner.id).to eq(owner.id)
+      expect(company.name).to eq("Acme Inc")
+      expect(company.street).to eq("Strasse 1")
+      expect(company.zip).to eq("12345")
+      expect(company.city).to eq("Exampletown")
+    end
 
     it 'Has the correct http status' do
       subject.call
