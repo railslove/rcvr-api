@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_141529) do
+ActiveRecord::Schema.define(version: 2021_04_12_064405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -78,11 +78,9 @@ ActiveRecord::Schema.define(version: 2021_04_08_141529) do
     t.string "url"
   end
 
-  create_table "jwt_blacklists", force: :cascade do |t|
-  end
-
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
+    t.datetime "exp"
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
