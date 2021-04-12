@@ -34,12 +34,11 @@ group :development, :test do
   gem 'faker'
   gem 'letter_opener'
 
-  # Bleeding edge testing / required for rails 6 with rspec
-  gem 'rspec-core', github: 'rspec/rspec-core'
-  gem 'rspec-expectations', github: 'rspec/rspec-expectations'
-  gem 'rspec-mocks', github: 'rspec/rspec-mocks'
-  gem 'rspec-rails', github: 'rspec/rspec-rails'
-  gem 'rspec-support', github: 'rspec/rspec-support'
+  gem 'rspec-core', '~> 3.10.0'
+  gem 'rspec-expectations', '~> 3.10.1'
+  gem 'rspec-mocks', '~> 3.10.2'
+  gem 'rspec-rails', '~> 5.0.1'
+  gem 'rspec-support', '~> 3.10.2'
   gem 'bullet'
 end
 
