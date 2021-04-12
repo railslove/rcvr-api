@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise-jwt'
 gem 'pg'
 gem 'puma', '~> 5.2'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.3'
 gem 'sentry-raven'
 gem 'happypdf_renderer', git: 'https://ef44d43b3bd2bcace3681ac53e1553a1a4f98eda:x-oauth-basic@github.com/railslove/happypdf_renderer.git'
 gem 'interactor-rails'
@@ -34,12 +34,11 @@ group :development, :test do
   gem 'faker'
   gem 'letter_opener'
 
-  # Bleeding edge testing / required for rails 6 with rspec
-  gem 'rspec-core', github: 'rspec/rspec-core'
-  gem 'rspec-expectations', github: 'rspec/rspec-expectations'
-  gem 'rspec-mocks', github: 'rspec/rspec-mocks'
-  gem 'rspec-rails', github: 'rspec/rspec-rails'
-  gem 'rspec-support', github: 'rspec/rspec-support'
+  gem 'rspec-core', '~> 3.10.0'
+  gem 'rspec-expectations', '~> 3.10.1'
+  gem 'rspec-mocks', '~> 3.10.2'
+  gem 'rspec-rails', '~> 5.0.1'
+  gem 'rspec-support', '~> 3.10.2'
   gem 'bullet'
 end
 
