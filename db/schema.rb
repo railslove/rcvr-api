@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_105028) do
+ActiveRecord::Schema.define(version: 2021_04_19_095723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_04_12_105028) do
     t.string "street"
     t.string "zip"
     t.string "city"
+    t.boolean "need_to_show_corona_test", default: false
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
