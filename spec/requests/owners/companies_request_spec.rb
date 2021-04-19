@@ -29,7 +29,7 @@ RSpec.describe Owners::CompaniesController do
 
   context 'POST company' do
     subject do
-      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown"}} }
+      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown", need_to_show_corona_test: true}} }
     end
 
     it "creates a new company" do
@@ -42,6 +42,7 @@ RSpec.describe Owners::CompaniesController do
       expect(company.street).to eq("Strasse 1")
       expect(company.zip).to eq("12345")
       expect(company.city).to eq("Exampletown")
+      expect(company.need_to_show_corona_test).to be(true)
     end
 
     it 'Has the correct http status' do
