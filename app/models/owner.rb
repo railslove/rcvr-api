@@ -37,6 +37,12 @@ class Owner < ApplicationRecord
     block_at&.past?
   end
 
+  def affiliate_logo
+    return unless affiliate
+    
+    Affiliate.find_by(code: affiliate)&.logo_url
+  end
+
   def frontend_url
     # This could be replaced by a delegate once the migration has been done on production
 
