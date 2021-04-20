@@ -43,7 +43,7 @@ module Owners
     private
 
     def company_params
-      params.require(:company).permit(:name, :street, :zip, :city, :menu_link, :menu_pdf, :remove_menu_pdf, :privacy_policy_link)
+      params.require(:company).permit(:name, :street, :zip, :city, :menu_link, :menu_pdf, :remove_menu_pdf, :privacy_policy_link, :need_to_show_corona_test)
     end
 
     def authenticate_owner_with_api_token
