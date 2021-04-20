@@ -29,6 +29,7 @@ class Company < ApplicationRecord
   scope :not_free, -> { where.not(is_free: true) }
 
   delegate :menu_alias, :frontend_url, :public_key, to: :owner
+  delegate :affiliate_logo, to: :owner
 
   attr_accessor :remove_menu_pdf
 
