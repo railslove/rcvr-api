@@ -1,5 +1,5 @@
 GIT
-  remote: https://ef44d43b3bd2bcace3681ac53e1553a1a4f98eda:x-oauth-basic@github.com/railslove/happypdf_renderer.git
+  remote: https://github.com/railslove/happypdf_renderer.git
   revision: 93904fec6582ba8a04eca52cf2be6e1e5b748648
   specs:
     happypdf_renderer (0.2.4)
@@ -165,7 +165,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    httparty (0.18.0)
+    httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
     i18n (1.8.10)
