@@ -28,6 +28,9 @@ Rails.application.routes.draw do
       resources :areas, only: %i[index create update show], shallow: true
       resources :tickets, only: :index
       resources :data_requests, only: %i[show index create], shallow: true
+      resources :unaccepted_data_requests, only: %i[index], shallow: true do
+        patch "accept", to: "accept_data_requests#update"
+      end
       get :stats
     end
     resource :owner, only: %i[show update]
