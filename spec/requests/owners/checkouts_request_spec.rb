@@ -5,7 +5,7 @@ RSpec.describe Owners::AreasController do
 
   before { allow(Stripe::Subscription).to receive(:update) }
   before { allow(Stripe::Checkout::Session).to receive(:create) }
-  before { allow(Stripe::Subscription).to receive(:retrieve).and_return(double(status: :active)) }
+  before { allow(Stripe::Subscription).to receive(:retrieve).and_return(double(status: :active, pause_collection: nil)) }
 
   before { sign_in(owner) }
 

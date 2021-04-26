@@ -42,4 +42,30 @@ RSpec.describe Owner, type: :model do
       expect(subject).to eq(2.hours)
     end
   end
+
+  describe '.update' do
+    before { allow(Stripe::Subscription).to receive(:update) }
+    let(:owner) { FactoryBot.create(:owner, stripe_subscription_id: 'sub_1') }
+
+    it "does updates stripe if payment is configured" do
+      allow(Stripe::Subscription).to receive(:retrieve).and_return(
+        double(status: :active, pause_collection: nil)
+      )
+      owner.update!(name: "Exampe Pub")
+      expect(Stripe::Subscription).to have_received(:update).at_least(:once)
+    end
+
+    it "does not update stripe if payment paused" do
+      allow(Stripe::Subscription).to receive(:retrieve).and_return(
+        double(status: :active, pause_collection: {
+          pause_collection: {
+            behavior: "mark_uncollectible", resumes_at: nil
+          }
+        })
+      )
+      owner.update!(name: "Exampe Pub")
+      expect(Stripe::Subscription).not_to have_received(:update)
+    end
+
+  end
 end
