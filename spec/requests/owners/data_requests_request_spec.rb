@@ -13,6 +13,28 @@ RSpec.describe Owners::DataRequestsController do
     sign_in(owner)
   end
 
+  context "GET data_request index" do
+    let!(:data_request) do
+      FactoryBot.create(:ticket, area: area, encrypted_data: "data", entered_at: Time.zone.now.yesterday - 2.hours, left_at: Time.zone.now.yesterday - 1.hour)
+      FactoryBot.create(:data_request,
+                        company: company,
+                        from: Time.zone.now.yesterday - 4.hours,
+                        to: Time.zone.now.yesterday,
+                        accepted_at: Time.zone.now.yesterday)
+    end
+
+    before do
+      get owners_company_data_requests_path(company_id: company.id)
+    end
+
+    subject { JSON.parse(response.body) }
+
+    it "has the correct data" do
+      expect(subject.length).to eq(1)
+      expect(subject.map{|item| item["id"]}).to eq([data_request.id])
+    end
+  end
+
   context 'POST first data_request' do
     subject do
       -> { post owners_company_data_requests_path(company_id: company.id), params: { data_request: { reason: 'for fun' } } }
