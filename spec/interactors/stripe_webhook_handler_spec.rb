@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StripeWebhookHandler do
   before { allow(Stripe::Subscription).to receive(:update) }
-  before { allow(Stripe::Subscription).to receive(:retrieve).and_return(double(status: :active)) }
+  before { allow(Stripe::Subscription).to receive(:retrieve).and_return(double(status: :active, pause_collection: nil)) }
 
   context 'checkout.session.completed' do
     let(:owner) { FactoryBot.create(:owner, block_at: 1.day.from_now) }
