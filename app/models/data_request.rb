@@ -2,10 +2,12 @@ class DataRequest < ApplicationRecord
   include ApiSerializable
   include RailsAdminConfig::ForDataRequest
 
-  EXPOSED_ATTRIBUTES = %i[id from to accepted_at]
+  EXPOSED_ATTRIBUTES = %i[id from to reason accepted_at iris_health_department iris_key_of_health_department]
 
   belongs_to :company
   has_many :tickets, -> (request) { during(request.time_range) }, through: :company
+
+  scope :unaccepted, -> { where(accepted_at: nil) }
 
   validates :from, presence: true
   validates :to, presence: true
