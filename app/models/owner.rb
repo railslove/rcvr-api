@@ -56,7 +56,7 @@ class Owner < ApplicationRecord
   end
 
   def active_stripe_subscription?
-    stripe_subscription_id? && stripe_subscription_status != 'canceled'
+    stripe_subscription_id? && stripe_subscription_status != 'canceled' && stripe_subscription.pause_collection == nil
   end
 
   def stripe_price_id
