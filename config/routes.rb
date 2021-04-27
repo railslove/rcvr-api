@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       resources :data_requests, only: %i[show index create], shallow: true
       get :stats
     end
+    resources :unaccepted_data_requests, only: %i[index], shallow: true do
+      patch "accept", to: "accept_data_requests#update"
+    end
     resource :owner, only: %i[show update]
     post :checkout, only: :create, controller: :checkouts, action: :create
     post :setup_intent, controller: :checkouts, action: :setup_intent

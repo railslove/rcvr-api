@@ -5,7 +5,6 @@ require Rails.root.join('lib/rails_admin/actions.rb')
 require "nested_form/engine"
 require "nested_form/builder_mixin"
 
-RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::AcceptDataRequest)
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::BlockOwner)
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::GenerateOwnerApiToken)
 
@@ -35,6 +34,5 @@ RailsAdmin.config do |config|
     export
     block_owner
     generate_owner_api_token
-    accept_data_request
   end
 end
