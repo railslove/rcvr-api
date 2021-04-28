@@ -12,7 +12,7 @@ RSpec.describe AcceptDataRequest do
 
     it "accepts the data request" do
       data_request = subject.call.data_request
-      expect(data_request).to_not be_nil
+      expect(data_request.accepted_at).to_not be_nil
     end
   end
 end
