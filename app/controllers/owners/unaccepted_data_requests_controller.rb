@@ -8,15 +8,15 @@ module Owners
     private
 
     def json_data
-      current_owner.companies.map {|company|
-        {
-          id: company.id,
-          name: company.name,
-          unaccepted_data_requests: company.data_requests.unaccepted
-        }
-      }.filter {|item| 
-        item[:unaccepted_data_requests].length > 0
-      }
+      current_owner.companies
+        .filter { |company| company.data_requests.unaccepted.size > 0 }
+        .map do |company|
+          {
+            id: company.id,
+            name: company.name,
+            unaccepted_data_requests: company.data_requests.unaccepted
+          }
+      end
     end
 
   end
