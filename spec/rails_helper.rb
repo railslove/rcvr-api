@@ -33,6 +33,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Warden::Test::Helpers, type: :request
+  config.include ActionMailer::TestHelper
 
   FactoryBot::SyntaxRunner.class_eval do
     include ActionDispatch::TestProcess

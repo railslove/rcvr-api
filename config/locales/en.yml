@@ -1,10 +1,6 @@
 en:
   admin:
     actions:
-      accept_data_request:
-        menu: 'Accept'
-        title: 'Accept'
-        breadcrumb: 'Accept'
       block_owner:
         menu: 'Block'
         title: 'Block'

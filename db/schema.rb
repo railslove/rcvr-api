@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_095723) do
+ActiveRecord::Schema.define(version: 2021_04_22_102308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -81,6 +81,11 @@ ActiveRecord::Schema.define(version: 2021_04_19_095723) do
     t.datetime "to"
     t.datetime "accepted_at"
     t.string "reason"
+    t.string "iris_submission_url"
+    t.text "iris_health_department"
+    t.text "iris_key_of_health_department"
+    t.text "iris_key_reference"
+    t.index ["accepted_at"], name: "index_data_requests_on_accepted_at"
     t.index ["company_id"], name: "index_data_requests_on_company_id"
   end
 
