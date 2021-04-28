@@ -1,0 +1,30 @@
+<container>
+  <row>
+    <columns small="24" valign="middle">
+      <center>
+        <spacer size="24"/>
+
+        <h3>Liebe/r recover Nutzer:in,</h3>
+        <p>
+          eine Corona-positiv getestete Person hat sich in den vergangenen Tagen in Deinem Betrieb aufgehalten.
+        </p>
+        <p>
+          Damit das Gesundheitsamt schnellstmöglich andere Personen informieren kann, die sich zur selben Zeit 
+          in der Nähe aufgehalten haben, ist Deine Mitarbeit erforderlich. Nach Corona-Schutzverordnung kann das 
+          Gesundheitsamt die verschlüsselten Daten nur erhalten, wenn Du sie dafür freigibst.
+        </p>
+        <p>
+          Bitte öffne dafür das <a href="https://rcvr.app/business/dashboard/<%= @company.id %>/data-request/<%= @data_request.id %>">recover Dashboard</a> und klicke den 
+          "Daten freigeben" Button an.
+        </p>
+        <p>
+          Bitte gebe die Daten so schnell wie möglich frei - im Infektionsfall zählt jede Minute!
+        </p>
+        <p>
+          Ganz herzlichen Dank für Deine Mitarbeit,<br/>
+          Dein recover Team
+        </p>
+      </center>
+    </columns>
+  </row>
+</container>
