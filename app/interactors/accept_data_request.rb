@@ -5,7 +5,7 @@ class AcceptDataRequest
   required_attributes %i[data_request]
 
   def call
-    if (!data_request.accepted?)
+    unless data_request.accepted?
       data_request.accept!
     end
     context.data_request = data_request
