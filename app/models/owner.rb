@@ -9,6 +9,7 @@ class Owner < ApplicationRecord
          :confirmable, :recoverable, jwt_revocation_strategy: JwtDenylist
 
   validates :email, uniqueness: true, presence: true
+  validates_length_of :password, within: 8..128, allow_blank: true
 
   scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
   scope :with_stripe_data, -> { where.not(stripe_subscription_id: nil) }
