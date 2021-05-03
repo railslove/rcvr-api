@@ -68,6 +68,7 @@ class StripeWebhookHandler
   end
 
   def save_owner
+    puts owner.inspect
     owner&.save!
   end
 
