@@ -4,6 +4,7 @@ module Owners
 
     def request_reset
       Owner.find_by(email: params[:email])&.send_reset_password_instructions
+      render json: {status: "OK"}
     end
 
     def reset
@@ -13,7 +14,8 @@ module Owners
 
       raise ActiveRecord::RecordNotFound if owner.blank?
 
-      owner.update(password: params[:password])
+      owner.update!(password: params[:password])
+      render json: { status: "OK" }
     end
   end
 end
