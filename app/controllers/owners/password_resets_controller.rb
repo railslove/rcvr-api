@@ -15,7 +15,7 @@ module Owners
       raise ActiveRecord::RecordNotFound if owner.blank?
 
       owner.update!(password: params[:password])
-      render json: {status: "OK"}
+      render json: { status: "OK" }
     end
   end
 end
