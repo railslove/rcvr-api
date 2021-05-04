@@ -4,7 +4,7 @@ module Owners
 
     def request_reset
       Owner.find_by(email: params[:email])&.send_reset_password_instructions
-      render json: {status: "OK"}
+      render json: { status: "OK" }
     end
 
     def reset
