@@ -3,6 +3,15 @@ class Company < ApplicationRecord
   include RailsAdminConfig::ForCompany
   include Rails.application.routes.url_helpers
 
+  LOCATION_TYPES = %w{
+    RETAIL
+    FOOD_SERVICE
+    CRAFT
+    WORKPLACE
+    EDUCATIONAL_INSTITUTION
+    PUBLIC_BUILDING
+  }
+
   EXPOSED_ATTRIBUTES = %i[
     id
     name
@@ -17,6 +26,7 @@ class Company < ApplicationRecord
   ]
 
   validates :name, presence: true
+  validates_inclusion_of :location_type, in: LOCATION_TYPES, allow_nil: true
 
   belongs_to :owner, touch: true
 
@@ -37,6 +47,14 @@ class Company < ApplicationRecord
     menu_pdf.purge if remove_menu_pdf == '1' and menu_pdf.attached?
   }
 
+  before_save :assign_cwa_crypto_if_needed
+  
+  def assign_cwa_crypto_if_needed
+    if self.cwa_crypto_seed.nil?
+      self.cwa_crypto_seed = SecureRandom.random_bytes(16)
+    end
+  end
+
   def menu_pdf_link
     return unless menu_pdf.attached?
 
@@ -53,5 +71,9 @@ class Company < ApplicationRecord
 
   def ticket_count
     tickets.count
+  end
+
+  def address
+    "#{street}, #{zip} #{city}"
   end
 end
