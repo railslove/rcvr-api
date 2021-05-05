@@ -216,6 +216,7 @@ GEM
       rest-client (>= 2.0.2)
     marcel (1.0.1)
     method_source (1.0.0)
+    middleware (0.1.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0225)
@@ -244,6 +245,11 @@ GEM
     premailer-rails (1.11.1)
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
+    protobuf (3.10.3)
+      activesupport (>= 3.2)
+      middleware
+      thor
+      thread_safe
     public_suffix (4.0.6)
     puma (5.2.2)
       nio4r (~> 2.0)
@@ -373,6 +379,7 @@ GEM
     stripe (5.32.1)
     temple (0.8.2)
     thor (1.1.0)
+    thread_safe (0.3.6)
     thwait (0.1.0)
     tilt (2.0.10)
     tzinfo (2.0.4)
@@ -420,6 +427,7 @@ DEPENDENCIES
   paper_trail
   pg
   premailer-rails
+  protobuf
   puma (~> 5.2)
   rack-cors
   rails (~> 6.1.3)
