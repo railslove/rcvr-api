@@ -74,7 +74,7 @@ module Cwa
         countryData: CWALocationData.new(
           version: 1,
           type: location_type_for(@company),
-          defaultCheckInLengthInMinutes: 120
+          defaultCheckInLengthInMinutes: @company.owner.auto_checkout_time.to_i / 60
         ).encode
       ).encode
     end
