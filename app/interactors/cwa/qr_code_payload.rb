@@ -97,7 +97,5 @@ module Cwa
           TraceLocationType::LOCATION_TYPE_UNSPECIFIED
       end
     end
-
-
   end
 end
