@@ -39,7 +39,7 @@ RSpec.describe Company do
 
     it 'should return a cwa url if it is enabled' do
       company = FactoryBot.create(:company, name: "Example Inc", location_type: "PUBLIC_BUILDING", street: "Example Str. 2", zip: "10223", city: "Berlin", cwa_crypto_seed: "\x9E\x1C\x85\xDDq WL}C\xD8\xDA?\xB7ih", cwa_link_enabled: true)
-      expect(company.cwa_url).to eql("https://e.coronawarn.app?v=1#CAESLQgBEgtFeGFtcGxlIEluYxocRXhhbXBsZSBTdHIuIDIsIDEwMjIzIEJlcmxpbhqXAQgBEoABZ3dMTXpFMTUzdFF3QU9mMk1ab1VYWGZ6V1RkbFNwZlM5OWlaZmZtY214T0c5bmpTSzRSVGltRk9Gd0RoNnQwVHl3OFhSMDF1Z0RZanR1S3dqanVLNDlPaDgzRldjdDZYcGVmUGk5U2tqeHZ2ejUzaTlnYU1tVUVjOTZwYnRvYUEaEJ4chd1xIFdMfUPY2j-3aWgiBggBEAgYeA==")
+      expect(company.cwa_url).to eql("https://e.coronawarn.app?v=1#CAESLQgBEgtFeGFtcGxlIEluYxocRXhhbXBsZSBTdHIuIDIsIDEwMjIzIEJlcmxpbhqXAQgBEoABZ3dMTXpFMTUzdFF3QU9mMk1ab1VYWGZ6V1RkbFNwZlM5OWlaZmZtY214T0c5bmpTSzRSVGltRk9Gd0RoNnQwVHl3OFhSMDF1Z0RZanR1S3dqanVLNDlPaDgzRldjdDZYcGVmUGk5U2tqeHZ2ejUzaTlnYU1tVUVjOTZwYnRvYUEaEJ4chd1xIFdMfUPY2j-3aWgiBwgBEAgY8AE=")
     end
 
     it 'should return null if cwa url is disabled' do
