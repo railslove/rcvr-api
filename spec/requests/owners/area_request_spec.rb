@@ -75,7 +75,7 @@ RSpec.describe Owners::AreasController do
       get owners_area_path(area, format: :svg)
 
       expect(response.content_type).to eq('image/svg')
-      expect(response.body).to start_with("<?xml version=\"1.0\" standalone=\"yes\"?>\n<svg version=\"1.1\"")
+      expect(response.body).to start_with("<?xml version=\"1.0\" standalone=\"yes\"?><svg version=\"1.1\"")
     end
   end
 
