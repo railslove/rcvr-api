@@ -9,7 +9,8 @@ class Company < ApplicationRecord
     "CRAFT" => "Handwerksbetrieb",
     "WORKPLACE" => "Arbeitsstätte",
     "EDUCATIONAL_INSTITUTION" => "Bildungsstätte",
-    "PUBLIC_BUILDING" => "öffentliches Gebäude"
+    "PUBLIC_BUILDING" => "öffentliches Gebäude",
+    "OTHER" => "Anderes"
   }
 
   EXPOSED_ATTRIBUTES = %i[

@@ -93,6 +93,8 @@ module Cwa
           TraceLocationType::LOCATION_TYPE_PERMANENT_EDUCATIONAL_INSTITUTION
         when "PUBLIC_BUILDING"
           TraceLocationType::LOCATION_TYPE_PERMANENT_PUBLIC_BUILDING
+        when "OTHER"
+          TraceLocationType::LOCATION_TYPE_PERMANENT_OTHER
         else
           TraceLocationType::LOCATION_TYPE_UNSPECIFIED
       end
