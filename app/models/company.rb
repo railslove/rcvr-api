@@ -3,6 +3,16 @@ class Company < ApplicationRecord
   include RailsAdminConfig::ForCompany
   include Rails.application.routes.url_helpers
 
+  enum location_type: [
+    :other,
+    :retail, 
+    :food_service, 
+    :craft, 
+    :workplace, 
+    :educational_institution, 
+    :public_building
+  ], _prefix: 'location'
+
   EXPOSED_ATTRIBUTES = %i[
     id
     name
@@ -14,9 +24,12 @@ class Company < ApplicationRecord
     menu_pdf_link
     privacy_policy_link
     need_to_show_corona_test
+    location_type
+    cwa_link_enabled
   ]
 
   validates :name, presence: true
+  validates_inclusion_of :location_type, in: location_types.keys, if: Proc.new { |company| company.cwa_link_enabled }
 
   belongs_to :owner, touch: true
 
@@ -37,6 +50,14 @@ class Company < ApplicationRecord
     menu_pdf.purge if remove_menu_pdf == '1' and menu_pdf.attached?
   }
 
+  before_save :assign_cwa_crypto_if_needed
+
+  def assign_cwa_crypto_if_needed
+    if self.cwa_crypto_seed.nil?
+      self.cwa_crypto_seed = SecureRandom.random_bytes(16)
+    end
+  end
+
   def menu_pdf_link
     return unless menu_pdf.attached?
 
@@ -53,5 +74,13 @@ class Company < ApplicationRecord
 
   def ticket_count
     tickets.count
+  end
+
+  def address
+    "#{street}, #{zip} #{city}"
+  end
+
+  def cwa_url 
+    Cwa::GenerateUrl.call(company: self).url if cwa_link_enabled
   end
 end

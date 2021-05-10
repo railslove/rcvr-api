@@ -76,4 +76,10 @@ RSpec.describe Ticket do
 
   end
 
+  it "should expose the company cwa url" do
+    company = FactoryBot.create(:company, name: "Example Inc", location_type: :public_building, street: "Example Str. 2", zip: "10223", city: "Berlin", cwa_crypto_seed: "\x9E\x1C\x85\xDDq WL}C\xD8\xDA?\xB7ih", cwa_link_enabled: true)
+    ticket = FactoryBot.create(:ticket, entered_at: 1.hour.ago, left_at: 30.minutes.ago, company: company)
+    expect(ticket.company_cwa_url).to eql("https://e.coronawarn.app?v=1#CAESLQgBEgtFeGFtcGxlIEluYxocRXhhbXBsZSBTdHIuIDIsIDEwMjIzIEJlcmxpbhqXAQgBEoABZ3dMTXpFMTUzdFF3QU9mMk1ab1VYWGZ6V1RkbFNwZlM5OWlaZmZtY214T0c5bmpTSzRSVGltRk9Gd0RoNnQwVHl3OFhSMDF1Z0RZanR1S3dqanVLNDlPaDgzRldjdDZYcGVmUGk5U2tqeHZ2ejUzaTlnYU1tVUVjOTZwYnRvYUEaEJ4chd1xIFdMfUPY2j-3aWgiBwgBEAgY8AE=")
+  end
+
 end
