@@ -5,7 +5,7 @@ class Ticket < ApplicationRecord
   has_paper_trail on: [:update], only: [:encrypted_data]
 
   AUTO_CHECKOUT_AFTER = 4.hours
-  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name company_cwa_url area_name]
+  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name company_address company_location_type company_auto_checkout_time area_name]
 
   enum status: { neutral: 0, at_risk: 2 }
 
@@ -23,8 +23,10 @@ class Ticket < ApplicationRecord
   scope :during, -> (range) { where('entered_at <= ? AND (left_at >= ? OR left_at IS NULL)', range.end, range.begin) }
 
   delegate :name, to: :company, prefix: :company
+  delegate :address, to: :company, prefix: :company
+  delegate :location_type, to: :company, prefix: :company
   delegate :name, to: :area, prefix: :area
-  delegate :cwa_url, to: :company, prefix: :company
+  delegate :auto_checkout_time, to: :company, prefix: :company
 
   def schedule_auto_checkout_job
     AutoCheckoutTicketJob.set(wait: company.owner.auto_checkout_time).perform_later(id)

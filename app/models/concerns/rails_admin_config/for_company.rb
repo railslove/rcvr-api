@@ -25,13 +25,6 @@ module RailsAdminConfig
         field :stats_url do
           read_only true
         end
-
-        field :cwa_url do
-          label "CWA URL"
-          read_only true
-        end
-
-
       end
     end
   end
