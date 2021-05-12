@@ -26,6 +26,7 @@ class Company < ApplicationRecord
     need_to_show_corona_test
     location_type
     cwa_link_enabled
+    cwa_crypto_seed
   ]
 
   validates :name, presence: true
@@ -43,20 +44,13 @@ class Company < ApplicationRecord
 
   delegate :menu_alias, :frontend_url, :public_key, to: :owner
   delegate :affiliate_logo, to: :owner
+  delegate :auto_checkout_time, to: :owner
 
   attr_accessor :remove_menu_pdf
 
   before_update {
     menu_pdf.purge if remove_menu_pdf == '1' and menu_pdf.attached?
   }
-
-  before_save :assign_cwa_crypto_if_needed
-
-  def assign_cwa_crypto_if_needed
-    if self.cwa_crypto_seed.nil?
-      self.cwa_crypto_seed = SecureRandom.random_bytes(16)
-    end
-  end
 
   def menu_pdf_link
     return unless menu_pdf.attached?
@@ -80,7 +74,4 @@ class Company < ApplicationRecord
     "#{street}, #{zip} #{city}"
   end
 
-  def cwa_url 
-    Cwa::GenerateUrl.call(company: self).url if cwa_link_enabled
-  end
 end
