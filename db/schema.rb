@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_084831) do
+ActiveRecord::Schema.define(version: 2021_05_14_123815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_084831) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string "affiliate"
+    t.string "affiliate_code"
     t.string "stripe_customer_id"
     t.string "stripe_subscription_id"
     t.datetime "trial_ends_at"
