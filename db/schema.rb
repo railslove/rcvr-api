@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_123815) do
+ActiveRecord::Schema.define(version: 2021_05_14_152111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(version: 2021_05_14_123815) do
     t.string "street"
     t.string "zip"
     t.string "city"
+    t.uuid "affiliate_id"
+    t.index ["affiliate_id"], name: "index_owners_on_affiliate_id"
     t.index ["confirmation_token"], name: "index_owners_on_confirmation_token", unique: true
     t.index ["email"], name: "index_owners_on_email", unique: true
     t.index ["frontend_id"], name: "index_owners_on_frontend_id"
@@ -165,6 +167,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_123815) do
   add_foreign_key "areas", "companies"
   add_foreign_key "companies", "owners"
   add_foreign_key "data_requests", "companies"
+  add_foreign_key "owners", "affiliates"
   add_foreign_key "owners", "frontends"
   add_foreign_key "tickets", "areas"
 end
