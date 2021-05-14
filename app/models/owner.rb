@@ -9,22 +9,23 @@ class Owner < ApplicationRecord
          :confirmable, :recoverable, jwt_revocation_strategy: JwtDenylist
 
   validates :email, uniqueness: true, presence: true
-  validates :password, 
-    presence: true, 
-    length: { in: Devise.password_length }, 
-    confirmation: true, 
-    on: :create 
+  validates :password,
+    presence: true,
+    length: { in: Devise.password_length },
+    confirmation: true,
+    on: :create
 
-  validates :password, 
-    allow_nil: true, 
-    length: { in: Devise.password_length }, 
-    confirmation: true, 
+  validates :password,
+    allow_nil: true,
+    length: { in: Devise.password_length },
+    confirmation: true,
     on: :update
 
   scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
   scope :with_stripe_data, -> { where.not(stripe_subscription_id: nil) }
 
   belongs_to :frontend
+  belongs_to :affilate
 
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
@@ -50,7 +51,7 @@ class Owner < ApplicationRecord
 
   def affiliate_logo
     return unless affiliate
-    
+
     Affiliate.find_by(code: affiliate)&.logo_url
   end
 

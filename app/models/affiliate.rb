@@ -6,6 +6,7 @@ class Affiliate < ApplicationRecord
   EXPOSED_ATTRIBUTES = %i[name logo_link logo_url]
 
   has_one_attached :logo
+  has_many :owners
 
   validates :logo, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'] }
 
