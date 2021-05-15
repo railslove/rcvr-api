@@ -25,7 +25,7 @@ class Owner < ApplicationRecord
   scope :with_stripe_data, -> { where.not(stripe_subscription_id: nil) }
 
   belongs_to :frontend
-  belongs_to :affiliate
+  belongs_to :affiliate, optional: true
 
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
