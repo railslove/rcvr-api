@@ -105,4 +105,9 @@ class Owner < ApplicationRecord
     # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
     trial_ends_at? && trial_ends_at.future? ? [trial_ends_at, 50.hours.from_now].max.to_i : nil
   end
+
+  def self.non_associated_affiliates
+    # To identify owners that have used an affiliate thats not properly registered in the affiliates table.
+    Owner.where(affiliate: nil).where.not(affiliate_code: nil)
+  end
 end
