@@ -51,8 +51,7 @@ class Owner < ApplicationRecord
 
   def affiliate_logo
     return unless affiliate
-
-    Affiliate.find_by(code: affiliate)&.logo_url
+    affiliate.logo_url
   end
 
   def frontend_url
@@ -75,8 +74,7 @@ class Owner < ApplicationRecord
     main_price_id = ENV['STRIPE_SUBSCRIPTION_PRICE_ID']
 
     raise "ENV['STRIPE_SUBSCRIPTION_PRICE_ID'] is empty" unless main_price_id.present?
-
-    Affiliate.find_by(code: affiliate)&.stripe_price_id_monthly || main_price_id
+    affiliate.stripe_price_id_monthly || main_price_id
   end
 
   def stripe_subscription
