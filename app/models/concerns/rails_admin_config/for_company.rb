@@ -14,6 +14,7 @@ module RailsAdminConfig
 
         field :cwa_link_enabled do
           label "Enable CWA Link after checkin"
+          read_only true
         end
 
         field :ticket_count do
@@ -25,13 +26,6 @@ module RailsAdminConfig
         field :stats_url do
           read_only true
         end
-
-        field :cwa_url do
-          label "CWA URL"
-          read_only true
-        end
-
-
       end
     end
   end
