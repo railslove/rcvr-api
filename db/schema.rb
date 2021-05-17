@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_084831) do
+ActiveRecord::Schema.define(version: 2021_05_17_071658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_084831) do
     t.boolean "need_to_show_corona_test", default: false
     t.integer "location_type", default: 0
     t.boolean "cwa_link_enabled", default: false
-    t.binary "cwa_crypto_seed"
+    t.string "cwa_crypto_seed"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
