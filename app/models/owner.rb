@@ -9,22 +9,23 @@ class Owner < ApplicationRecord
          :confirmable, :recoverable, jwt_revocation_strategy: JwtDenylist
 
   validates :email, uniqueness: true, presence: true
-  validates :password, 
-    presence: true, 
-    length: { in: Devise.password_length }, 
-    confirmation: true, 
-    on: :create 
+  validates :password,
+    presence: true,
+    length: { in: Devise.password_length },
+    confirmation: true,
+    on: :create
 
-  validates :password, 
-    allow_nil: true, 
-    length: { in: Devise.password_length }, 
-    confirmation: true, 
+  validates :password,
+    allow_nil: true,
+    length: { in: Devise.password_length },
+    confirmation: true,
     on: :update
 
   scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
   scope :with_stripe_data, -> { where.not(stripe_subscription_id: nil) }
 
   belongs_to :frontend
+  belongs_to :affiliate, optional: true
 
   has_many :companies, dependent: :destroy
   has_many :areas, through: :companies
@@ -50,8 +51,7 @@ class Owner < ApplicationRecord
 
   def affiliate_logo
     return unless affiliate
-    
-    Affiliate.find_by(code: affiliate)&.logo_url
+    affiliate.logo_url
   end
 
   def frontend_url
@@ -74,8 +74,7 @@ class Owner < ApplicationRecord
     main_price_id = ENV['STRIPE_SUBSCRIPTION_PRICE_ID']
 
     raise "ENV['STRIPE_SUBSCRIPTION_PRICE_ID'] is empty" unless main_price_id.present?
-
-    Affiliate.find_by(code: affiliate)&.stripe_price_id_monthly || main_price_id
+    affiliate.stripe_price_id_monthly || main_price_id
   end
 
   def stripe_subscription
@@ -105,5 +104,10 @@ class Owner < ApplicationRecord
   def trial_end
     # There is not trial if the trial is blank or has already been passed, else it has to be at least two days in the future
     trial_ends_at? && trial_ends_at.future? ? [trial_ends_at, 50.hours.from_now].max.to_i : nil
+  end
+
+  def self.non_associated_affiliates
+    # To identify owners that have used an affiliate thats not properly registered in the affiliates table.
+    Owner.where(affiliate: nil).where.not(affiliate_code: nil)
   end
 end
