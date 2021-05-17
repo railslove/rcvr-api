@@ -26,6 +26,7 @@ class Company < ApplicationRecord
     need_to_show_corona_test
     location_type
     cwa_link_enabled
+    cwa_crypto_seed
   ]
 
   validates :name, presence: true
