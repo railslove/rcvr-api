@@ -395,7 +395,7 @@ GEM
       dry-configurable (~> 0.9)
       jwt (~> 2.1)
       warden (~> 1.2)
-    webmock (3.12.2)
+    webmock (3.13.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
