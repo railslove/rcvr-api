@@ -19,7 +19,7 @@ class Affiliate < ApplicationRecord
   end
 
   def link
-    URI("#{ENV['FRONTEND_URL']}/business/setup/intro").tap do |uri|
+    URI("#{(ENV['FRONTEND_URL'] || "").chomp("/")}/business/setup/intro").tap do |uri|
       uri.query = { affiliate: code }.to_param if code?
     end.to_s
   end
