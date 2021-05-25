@@ -3,7 +3,8 @@ module RailsAdminConfig
     extend ActiveSupport::Concern
 
     included do
-    attr_accessor :remove_menu_pdf
+      attr_accessor :remove_menu_pdf
+   
       after_save { menu_pdf.purge if remove_menu_pdf.present? }
 
       rails_admin do
@@ -25,6 +26,12 @@ module RailsAdminConfig
         end
         field :stats_url do
           read_only true
+        end
+
+        field :affiliate
+
+        list do
+          scopes [:all, :unknown_affiliate_and_zip]
         end
       end
     end

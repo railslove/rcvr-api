@@ -41,10 +41,14 @@ class Company < ApplicationRecord
   has_one_attached :menu_pdf
 
   scope :not_free, -> { where.not(is_free: true) }
+  scope :unknown_affiliate_and_zip, ->() { 
+    joins(:owner).where("coalesce(companies.zip, '') = '' and coalesce(owners.affiliate, '') = ''")
+  }
 
   delegate :menu_alias, :frontend_url, :public_key, to: :owner
   delegate :affiliate_logo, to: :owner
   delegate :auto_checkout_time, to: :owner
+  delegate :affiliate, to: :owner
 
   attr_accessor :remove_menu_pdf
 
@@ -72,6 +76,10 @@ class Company < ApplicationRecord
 
   def address
     "#{street}, #{zip} #{city}"
+  end
+
+  def affiliate=(code) 
+    self.owner.update(affiliate: code)
   end
 
 end
