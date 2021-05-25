@@ -23,4 +23,8 @@ class Affiliate < ApplicationRecord
       uri.query = { affiliate: code }.to_param if code?
     end.to_s
   end
+
+  def owner_count
+    Owner.where(affiliate: self.code).count
+  end
 end
