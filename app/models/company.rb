@@ -48,7 +48,7 @@ class Company < ApplicationRecord
   delegate :menu_alias, :frontend_url, :public_key, to: :owner
   delegate :affiliate_logo, to: :owner
   delegate :auto_checkout_time, to: :owner
-  delegate :affiliate, to: :owner
+  delegate :affiliate, to: :owner, allow_nil: true
 
   attr_accessor :remove_menu_pdf
 
@@ -63,7 +63,9 @@ class Company < ApplicationRecord
   end
 
   def stats_url
-    owners_company_stats_url(self)
+    if self.id
+      owners_company_stats_url(self)
+    end
   end
 
   def open_ticket_count
