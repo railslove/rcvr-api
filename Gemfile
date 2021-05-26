@@ -41,6 +41,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.1'
   gem 'rspec-support', '~> 3.10.2'
   gem 'bullet'
+  gem 'climate_control'
 end
 
 group :development do
