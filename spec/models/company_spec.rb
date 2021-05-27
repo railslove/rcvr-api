@@ -27,4 +27,12 @@ RSpec.describe Company do
     end
 
   end
+
+  describe "affiliate=" do
+    it 'should update the affiliate code in the owner' do
+      company = FactoryBot.create(:company)
+      company.affiliate = "awesome-code"
+      expect(company.owner.affiliate).to eql("awesome-code")
+    end
+  end
 end
