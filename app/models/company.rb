@@ -56,6 +56,14 @@ class Company < ApplicationRecord
     menu_pdf.purge if remove_menu_pdf == '1' and menu_pdf.attached?
   }
 
+  after_commit(on: [:create, :update]) {
+    IrisUpdateCompany.perform_later(self.id)
+  }
+
+  after_commit(on: [:destroy]) {
+    IrisDeleteCompany.perform_later(self.id)
+  }
+
   def menu_pdf_link
     return unless menu_pdf.attached?
 
