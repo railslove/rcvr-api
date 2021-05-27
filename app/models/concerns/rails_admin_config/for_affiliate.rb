@@ -15,6 +15,7 @@ module RailsAdminConfig
             path = bindings[:view].index_path(model_name: 'Owner')
             bindings[:view].link_to(bindings[:object].owner_count, "#{path}?f[affiliate][1][o]=is&f[affiliate][1][v]=#{ERB::Util.url_encode(bindings[:object].code)}")
           end
+          read_only true
         end
         field :companies_count do
           label "Companies"
