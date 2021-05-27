@@ -7,6 +7,7 @@ end
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Sidekiq::Web => '/sidekiq'
+  mount Jimson::Server.new(IrisController.new) => '/irisrpc'
 
   devise_for(
     :owners, path: '',
