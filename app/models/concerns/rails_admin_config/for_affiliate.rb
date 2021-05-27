@@ -21,6 +21,7 @@ module RailsAdminConfig
           formatted_value do
             bindings[:object].company_count
           end
+          read_only true
         end
         fields :stripe_price_id_monthly, :custom_trial_phase, :logo_link
 
