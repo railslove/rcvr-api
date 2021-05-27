@@ -27,4 +27,8 @@ class Affiliate < ApplicationRecord
   def owner_count
     Owner.where(affiliate: self.code).count
   end
+
+  def company_count
+    Company.joins(:owner).where(owners: {affiliate: self.code}).count
+  end
 end
