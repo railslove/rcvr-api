@@ -34,6 +34,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'letter_opener'
+  gem 'jimson'
 
   gem 'rspec-core', '~> 3.10.0'
   gem 'rspec-expectations', '~> 3.10.1'
