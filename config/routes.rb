@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Sidekiq::Web => '/sidekiq'
 
+  # TODO: make sure this route is only accessible from the EPS server, not the internet
+  mount Jimson::Server.new(IrisController.new) => '/irisrpc'
+
   devise_for(
     :owners, path: '',
      path_names: { sign_in: 'login', sign_out: 'logout', registration: 'signup' },
