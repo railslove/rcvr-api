@@ -71,7 +71,8 @@ Create a frontend entry in your postgres database:
 
 ```
 docker-compose exec postgres psql -U postgres
-postgres=# insert into frontends (name, url) values('App-Local', 'http://localhost:3333');
+postgres=# \connect rcvr_api_development
+rcvr_api_development=# insert into frontends (name, url) values('App-Local', 'http://localhost:3333');
 ```
 
 Your port might vary depending on your set up (see rcvr-app README).
