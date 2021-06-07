@@ -70,7 +70,7 @@ Install rcvr-app frontend: https://github.com/railslove/rcvr-app
 Create a frontend entry in your postgres database:
 
 ```
-docker-compose exec postgres psql -U postgres`
+docker-compose exec postgres psql -U postgres
 postgres=# insert into frontends (name, url) values('App-Local', 'http://localhost:3333');
 ```
 
