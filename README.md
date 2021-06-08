@@ -77,6 +77,12 @@ rcvr_api_development=# insert into frontends (name, url) values('App-Local', 'ht
 
 Your port might vary depending on your set up (see rcvr-app README).
 
+You should also update the frontend .env.local to match your backends local url: 
+
+NEXT_PUBLIC_API_BASE=http://api.localhost:3000 
+
+for local development the http://api. prefix is mandatory
+
 ### Deployment
 
 - `origin/master` deploys to production on push
