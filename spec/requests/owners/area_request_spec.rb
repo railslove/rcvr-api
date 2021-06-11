@@ -44,10 +44,12 @@ RSpec.describe Owners::AreasController do
     let!(:area) { FactoryBot.create(:area, company: company) }
 
     subject do
-      -> { patch(owners_area_path(area), params: { area: { name: 'New Name' } }) }
+      -> { patch(owners_area_path(area), params: { area: { test_exception: 'f', name: 'New Name' } }) }
     end
 
     it { is_expected.to change { area.reload.name }.to('New Name') }
+    
+    it { is_expected.to change { area.reload.test_exception }.to('f') }
 
     it 'renders the area' do
       subject.call
