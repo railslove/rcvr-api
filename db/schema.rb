@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_105453) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.uuid "company_id"
-    t.string "test_exemption"
+    t.boolean "test_exemption", default: false
     t.index ["company_id"], name: "index_areas_on_company_id"
   end
 

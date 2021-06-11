@@ -44,13 +44,13 @@ RSpec.describe Owners::AreasController do
     let!(:area) { FactoryBot.create(:area, company: company) }
 
     subject do
-      -> { patch(owners_area_path(area), params: { area: { test_exemption: 'f', name: 'New Name' } }) }
+      -> { patch(owners_area_path(area), params: { area: { test_exemption: true, name: 'New Name' } }) }
     end
 
     it { is_expected.to change { area.reload.name }.to('New Name') }
-    
-    it { is_expected.to change { area.reload.test_exemption }.to('f') }
 
+    it { expect(area.reload.test_exemption).to eq(true) }
+    
     it 'renders the area' do
       subject.call
 
