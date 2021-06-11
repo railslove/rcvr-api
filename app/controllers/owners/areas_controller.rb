@@ -54,7 +54,7 @@ module Owners
     end
 
     def area_params
-      params.require(:area).permit(:name)
+      params.require(:area).permit(:name, :test_exception)
     end
   end
 end
