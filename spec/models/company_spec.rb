@@ -28,6 +28,14 @@ RSpec.describe Company do
 
   end
 
+  describe "affiliate=" do
+    it 'should update the affiliate code in the owner' do
+      company = FactoryBot.create(:company)
+      company.affiliate = "awesome-code"
+      expect(company.owner.affiliate).to eql("awesome-code")
+    end
+  end
+
   describe 'updates IRIS on create/update' do
     it 'should schedule a job for creates' do
       expect(IrisUpdateCompany).to receive(:perform_later)
