@@ -35,4 +35,25 @@ RSpec.describe Company do
       expect(company.owner.affiliate).to eql("awesome-code")
     end
   end
+
+  describe 'updates IRIS on create/update' do
+    it 'should schedule a job for creates' do
+      expect(IrisUpdateCompany).to receive(:perform_later)
+      FactoryBot.create(:company)
+    end
+
+    it 'should schedule a job for updates' do
+      company = FactoryBot.create(:company)
+      expect(IrisUpdateCompany).to receive(:perform_later).with(company.id)
+      company.update(name: "IRIS Update Name")
+    end
+  end
+
+  describe 'informs IRIS about destroy' do
+    it 'should schedule a job for destroys' do
+      company = FactoryBot.create(:company)
+      expect(IrisDeleteCompany).to receive(:perform_later).with(company.id)
+      company.destroy
+    end
+  end
 end
