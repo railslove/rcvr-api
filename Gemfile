@@ -22,6 +22,7 @@ gem 'activestorage-validator'
 gem 'image_processing'
 gem 'paper_trail'
 gem 'protobuf'
+gem 'jimson'
 
 # Emails
 gem 'mailgun-ruby', '~> 1.2'
