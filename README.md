@@ -70,11 +70,18 @@ Install rcvr-app frontend: https://github.com/railslove/rcvr-app
 Create a frontend entry in your postgres database:
 
 ```
-docker-compose exec postgres psql -U postgres`
-postgres=# insert into frontends (name, url) values('App-Local', 'http://localhost:3333');
+docker-compose exec postgres psql -U postgres
+postgres=# \connect rcvr_api_development
+rcvr_api_development=# insert into frontends (name, url) values('App-Local', 'http://localhost:3333');
 ```
 
 Your port might vary depending on your set up (see rcvr-app README).
+
+You should also update the frontend .env.local to match your backends local url: 
+
+NEXT_PUBLIC_API_BASE=http://api.localhost:3000 
+
+for local development the http://api. prefix is mandatory
 
 ### Deployment
 

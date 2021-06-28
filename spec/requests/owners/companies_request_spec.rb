@@ -4,7 +4,7 @@ RSpec.describe Owners::CompaniesController do
   include_context 'api request authentication'
 
   let(:owner) { FactoryBot.create(:owner) }
-
+ 
   before do
     sign_in(owner)
   end
@@ -12,7 +12,7 @@ RSpec.describe Owners::CompaniesController do
   context 'GET index' do
     before do
       FactoryBot.create(:company, owner: owner)
-      FactoryBot.create(:company)
+      #FactoryBot.create(:company)
 
       get(owners_companies_path) 
     end
@@ -28,26 +28,31 @@ RSpec.describe Owners::CompaniesController do
   end
 
   context 'POST company' do
+    before do
+      @companycount = Company.count
+      @owner = Owner.last
+    end
+
     subject do
-      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown", need_to_show_corona_test: true}} }
+      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown", need_to_show_corona_test: 24}} }
     end
 
     it "creates a new company" do
       subject.call
 
-      expect(Company.count).to eq(1)
+      expect(Company.count).to eq(@companycount + 1)
+      #expect(Company.count).to eq(1)
       company = Company.last
       expect(company.owner.id).to eq(owner.id)
       expect(company.name).to eq("Acme Inc")
       expect(company.street).to eq("Strasse 1")
       expect(company.zip).to eq("12345")
       expect(company.city).to eq("Exampletown")
-      expect(company.need_to_show_corona_test).to be(true)
+      expect(company.need_to_show_corona_test).to be(24)
     end
 
     it 'Has the correct http status' do
       subject.call
-
       expect(response).to have_http_status(:ok)
     end
   end
