@@ -86,9 +86,10 @@ ActiveRecord::Schema.define(version: 2021_06_10_105453) do
     t.datetime "accepted_at"
     t.string "reason"
     t.string "iris_submission_url"
-    t.text "iris_health_department"
-    t.text "iris_key_of_health_department"
     t.text "iris_key_reference"
+    t.string "iris_client_name"
+    t.text "iris_data_authorization_token"
+    t.text "iris_connection_authorization_token"
     t.index ["accepted_at"], name: "index_data_requests_on_accepted_at"
     t.index ["company_id"], name: "index_data_requests_on_company_id"
   end
