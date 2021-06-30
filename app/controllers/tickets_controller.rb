@@ -31,6 +31,6 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params
-    params.require(:ticket).permit(:id, :area_id, :entered_at, :left_at, :encrypted_data, :public_key, :accepted_privacy_policy)
+    params.require(:ticket).permit(:id, :area_id, :entered_at, :left_at, :cwa_checked_in, :encrypted_data, :public_key, :accepted_privacy_policy)
   end
 end
