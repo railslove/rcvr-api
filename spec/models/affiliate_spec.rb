@@ -21,4 +21,31 @@ RSpec.describe Affiliate do
       end
     end
   end
+
+  describe "owner_count" do
+    let(:affiliate) { FactoryBot.create(:affiliate) }
+
+    it "should return the correct owner count" do
+      FactoryBot.create(:owner, affiliate: affiliate.code)
+      FactoryBot.create(:owner, affiliate: affiliate.code)
+      FactoryBot.create(:owner)
+
+      expect(affiliate.owner_count).to eql 2
+    end
+  end
+
+  describe "company_count" do
+    let(:affiliate) { FactoryBot.create(:affiliate) }
+
+    it "should return the correct owner count" do
+      owner1 = FactoryBot.create(:owner, affiliate: affiliate.code)
+      owner2 = FactoryBot.create(:owner, affiliate: affiliate.code)
+      FactoryBot.create(:company, owner: owner1)
+      FactoryBot.create(:company, owner: owner1)
+      FactoryBot.create(:company, owner: owner2)
+      FactoryBot.create(:company)
+
+      expect(affiliate.company_count).to eql 3
+    end
+  end
 end

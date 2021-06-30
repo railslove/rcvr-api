@@ -48,12 +48,20 @@ class Company < ApplicationRecord
   delegate :menu_alias, :frontend_url, :public_key, to: :owner
   delegate :affiliate_logo, to: :owner
   delegate :auto_checkout_time, to: :owner
-  delegate :affiliate, to: :owner
+  delegate :affiliate, to: :owner, allow_nil: true
 
   attr_accessor :remove_menu_pdf
 
   before_update {
     menu_pdf.purge if remove_menu_pdf == '1' and menu_pdf.attached?
+  }
+
+  after_commit(on: [:create, :update]) {
+    IrisUpdateCompany.perform_later(self.id)
+  }
+
+  after_commit(on: [:destroy]) {
+    IrisDeleteCompany.perform_later(self.id)
   }
 
   def menu_pdf_link
@@ -63,7 +71,9 @@ class Company < ApplicationRecord
   end
 
   def stats_url
-    owners_company_stats_url(self)
+    if self.id
+      owners_company_stats_url(self)
+    end
   end
 
   def open_ticket_count
