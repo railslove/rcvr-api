@@ -5,7 +5,7 @@ class Ticket < ApplicationRecord
   has_paper_trail on: [:update], only: [:encrypted_data]
 
   AUTO_CHECKOUT_AFTER = 4.hours
-  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name company_address company_location_type company_cwa_link_enabled company_auto_checkout_time area_name]
+  EXPOSED_ATTRIBUTES = %i[id entered_at left_at area_id company_name cwa_checked_in company_address company_location_type company_cwa_link_enabled company_auto_checkout_time area_name]
 
   enum status: { neutral: 0, at_risk: 2 }
 
