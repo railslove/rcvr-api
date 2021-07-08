@@ -5,11 +5,11 @@ class Company < ApplicationRecord
 
   enum location_type: [
     :other,
-    :retail, 
-    :food_service, 
-    :craft, 
-    :workplace, 
-    :educational_institution, 
+    :retail,
+    :food_service,
+    :craft,
+    :workplace,
+    :educational_institution,
     :public_building
   ], _prefix: 'location'
 
@@ -19,7 +19,8 @@ class Company < ApplicationRecord
     street
     zip
     city
-    menu_link 
+    menu_link
+    menu_alias
     areas
     menu_pdf_link
     privacy_policy_link
@@ -45,7 +46,7 @@ class Company < ApplicationRecord
     joins(:owner).where("coalesce(companies.zip, '') = '' and coalesce(owners.affiliate, '') = ''")
   }
 
-  delegate :menu_alias, :frontend_url, :public_key, to: :owner
+  delegate :frontend_url, :public_key, to: :owner
   delegate :affiliate_logo, to: :owner
   delegate :auto_checkout_time, to: :owner
   delegate :affiliate, to: :owner, allow_nil: true
@@ -88,7 +89,7 @@ class Company < ApplicationRecord
     "#{street}, #{zip} #{city}"
   end
 
-  def affiliate=(code) 
+  def affiliate=(code)
     self.owner.update(affiliate: code)
   end
 

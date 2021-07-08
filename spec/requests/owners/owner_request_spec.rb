@@ -30,7 +30,6 @@ RSpec.describe Owners::OwnersController do
       expect(json["trial_ends_at"]).to eq(owner.trial_ends_at)
       expect(json["block_at"]).to eq(owner.block_at)
       expect(json["can_use_for_free"]).to eq(owner.can_use_for_free)
-      expect(json["menu_alias"]).to eq(owner.menu_alias)
     end
   end
 
