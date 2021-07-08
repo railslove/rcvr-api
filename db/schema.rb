@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_084018) do
     t.integer "location_type", default: 0
     t.boolean "cwa_link_enabled", default: false
     t.string "cwa_crypto_seed"
-    t.string "menu_alias", default: "f"
+    t.string "menu_alias"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
@@ -148,7 +148,6 @@ ActiveRecord::Schema.define(version: 2021_07_05_084018) do
     t.string "public_key"
     t.uuid "area_id"
     t.boolean "accepted_privacy_policy"
-    t.integer "cwa_checked_in"
     t.index ["area_id"], name: "index_tickets_on_area_id"
   end
 
