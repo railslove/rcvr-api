@@ -4,7 +4,7 @@ RSpec.describe Owners::CompaniesController do
   include_context 'api request authentication'
 
   let(:owner) { FactoryBot.create(:owner) }
- 
+
   before do
     sign_in(owner)
   end
@@ -14,7 +14,7 @@ RSpec.describe Owners::CompaniesController do
       FactoryBot.create(:company, owner: owner)
       #FactoryBot.create(:company)
 
-      get(owners_companies_path) 
+      get(owners_companies_path)
     end
 
     it 'Has the correct http status' do
@@ -34,7 +34,7 @@ RSpec.describe Owners::CompaniesController do
     end
 
     subject do
-      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown", need_to_show_corona_test: 24}} }
+      -> { post owners_companies_path, params: { company: {name: "Acme Inc", street: "Strasse 1", zip: "12345", city: "Exampletown", menu_alias: "Speisekarte", need_to_show_corona_test: 24}} }
     end
 
     it "creates a new company" do
@@ -48,6 +48,7 @@ RSpec.describe Owners::CompaniesController do
       expect(company.street).to eq("Strasse 1")
       expect(company.zip).to eq("12345")
       expect(company.city).to eq("Exampletown")
+      expect(company.menu_alias).to eq("Speisekarte")
       expect(company.need_to_show_corona_test).to be(24)
     end
 

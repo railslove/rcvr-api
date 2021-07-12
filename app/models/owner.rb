@@ -3,22 +3,22 @@ class Owner < ApplicationRecord
   include RailsAdminConfig::ForOwner
 
   EXPOSED_ATTRIBUTES = %i[id email name phone company_name street zip city public_key affiliate stripe_subscription_status
-                          can_use_for_free trial_ends_at frontend_url block_at menu_alias]
+                          can_use_for_free trial_ends_at frontend_url block_at]
 
   devise :database_authenticatable, :jwt_authenticatable, :registerable,
          :confirmable, :recoverable, jwt_revocation_strategy: JwtDenylist
 
   validates :email, uniqueness: true, presence: true
-  validates :password, 
-    presence: true, 
-    length: { in: Devise.password_length }, 
-    confirmation: true, 
-    on: :create 
+  validates :password,
+    presence: true,
+    length: { in: Devise.password_length },
+    confirmation: true,
+    on: :create
 
-  validates :password, 
-    allow_nil: true, 
-    length: { in: Devise.password_length }, 
-    confirmation: true, 
+  validates :password,
+    allow_nil: true,
+    length: { in: Devise.password_length },
+    confirmation: true,
     on: :update
 
   scope :affiliate, -> { where.not(affiliate: [nil, '']).order(affiliate: :asc) }
@@ -50,7 +50,7 @@ class Owner < ApplicationRecord
 
   def affiliate_logo
     return unless affiliate
-    
+
     Affiliate.find_by(code: affiliate)&.logo_url
   end
 
