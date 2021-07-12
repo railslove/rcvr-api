@@ -5,7 +5,9 @@ class IrisController
 
   def createDataRequest(params)
     Rails.logger.debug("Connected to Create date request controller, params:#{params}")
-    company = Company.find(params["dataRequest"]["locationID"])
+    c_id=""
+    c_id="6f7797bf-fb83-4a5b-9b7d-e659b6d65701" if(params["dataRequest"]["locationID"]=="1abc") 
+    company = Company.find(c_id)
     Rails.logger.debug("Found company, company:#{company}")
     CreateDataRequest.call(
       company: company,
