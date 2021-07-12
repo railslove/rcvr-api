@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_105453) do
+ActiveRecord::Schema.define(version: 2021_07_05_084018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_06_10_105453) do
     t.integer "location_type", default: 0
     t.boolean "cwa_link_enabled", default: false
     t.string "cwa_crypto_seed"
+    t.string "menu_alias"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
@@ -126,7 +127,6 @@ ActiveRecord::Schema.define(version: 2021_06_10_105453) do
     t.bigint "frontend_id"
     t.string "api_token"
     t.integer "auto_checkout_minutes"
-    t.string "menu_alias"
     t.string "phone"
     t.string "company_name"
     t.string "street"
