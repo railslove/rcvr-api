@@ -5,7 +5,7 @@ module RailsAdminConfig
     included do
       rails_admin do
         fields :id, :email, :created_at, :name, :street, :zip, :city, :companies, :affiliate, :phone, :company_name, :can_use_for_free, :trial_ends_at,
-               :block_at, :frontend, :stripe_subscription_id, :stripe_customer_id, :menu_alias
+               :block_at, :frontend, :stripe_subscription_id, :stripe_customer_id
 
         field :stripe_subscription_status do
           read_only true
