@@ -4,11 +4,10 @@ class IrisController
   extend Jimson::Handler
 
   def createDataRequest(params)
-    Rails.logger.debug("Connected to Create date request controller, params:#{params["dataRequest"]}")
-    c_id=""
-    c_id="6e69ea48-7eb7-42fa-a876-84e409cb5505" if(params["dataRequest"]["locationId"]=="1abc")
-    company = Company.find(c_id)
-    Rails.logger.debug("Found company, company:#{company}")
+    c_id = "6e69ea48-7eb7-42fa-a876-84e409cb5505"
+    c_id = params["dataRequest"]["locationId"] if Rails.env.production?
+
+    Company.find(c_id)
     CreateDataRequest.call(
       company: company,
       from: params["dataRequest"]["start"],
