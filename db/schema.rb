@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_084018) do
+ActiveRecord::Schema.define(version: 2021_07_29_090926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_084018) do
     t.integer "location_type", default: 0
     t.boolean "cwa_link_enabled", default: false
     t.string "cwa_crypto_seed"
-    t.string "menu_alias"
+    t.string "menu_alias", default: "f"
     t.index ["owner_id"], name: "index_companies_on_owner_id"
   end
 
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_084018) do
     t.string "iris_client_name"
     t.text "iris_data_authorization_token"
     t.text "iris_connection_authorization_token"
+    t.string "proxy_endpoint"
     t.index ["accepted_at"], name: "index_data_requests_on_accepted_at"
     t.index ["company_id"], name: "index_data_requests_on_company_id"
   end
@@ -149,6 +150,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_084018) do
     t.string "public_key"
     t.uuid "area_id"
     t.boolean "accepted_privacy_policy"
+    t.integer "cwa_checked_in"
     t.index ["area_id"], name: "index_tickets_on_area_id"
   end
 

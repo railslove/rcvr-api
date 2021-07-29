@@ -17,6 +17,7 @@ class IrisController
       iris_client_name: params["_client"]["name"],
       iris_data_authorization_token: params["dataRequest"]["dataAuthorizationToken"],
       iris_connection_authorization_token: params["dataRequest"]["connectionAuthorizationToken"],
+      proxy_endpoint: params["dataRequest"]["proxyEndpoint"]
     )
 
     {"_" => "OK"}
