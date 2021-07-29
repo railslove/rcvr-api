@@ -8,7 +8,7 @@ class IrisController
     c_id = "6e69ea48-7eb7-42fa-a876-84e409cb5505"
     c_id = params["dataRequest"]["locationId"] if Rails.env.production?
 
-    Company.find(c_id)
+    company = Company.find(c_id)
     CreateDataRequest.call(
       company: company,
       from: params["dataRequest"]["start"],
