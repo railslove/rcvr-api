@@ -11,7 +11,6 @@ class DataRequest < ApplicationRecord
 
   validates :from, presence: true
   validates :to, presence: true
-  validates :reason, presence: true
 
   def accepted?
     accepted_at?
