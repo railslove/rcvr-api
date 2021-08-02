@@ -16,7 +16,6 @@ module DeviseOverwrites
       resource.trial_ends_at = trial_phase.since
       resource.block_at = resource.trial_ends_at + 2.days
       resource.frontend = Frontend.find_by(frontend_params)
-
       resource.save!
 
       sign_in resource
