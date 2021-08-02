@@ -6,7 +6,7 @@ RSpec.describe IrisController do
       company = FactoryBot.create(:company)
       expect {
         post '/irisrpc/', params: {
-          "jsonrpc" => "2.0", 
+          "jsonrpc" => "2.0",
           "id": "id-2",
           "method": "createDataRequest",
           "params": [
@@ -20,10 +20,10 @@ RSpec.describe IrisController do
                 "requestDetails": "Corona Fall Dringend",
                 "dataAuthorizationToken": "data-token",
                 "connectionAuthorizationToken": "connection-token",
-                "locationID": company.id
+                "locationId": company.id
               }
             }
-          ] 
+          ]
         }.to_json
       }.to change(DataRequest, :count).by(1)
 
@@ -48,7 +48,7 @@ RSpec.describe IrisController do
       company = FactoryBot.create(:company)
       assert_emails 1 do
         post '/irisrpc/', params: {
-          "jsonrpc" => "2.0", 
+          "jsonrpc" => "2.0",
           "id": "id-2",
           "method": "createDataRequest",
           "params": [
@@ -62,10 +62,10 @@ RSpec.describe IrisController do
                 "requestDetails": "Corona Fall Dringend",
                 "dataAuthorizationToken": "data-token",
                 "connectionAuthorizationToken": "connection-token",
-                "locationID": company.id
+                "locationId": company.id
               }
             }
-          ] 
+          ]
         }.to_json
       end
       last_email = ActionMailer::Base.deliveries.last
@@ -76,7 +76,7 @@ RSpec.describe IrisController do
     it 'returns an error if the company cannot be found' do
       expect {
         post '/irisrpc/', params: {
-          "jsonrpc" => "2.0", 
+          "jsonrpc" => "2.0",
           "id": "id-2",
           "method": "createDataRequest",
           "params": [
@@ -90,10 +90,10 @@ RSpec.describe IrisController do
                 "requestDetails": "Corona Fall Dringend",
                 "dataAuthorizationToken": "data-token",
                 "connectionAuthorizationToken": "connection-token",
-                "locationID": "unkonwn"
+                "locationId": "unkonwn"
               }
             }
-          ] 
+          ]
         }.to_json
       }.to change(DataRequest, :count).by(0)
 
@@ -108,7 +108,7 @@ RSpec.describe IrisController do
       company = FactoryBot.create(:company)
       expect {
         post '/irisrpc/', params: {
-          "jsonrpc" => "2.0", 
+          "jsonrpc" => "2.0",
           "id": "id-2",
           "method": "createDataRequest",
           "params": [
@@ -121,10 +121,10 @@ RSpec.describe IrisController do
                 "requestDetails": "Corona Fall Dringend",
                 "dataAuthorizationToken": "data-token",
                 "connectionAuthorizationToken": "connection-token",
-                "locationID": company.id
+                "locationId": company.id
               }
             }
-          ] 
+          ]
         }.to_json
       }.to change(DataRequest, :count).by(0)
 
