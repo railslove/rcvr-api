@@ -2,7 +2,7 @@ class IrisUpdateCompany < ApplicationJob
   queue_as :default
 
   def perform(company_id)
-    return if ENV["IRIS_EPS_URL"].blank?
+    return if ENV["IRIS_EPS_URL"].blank? || ENV["IRIS_LOCATION_IDENTIFIER"].blank?
 
     company = Company.find(company_id)
     return unless company
