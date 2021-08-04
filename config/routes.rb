@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   mount Jimson::Server.new(IrisController.new) => '/irisrpc',
   constraints: lambda { |request|
+    Rails.logger.debug("REMOTE IP: #{request.remote_ip}")
     ENV["EPS_IP"] == request.remote_ip
+
   }
 
   devise_for(
