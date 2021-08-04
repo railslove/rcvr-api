@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Sidekiq::Web => '/sidekiq'
 
-  # TODO: make sure this route is only accessible from the EPS server, not the internet
-  mount Jimson::Server.new(IrisController.new) => '/irisrpc'
+  mount Jimson::Server.new(IrisController.new) => '/irisrpc',
+  constraints: lambda { |request|
+    ENV["EPS_IP"] == request.remote_ip
+  }
 
   devise_for(
     :owners, path: '',
