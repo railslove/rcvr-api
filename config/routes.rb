@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Sidekiq::Web => '/sidekiq'
 
+  mount Jimson::Server.new(IrisController.new) => '/irisrpc',
+  constraints: lambda { |request|
+    ENV["EPS_IP"] == request.remote_ip
+  }
+
   devise_for(
     :owners, path: '',
      path_names: { sign_in: 'login', sign_out: 'logout', registration: 'signup' },
