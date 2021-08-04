@@ -42,7 +42,7 @@ class Company < ApplicationRecord
   has_one_attached :menu_pdf
 
   scope :not_free, -> { where.not(is_free: true) }
-  scope :unknown_affiliate_and_zip, ->() { 
+  scope :unknown_affiliate_and_zip, ->() {
     joins(:owner).where("coalesce(companies.zip, '') = '' and coalesce(owners.affiliate, '') = ''")
   }
 
@@ -89,6 +89,10 @@ class Company < ApplicationRecord
     "#{street}, #{zip} #{city}"
   end
 
+  def iris_update
+    IrisUpdateCompany.perform_later(self.id)
+  end
+  
   def affiliate=(code)
     self.owner.update(affiliate: code)
   end
