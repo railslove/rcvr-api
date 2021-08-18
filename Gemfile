@@ -39,7 +39,7 @@ group :development, :test do
   gem 'rspec-core', '~> 3.10.0'
   gem 'rspec-expectations', '~> 3.10.1'
   gem 'rspec-mocks', '~> 3.10.2'
-  gem 'rspec-rails', '~> 5.0.1'
+  gem 'rspec-rails', '~> 5.0.2'
   gem 'rspec-support', '~> 3.10.2'
   gem 'bullet'
   gem 'climate_control'
