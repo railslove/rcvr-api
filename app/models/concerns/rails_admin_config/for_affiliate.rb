@@ -20,7 +20,8 @@ module RailsAdminConfig
         field :companies_count do
           label "Companies"
           formatted_value do
-            bindings[:object].company_count
+            path = bindings[:view].index_path(model_name: 'AffiliateCompany')
+            bindings[:view].link_to(bindings[:object].company_count, "#{path}?f[affiliate][03456][o]=is&f[affiliate][03456][v]=#{ERB::Util.url_encode(bindings[:object].code)}&model_name=AffiliateCompany&sort=created_at")
           end
           read_only true
         end

@@ -21,18 +21,24 @@ RailsAdmin.config do |config|
 
   config.parent_controller = "::RailsAdminController"
 
-  config.included_models = %w[Area Company Owner Ticket DataRequest Affiliate Frontend]
+  config.included_models = %w[Area Company AffiliateCompany Owner Ticket DataRequest Affiliate Frontend]
 
   config.actions do
     dashboard
     index
     new
     show
-    edit
-    delete
+    edit do
+      except ['AffiliateCompany']
+    end
+    delete do
+      except ['AffiliateCompany']
+    end
     bulk_delete
     export
     block_owner
     generate_owner_api_token
   end
+
+
 end
