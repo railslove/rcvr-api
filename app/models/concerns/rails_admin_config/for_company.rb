@@ -11,7 +11,14 @@ module RailsAdminConfig
         fields :id, :name, :created_at, :areas, :street, :zip, :city, :owner
 
         field :location_type, :enum
-        fields :tickets, :menu_alias, :menu_link, :menu_pdf, :is_free, :privacy_policy_link, :need_to_show_corona_test
+        fields :tickets, :menu_alias, :menu_link, :menu_pdf, :is_free, 
+               :privacy_policy_link, :need_to_show_corona_test
+
+        field :owner do
+          label "Affiliate Code"
+          searchable [:affiliate]
+          filterable true
+        end
 
         field :cwa_link_enabled do
           label "Enable CWA Link after checkin"
