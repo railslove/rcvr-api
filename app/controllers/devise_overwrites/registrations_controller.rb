@@ -15,14 +15,7 @@ module DeviseOverwrites
 
       resource.trial_ends_at = trial_phase.since
       resource.block_at = resource.trial_ends_at + 2.days
-      
-      if Rails.env.production?
-      else
-        #frontend_params.to_h['url']
-        #byebug
-        Frontend.create(name: frontend_params.to_h['url'], url: frontend_params.to_h['url']).save!
-      end
-
+      Frontend.create(name: frontend_params.to_h['url'], url: frontend_params.to_h['url']).save! unless Rails.env.production?
       resource.frontend = Frontend.find_by(frontend_params) 
       
       resource.save!
