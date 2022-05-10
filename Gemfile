@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise-jwt'
 gem 'pg'
 gem 'puma', '~> 5.4'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 6.1.6'
 gem 'sentry-raven'
 gem 'happypdf_renderer', github: 'railslove/happypdf_renderer'
 gem 'interactor-rails'
