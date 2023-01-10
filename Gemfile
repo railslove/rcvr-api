@@ -46,7 +46,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.6'
+  gem 'listen', '~> 3.8'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
