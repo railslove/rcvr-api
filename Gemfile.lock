@@ -259,7 +259,7 @@ GEM
       thor
       thread_safe
     public_suffix (4.0.6)
-    puma (5.4.0)
+    puma (6.1.1)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.5.2)
@@ -439,7 +439,7 @@ DEPENDENCIES
   pg
   premailer-rails
   protobuf
-  puma (~> 5.4)
+  puma (~> 6.1)
   rack-cors
   rails (~> 6.1.4)
   rails_admin
